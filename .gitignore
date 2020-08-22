@@ -1,0 +1,8 @@
+.DS_Store
+media
+__pycache__/
+.vscode
+env/
+db.sqlite3
+migrations/
+production.py

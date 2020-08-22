@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <center>
+    <br><br><br>
+    <form action="{% url 'users:signup'%}" method="post">
+    {% csrf_token %}
+    <input type="text" name="first_name" placeholder='first name' id="">
+    <br><br>
+    <input type="text" name="last_name" placeholder='last name' id="">
+    <br><br>
+    <input type="email" name="email" placeholder='email' id="">
+    <br><br>
+    <input type="phone" name="phone" placeholder='phone' id="">
+    <br><br>
+    <input type="hidden" name="refer_code" value={{refer_code}} id="">
+    <input type="password" name="password" placeholder='password' id="">
+    <br><br>
+    <input type="submit" value='submit'>
+    
+    </form>
+    </center>
+</body>
+</html>
