@@ -17,20 +17,37 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
 
+
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, 'You are now logged in')
-            # return redirect('dashboard')
-            return HttpResponse('You are now logged in')
+
+            if request.POST.get('is_client', None) and user.is_client:
+                messages.success(request, 'You are now logged in')
+                # return redirect('dashboard') # client dashboard
+                return HttpResponse('You are now logged in, as a client')
+
+            elif request.POST.get('is_marketer', None) and user.is_marketer:
+                messages.success(request, 'You are now logged in')
+                # return redirect('dashboard') # marketer dashboard
+                return HttpResponse('You are now logged in, as a marketer')
+            else:
+                messages.success(request, 'You are now logged in')
+                # return redirect('index') # home
+                return HttpResponse('You are neither a client or a marketer')
         else:
             messages.error(request, 'Invalid credentials')
-            return redirect('login')
+            # return redirect('login')
+            return HttpResponse('Invalid credentials')
+
     return render(request, 'users/login.html')
 
 
 def signup(request, refer_code=None):
+
+    if refer_code:
+        request.session['refer_code'] = refer_code.lower()
 
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -38,7 +55,6 @@ def signup(request, refer_code=None):
         email = request.POST['email']
         phone = request.POST['phone']
         password = request.POST['password']
-        refer_code = request.POST['refer_code']
         referer = None
 
         if User.objects.filter(email=email).exists():
@@ -46,25 +62,43 @@ def signup(request, refer_code=None):
             # return redirect('signup')
             return HttpResponse('This email is in use')
 
-        if refer_code:
+        if request.session.get('refer_code', None):
             try:
-                referer = User.objects.get(refer_code=refer_code.lower())
+                referer = User.objects.get(refer_code=request.session['refer_code'])
             except:
                 pass
-        user = User.objects.create_user(first_name=first_name,
-                                        last_name=last_name,
-                                        email=email, 
-                                        phone=phone,
-                                        is_active=False,
-                                        referer=referer,
-                                        is_client=True,
-                                        password=password)
+        if request.POST.get('is_client', None): 
+
+            user = User.objects.create_user(first_name=first_name,
+                                            last_name=last_name,
+                                            email=email, 
+                                            phone=phone,
+                                            # is_active=False,
+                                            referer=referer,
+                                            is_client=True,
+                                            password=password)
+
+        elif request.POST.get('is_marketer', None): 
+
+            user = User.objects.create_user(first_name=first_name,
+                                            last_name=last_name,
+                                            email=email, 
+                                            phone=phone,
+                                            # is_active=False,
+                                            referer=referer,
+                                            is_marketer=True,
+                                            password=password)
+        else:
+            messages.success(request, 'Must be a client or marketer')
+            # return redirect('signup')
+            return HttpResponse('Must be a client or marketer')
+
         send_activation_email(request, user)
         messages.success(request, 'Registeration successful! Kindly login')
         # return redirect('login')
         return HttpResponse('Registration was successful, Verify your email')
 
-    return render(request, 'users/signup.html', {'refer_code':refer_code})
+    return render(request, 'users/signup.html')
 
 
 def logout(request):

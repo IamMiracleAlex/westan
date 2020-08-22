@@ -13,6 +13,13 @@
     <br><br><br>
     <form action="{% url 'users:signup'%}" method="post">
     {% csrf_token %}
+  <input type="radio" name="is_marketer" value="marketer" id='marketer'>
+  <label for="marketer">Marketer</label>
+
+  <input type="radio" name="is_client" value="client" id='client'>
+  <label for="client">Client</label>
+
+<br> <br>
     <input type="text" name="first_name" placeholder='first name' id="">
     <br><br>
     <input type="text" name="last_name" placeholder='last name' id="">
@@ -21,7 +28,6 @@
     <br><br>
     <input type="phone" name="phone" placeholder='phone' id="">
     <br><br>
-    <input type="hidden" name="refer_code" value={{refer_code}} id="">
     <input type="password" name="password" placeholder='password' id="">
     <br><br>
     <input type="submit" value='submit'>
