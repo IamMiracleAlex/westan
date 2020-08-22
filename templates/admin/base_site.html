@@ -1,0 +1,27 @@
+ {% extends 'admin/base.html' %}
+
+{% block title %} Westan Homes - Admin Site {% endblock title %}
+
+ {% load static %}
+
+ {% block branding %}
+    <h2 id="head" >
+      <a href="{% url 'admin:index' %}"  style="font-size: 2.4rem; margin-right:4rem; color: white;">
+         Westan Admin 
+      </a>  
+    </h2>
+ {% endblock branding %}
+
+
+
+ {% block extrastyle %}
+
+  <link rel="icon" href="{% static 'img/logo.svg' %}" type="image/x-icon">
+   
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+{% endblock extrastyle %}
+
+
+
+ {% block nav-global %}{% endblock %}

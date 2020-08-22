@@ -107,7 +107,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 
-try:
-    from .production import *
-except ImportError:
-    pass  
+# try:
+#     from .production import *
+# except ImportError:
+#     pass  

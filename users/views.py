@@ -5,8 +5,6 @@ from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator  
 
-
-
 from django.http import HttpResponse
 
 from .models import User
@@ -59,11 +57,12 @@ def signup(request, refer_code=None):
                                         phone=phone,
                                         is_active=False,
                                         referer=referer,
+                                        is_client=True,
                                         password=password)
         send_activation_email(request, user)
         messages.success(request, 'Registeration successful! Kindly login')
         # return redirect('login')
-        return HttpResponse('Registration was successful')
+        return HttpResponse('Registration was successful, Verify your email')
 
     return render(request, 'users/signup.html', {'refer_code':refer_code})
 
@@ -101,8 +100,6 @@ def activate_email(request, uid, token):
         context['message'] = 'Your email has already been verified'
         # return render(request, 'account_activation.html', context)
         return HttpResponse('Your email has already been verified')
-
-
 
     if user and default_token_generator.check_token(user, token):
 

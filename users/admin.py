@@ -1,19 +1,6 @@
-import json
-
 from django.contrib import admin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
-from django.utils.html import format_html
-from django.db.models.functions import TruncDay
-from django.core.serializers.json import DjangoJSONEncoder
-from django.db.models import Count
-from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import path, reverse
-from django.contrib import messages
-
 
 from utils.mixins import ExportCsvMixin
-# from .utils import EmailHandler
 from .models import User
 
 
