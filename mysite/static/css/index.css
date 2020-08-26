@@ -1,0 +1,169 @@
+ * {
+    font-family: 'Inter', sans-serif;
+  }
+ header {
+      background-image: url(../img/bg.png);
+      /* background-position: center; */
+      background-position: top;
+      background-size: cover;
+      background-color: #ffffff;
+      height: fit-content;
+      /* padding: 0 10rem; */
+      margin-top: 0 !important;
+      /* height: fit-content; */
+  }
+
+  .signup {
+    background-color: #fc8210;
+    border: 0;
+  }
+  
+  .signup:hover {
+    color: #fc8210;
+    background-color: #ffffff;
+    border: 1px solid #fc8210;
+    box-sizing: border-box;
+  }
+  
+  .login {
+    background-color: #31bfbf;
+    border: 0;
+  }
+  
+  .login:hover {
+    color: #31bfbf;
+    background-color: #ffffff;
+    border: 1px solid #31bfbf;
+    box-sizing: border-box;
+  }
+
+  form {
+    background-color: #EBF5F7;
+  }
+  form input, form select {
+    background-color: #EBF5F7 !important;
+    font-size: 1rem !important;
+  }
+  form button { 
+    font-size: 1rem !important;
+    border-radius: 0% !important;
+    background-color: #fc8210 !important;
+  border: 0;
+    }
+  *:focus {
+    outline: 0 !important;
+  }
+
+  *:focus {
+    outline-width: 0 !important;
+  }
+
+  .masthead {
+    padding: 10rem 0 4rem;
+  }
+
+  .masthead h1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 48px;
+    max-width: 770px;
+  }
+
+  .intros {
+    background-color: #E5F6FA;
+  }
+
+  .card {
+    border-radius: 10px !important;
+    overflow: hidden;
+  }
+
+  .card .price {
+    padding: 5px 13px !important;
+    background-color: rgba(0, 0, 0, 0.555);
+    width: min-content;
+    height: min-content;
+  }
+
+  .card-footer {
+    background-color: #F9FEFF !important;
+  }
+
+  .cities .card,
+  .cities .carousel .carousel-inner img,
+  .dele,
+  .properties .card,
+  .how-it-works .card {
+    border: 5px solid #fff !important;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.12);
+  }
+
+  .how-it-works .card {
+    border: 10px solid #fff !important;
+  }
+
+  .cities img {
+    opacity: 0.5 !important;
+    object-fit: cover;
+  }
+
+
+  main {
+    /* padding: 0 10rem; */
+  }
+  
+  footer {
+    background-color: #EBF5F7;
+    color: #73738D;
+  }
+
+  footer .row h5 {
+    color: #222222;
+    font-size: 14px;
+  }
+  footer .row a {
+    font-size: 14px;
+  }
+  footer .brand {
+    height: 48px;
+  }
+
+  footer img {
+    height: 20px;
+  }
+  
+
+  @media (max-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+    header {
+      padding: 0;
+    }
+    .masthead {padding: 4rem 0 3rem;}
+    .masthead h1 {font-size: 24px;}
+    .title {
+      font-size: 18px;
+    }
+    .subtitle {
+      font-size: 14px;
+    }
+    form {
+      background-color: transparent;
+    }
+    footer .row h5,
+    footer .row a {
+      font-size: 12px;
+    }
+    footer .brand {
+      height: 24px;
+    }
+  
+    footer img {
+      height: 14px;
+    }
+  }
+
+
+
+  

@@ -35,6 +35,7 @@ def login(request):
                 # return redirect('dashboard') # marketer dashboard
                 return HttpResponse('You are now logged in, as a marketer')
             else:
+                auth.logout(request) #log user out
                 messages.success(request, 'You are neither a client or a marketer')
                 # return redirect('index') # home
                 return HttpResponse('You are neither a client or a marketer')
@@ -171,3 +172,13 @@ def activate_email(request, uid, token):
 def test(request):
     return render(request, 'registration/password_reset_email.html')
     # return render(request, 'users/emails/activation_email.html')
+
+
+
+def subscribe(request):
+    if request.method == 'POST':
+        sub = Subscribe(email=request.POST['email'])
+        sub.save()
+        messages.success(request, 'Your subscription was successfull!')
+        return redirect('blog:index')
+

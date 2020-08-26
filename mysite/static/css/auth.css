@@ -1,0 +1,90 @@
+body {
+  background-image: url(../img/bgg.svg);
+  /* background-position: center; */
+  background-position: center;
+  background-size: cover;
+  background-color: #ffffff;
+  height: fit-content;
+  /* padding: 0 2rem; */
+  margin-top: 0;
+  /* height: fit-content; */
+}
+
+/* .h1 { color: #003333;}
+.h3 { color: #5A6F6F;}
+p { color: #73738D !important;} */
+
+navbar {
+  padding-left: 120px !important;
+}
+.nav-link {
+  color: #73738d;
+}
+
+.signup-form {
+  width: 805px;
+  padding: 50px 40px;
+  margin: 0 auto;
+  border: 1px solid #dfdfe7 !important;
+}
+
+.login-form {
+  width: 430px;
+  padding: 50px 40px;
+  margin: 0 auto;
+  border: 1px solid #dfdfe7 !important;
+}
+
+/* Fix for input number */
+
+/* Chrome, Safari, Edge, Opera */
+::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.signup {
+  background-color: #fc8210;
+  border: 0;
+}
+
+.signup:hover {
+  color: #fc8210;
+  background-color: #ffffff;
+  border: 1px solid #fc8210;
+  box-sizing: border-box;
+}
+
+.login {
+  background-color: #31bfbf;
+  border: 0;
+}
+
+.login:hover {
+  color: #31bfbf;
+  background-color: #ffffff;
+  border: 1px solid #31bfbf;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .navbar-brand img {
+    height: 28px;
+  }
+  .h1 {
+    font-size: 24px !important;
+  }
+  .h3 {
+    font-size: 1rem !important;
+  }
+  .login-form,
+  .signup-form {
+    width: 340px;
+    padding: 30px 20px;
+  }
+}
