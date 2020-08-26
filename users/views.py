@@ -23,17 +23,19 @@ def login(request):
         if user is not None:
             auth.login(request, user)
 
-            if request.POST.get('is_client', None) and user.is_client:
-                messages.success(request, 'You are now logged in')
+            user_type = request.POST.get('user_type', None)
+
+            if user_type == 'client' and user.is_client:
+                messages.success(request, 'You are now logged in, as a client')
                 # return redirect('dashboard') # client dashboard
                 return HttpResponse('You are now logged in, as a client')
 
-            elif request.POST.get('is_marketer', None) and user.is_marketer:
-                messages.success(request, 'You are now logged in')
+            elif user_type == 'marketer' and user.is_marketer:
+                messages.success(request, 'You are now logged in, as a marketer')
                 # return redirect('dashboard') # marketer dashboard
                 return HttpResponse('You are now logged in, as a marketer')
             else:
-                messages.success(request, 'You are now logged in')
+                messages.success(request, 'You are neither a client or a marketer')
                 # return redirect('index') # home
                 return HttpResponse('You are neither a client or a marketer')
         else:
@@ -67,7 +69,10 @@ def signup(request, refer_code=None):
                 referer = User.objects.get(refer_code=request.session['refer_code'])
             except:
                 pass
-        if request.POST.get('is_client', None): 
+
+        user_type = request.POST.get('user_type', None)
+
+        if user_type == 'client': 
 
             user = User.objects.create_user(first_name=first_name,
                                             last_name=last_name,
@@ -78,7 +83,7 @@ def signup(request, refer_code=None):
                                             is_client=True,
                                             password=password)
 
-        elif request.POST.get('is_marketer', None): 
+        elif user_type == 'marketer': 
 
             user = User.objects.create_user(first_name=first_name,
                                             last_name=last_name,
@@ -121,7 +126,15 @@ def logout(request):
 
 
 
+
+def resend_activation_email(request):
+    '''To resend activation email to a user'''
+
+    return send_activation_email(request, request.user)
+
+
 def activate_email(request, uid, token):
+    '''To activate the email address'''
     try:
         id = force_text(urlsafe_base64_decode(uid))
         user = User.objects.get(id=id)
@@ -150,5 +163,11 @@ def activate_email(request, uid, token):
         # return render(request, 'account_activation.html', context)
         return HttpResponse('Email verification failed')
 
+
+
+
+
+
 def test(request):
-    return render(request, 'users/emails/activation_email.html')
+    return render(request, 'registration/password_reset_email.html')
+    # return render(request, 'users/emails/activation_email.html')

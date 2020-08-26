@@ -1,37 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+{% endblock extrastyle %}
+
+{% block title %} Log In - {% endblock title %}
 
 
 
-    <center>
-    <br><br><br>
-    <form action="{% url 'users:login'%}" method="post">
-    {% csrf_token %}
 
-  <input type="radio" name="is_marketer" value="marketer" id='marketer'>
-  <label for="marketer">Marketer</label>
+{% block content %}
 
-  <input type="radio" name="is_client" value="client" id='client'>
-  <label for="client">Client</label>
+{% include 'partials/navbar.html' %}
 
-<br> <br>
-
-    <input type="email" name="email" id="">
-    <br><br>
-    <input type="password" name="password" id="">
-    <br><br>
-    <input type="submit" value='submit'>
-    
-    </form>
-    </center>
+<div class="my-1 my-md-5 py-5"></div>
 
 
-</body>
-</html>
+
+<div class="text-center mb-5">
+    <p class="h1"><strong>Affordable Properties</strong> </p>
+    <p class="h3 col-12 col-md-6 mx-auto">Login and start investing in Real Estate today, for great profits and peace of
+        mind.</p>
+</div>
+
+
+<form class="auth login-form border mx-auto bg-white" action="{% url 'users:login'%}" method="post">
+        {% csrf_token %}
+    <p class="text-center h4 mb-4"><strong>Login</strong> </p>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="user_type" id="client" value="client" required>
+        <label class="form-check-label" for="client">Client</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="user_type" id="marketer" value="marketer" required>
+        <label class="form-check-label" for="marketer">Marketer</label>
+    </div>
+    <br> <br>
+    <div class="form-group">
+        <input type="email" name="email" class="form-control px-3" id="validationCustom02" placeholder="Email address" required>
+        <div class="invalid-feedback">
+            Please enter a valid email address.
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" class="form-control px-3" id="validationCustom01" placeholder="Password" required>
+        <div class="invalid-feedback">
+            Please choose a password.
+        </div>
+    </div>
+    <button class="signup btn btn-primary w-100 mb-2" type="submit">Login</button>
+    <div class="d-flex justify-content-between">
+        <small>
+           Don't have an account? <a href="{% url 'users:signup' %}">Register</a>
+        </small>
+        <small>
+            Forgot Password? Click <a href="{% url 'password_reset' %}">here</a>
+        </small>
+    </div>
+</form>
+
+<div class="py-5"></div>
+
+{% endblock content %}
+
+
+
+{% block javascript %}
+<script>
+    // JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock javascript %}
+
+

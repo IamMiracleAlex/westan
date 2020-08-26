@@ -1,38 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+{% endblock extrastyle %}
+
+{% block title %} Sign Up {% endblock title %}
+
+
+{% block content %}
+
+{% include 'partials/navbar.html' %}
+
+
+    <div class="my-1 my-md-5 py-5"></div>
+
+
+
+    <div class="text-center mb-5">
+        <p class="h1"><strong>Affordable Properties</strong> </p>
+        <p class="h3 col-12 col-md-6 mx-auto">Sign up and start investing in Real Estate today, for great  profits and peace of mind.</p>
+    </div>
+
+
+
+      <form class="auth signup-form needs-validation rounded mb-5 pb-5 bg-white text-center" action="{% url 'users:signup'%}" method="post" novalidate>
+          <p class="text-center h4 mb-3 mb-md-5"><strong>Sign Up</strong> </p>
+               {% csrf_token %}
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="user_type" id="client" value="client" required>
+            <label class="form-check-label" for="client">Client</label>
+            <div class="ml-4 d-md-none invalid-feedback">
+                  Please choose a user type.
+              </div>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="user_type" id="marketer" value="marketer" required>
+            <label class="form-check-label" for="marketer">Marketer</label>
+            <br> <br>
+            <div class="ml-4 invalid-feedback">
+                  Please choose a user type.
+              </div>
+        </div>
+        <br> <br>           
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <input type="text" name='first_name' class="form-control px-3" id="validationCustom01" placeholder="First name" required>
+            <div class="invalid-feedback">
+                Please enter your first name.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <input type="text" name='last_name' class="form-control px-3" id="validationCustom02" placeholder="Last name" required>
+            <div class="invalid-feedback">
+                Please enter your last name.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <input type="text" name='phone' class="form-control px-3" id="validationCustom01" placeholder="Phone number" required>
+              <div class="invalid-feedback">
+                  Please enter your phone number.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <input type="email" name='email' class="form-control px-3" id="validationCustom02" placeholder="Email address" required>
+              <div class="invalid-feedback">
+                  Please enter a valid email address.
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <input type="password" name='password' class="form-control px-3" id="validationCustom01" placeholder="Password" required>
+              <div class="invalid-feedback">
+                  Please choose a password.
+              </div>
+            </div>
+
+            <div class="form-group col-md-6 py-auto">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">
+                        <small>
+                            I have read and agree to <a href="http://">policy</a> and <a href="">terms</a> 
+                        </small>
+                    
+                    </label>
+                    <div class="invalid-feedback">
+                    You must agree before submitting.
+                    </div>
+                </div>
+            </div>
+            </div>
+          </div>
+          
+          
+          
+        <button class="signup btn btn-primary col-md-6 mb-1 mx-auto" type="submit">Sign Up</button>
+        <br>
+        <small>
+            Have an account? <a href="{% url 'users:login' %}">Login</a> 
+        </small>
+      </form>
+
+      <div class="py-5"></div>
+
+      
+{% endblock content %}
+
+{% block javascript %}
+<script>
+// JavaScript for disabling form submissions if there are invalid fields
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+        }, false);
+    });
+    }, false);
+})();
+</script>
+
     
+{% endblock javascript %}
 
-
-    <center>
-    <br><br><br>
-    <form action="{% url 'users:signup'%}" method="post">
-    {% csrf_token %}
-  <input type="radio" name="is_marketer" value="marketer" id='marketer'>
-  <label for="marketer">Marketer</label>
-
-  <input type="radio" name="is_client" value="client" id='client'>
-  <label for="client">Client</label>
-
-<br> <br>
-    <input type="text" name="first_name" placeholder='first name' id="">
-    <br><br>
-    <input type="text" name="last_name" placeholder='last name' id="">
-    <br><br>
-    <input type="email" name="email" placeholder='email' id="">
-    <br><br>
-    <input type="phone" name="phone" placeholder='phone' id="">
-    <br><br>
-    <input type="password" name="password" placeholder='password' id="">
-    <br><br>
-    <input type="submit" value='submit'>
-    
-    </form>
-    </center>
-</body>
-</html>

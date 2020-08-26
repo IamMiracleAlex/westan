@@ -1,0 +1,65 @@
+{% load static %}
+
+<nav class="px-3 px-lg-5 navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+    <a class="navbar-brand" href="{% url 'listings:index' %}">
+        <img src="{% static 'img/logo.svg' %}" alt="Westan Logo" srcset="">
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto text-center">
+            <li class="nav-item active">
+                <a href="{% url 'listings:index' %}" class="nav-link ml-0 ml-md-3" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-0 ml-md-3" href="{% url 'listings:listings' %}">All Listings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-0 ml-md-3" href="#">How it works</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ml-0 ml-md-3" href="#">Blog</a>
+            </li>
+        </ul>
+        <p class="d-block d-md-none my-auto text-center px-auto py-3 py-md-0">
+            <a class="px-2" href="https://web.facebook.com/WestanHomesNG">
+                <img src="{% static 'img/social/facebook.svg' %}" alt="facebook link">
+            </a>
+            <a class="px-2" href="https://instagram.com/westanhomesng">
+                <img src="{% static 'img/social/instagram.svg' %}" alt="instagram link">
+            </a>
+            <a class="px-2" href="https://www.linkedin.com/company/westanhomesng/">
+                <img src="{% static 'img/social/linkedin.svg' %}" alt="linkedin link">
+            </a>
+        </p>
+        <p class="my-auto text-center px-auto py-3 py-md-0">
+        {% if user.is_authenticated %}
+
+                <button class="btn btn-sm text-md mr-2 py-2 px-5" >
+                    <strong>Hi {{user.first_name}}</strong>
+                </button>
+
+            <a href="{% url 'users:logout' %}">
+                <button class="signup btn btn-sm text-md btn-secondary py-2 px-5" type="submit">
+                    <strong>Log Out</strong>
+                </button>
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'users:login' %}">
+                <button class="login btn btn-sm text-md btn-primary mr-2 py-2 px-5" type="submit">
+                    <strong>Login</strong>
+                </button>
+            </a>
+            <a href="{% url 'users:signup' %}">
+                <button class="signup btn btn-sm text-md btn-secondary py-2 px-5" type="submit">
+                    <strong>Sign Up</strong>
+                </button>
+            </a>
+            {% endif %}
+        </p>
+    </div>
+</nav>

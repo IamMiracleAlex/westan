@@ -4,8 +4,6 @@ from utils.mixins import ExportCsvMixin
 from .models import User
 
 
-
-
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
 
@@ -13,13 +11,14 @@ class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
     date_hierarchy = 'date_joined'
     ExportCsvMixin.export_as_csv.short_description = 'Export selected users to csv'
 
-    list_display = ('first_name', 'last_name', 'email', 'phone', 'refered_by','refer_code', 
-                    'no_of_referrals', 'email_verified',  'is_client',  'is_marketer',
-                    'is_active', 'is_staff',  'created_at', 'updated_at',)
+    list_display = ('first_name','last_name','email','phone','refered_by','refer_code', 
+                'no_of_referrals', 'email_verified', 'is_client', 'is_marketer',
+                'is_active', 'is_staff',  'created_at', 'updated_at',)
     list_filter = ('is_staff', 'is_active', 'is_client', 'is_marketer')
    
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('-created_at',)
+    raw_id_fields = ['referer']
 
 
     def no_of_referrals(self, obj):
@@ -29,4 +28,3 @@ class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
         if obj.referer:
             return obj.referer.full_name()
         return None
-

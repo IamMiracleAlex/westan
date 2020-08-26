@@ -1,0 +1,77 @@
+<!-- FOOTER -->
+
+{% load static %}
+<footer class="pt-4 mt-md-5 pt-md-5">
+	<div class="row container mx-auto">
+		<div class="col-6 col-md">
+			<h5 class="text-uppercase">quick links</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="#">Listings</a></li>
+				<li><a class="text-muted" href="#">Featured</a></li>
+				<li><a class="text-muted" href="#">Contact</a></li>
+				<li><a class="text-muted" href="#">Sign Up</a></li>
+			</ul>
+		</div>
+		<div class="col-6 col-md">
+			<h5 class="text-uppercase">legal</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="#">Privacy</a></li>
+				<li><a class="text-muted" href="#">Terms & Conditions</a></li>
+				<!-- <li><a class="text-muted" href="#">FAQs</a></li> -->
+				<li><a class="text-muted" href="#">Money Back Policies</a></li>
+			</ul>
+		</div>
+		<div class="col-6 col-md">
+			<h5 class="text-uppercase">others</h5>
+			<ul class="list-unstyled text-small">
+				<li><a class="text-muted" href="#">FAQs</a></li>
+				<li><a class="text-muted" href="#">Blog</a></li>
+				<li><a class="text-muted" href="#">Testimonials</a></li>
+				<li><a class="text-muted" href="#">About Us</a></li>
+			</ul>
+		</div>
+		<div class="col-6 col-md-5">
+			<h5 class="text-uppercase">subscribe</h5>
+			<form>
+				<div class="form-md-row align-items-center">
+					<div class="my-1">
+						<label class="sr-only" for="inlineFormInputName">Email</label>
+						<input type="email" class="form-control bg-white" id="inlineFormInputName" placeholder="Email address">
+					</div>
+					<div class="w-25 my-1">
+						<button type="submit" class="btn btn-primary border-0 rounded">Submit</button>
+					</div>
+				</div>
+			</form>
+			<small class="d-none d-md-block"> Get updates on latest real estate trends
+
+			</small>
+		</div>
+	</div>
+
+	<hr>
+	<div class="container d-flex align-items-center justify-content-between pb-3 py-md-3">
+		<small class="d-flex align-items-center">
+			<img class="mr-3 brand" src="{% static 'img/logo.svg' %}" alt="">
+			&copy; 2020<span class="d-none d-md-block"> Westan Realtors. All rights reserved.</span>
+		</small>
+		<!-- float-right -->
+		<p class=" my-auto text-center px-auto py-md-0">
+			<a class="px-2" href="https://web.facebook.com/WestanHomesNG">
+				<img src="{% static 'img/social/facebook.svg' %}" alt="facebook link">
+			</a>
+			<a class="px-2" href="https://instagram.com/westanhomesng">
+				<img src="{% static 'img/social/instagram.svg' %}" alt="instagram link">
+			</a>
+			<a class="px-2" href="https://www.linkedin.com/company/westanhomesng/">
+				<img src="{% static 'img/social/linkedin.svg' %}" alt="linkedin link">
+			</a>
+			<a class="px-2" href="https://twitter.com/westanhomesng">
+				<img src="{% static 'img/social/twitter.svg' %}" alt="twitter link">
+			</a>
+			<a class="px-2" href="https://www.youtube.com/channel/UCmjgqpJ-hDDQcZwv8w-znXw/?sub_confirmation=1">
+				<img src="{% static 'img/social/youtube.svg' %}" alt="youtube link">
+			</a>
+		</p>
+	</div>
+</footer>
