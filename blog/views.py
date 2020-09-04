@@ -8,7 +8,7 @@ from django.db.models import Count
 from django.contrib import messages
 
 
-def index(request, tag_slug=None):
+def blog_index(request, tag_slug=None):
     object_list = Post.objects.filter(published=True)
     tag = None
 
@@ -35,7 +35,8 @@ def index(request, tag_slug=None):
 
 
 def blog_single(request, pk, slug):
-    post = get_object_or_404(Post, slug=slug, pk=pk)
+    # post = get_object_or_404(Post, slug=slug, pk=pk)
+    post = get_object_or_404(Post, pk=pk)
 
     # list of active comments for this post
     comments = post.comment_set.filter(active=True)
@@ -70,28 +71,6 @@ def blog_single(request, pk, slug):
 
                                               'similar_posts': similar_posts})
 
-
-
-def share(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    sent = False
-
-    if request.method == "POST":
-        form = EmailPostForm(request.POST)
-
-        if form.is_valid():
-            cd = form.cleaned_data
-            post_url = request.build_absolute_uri(post.get_absolute_url())
-            subject = f"{cd['name']} ({cd['email']}) recommends you reading '{post.title}'"
-            message = f"Read '{post.title}' at {post_url}\n\n{cd['name']}'s comments: {cd['comments']}"
-            send_mail(subject, message, 'collinsalex50@gmail.com', [cd['to']])
-
-            sent = True
-    else:
-        form = EmailPostForm()
-    return render(request, 'blog/share.html', {'post': post,
-                                                'form': form,
-                                                'sent': sent})
 
 
                                                 

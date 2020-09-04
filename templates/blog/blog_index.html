@@ -1,0 +1,268 @@
+
+   
+
+
+    <style>
+        .posts .card img,
+        .carousel-item img {
+            height: 450px;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./style/blog.css" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Main navbar -->
+    <div class="border-bottom">
+        <header class="blog-header container py-2">
+            <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1 d-none d-md-block">
+                <a class="text-muted p-2" href="/blog.html">Blog</a>
+                <a class="text-muted p-2" href="/listings.html">Find Properties</a>
+                <a class="text-muted p-2" href="/index.html">Back to Westan</a>
+            </div>
+            <div class="col-4 text-center">
+                <a class="navbar-brand" href="#">
+                    <img src="./images/Westan Logo.svg" alt="Westan Logo" srcset="">
+                </a>
+            </div>
+            
+            <div class="col-6 col-md-4 pt-2 d-flex justify-content-end align-items-center rounded">
+              <label class="sr-only" for="inlineFormInputGroup">Username</label>
+              <div class="input-group mb-2">
+                <input type="text" class="form-control border-right-0" id="inlineFormInputGroup" placeholder="Search">
+                <div class="input-group-prepend">
+                  <div class="input-group-text bg-white border-left-0 rounded" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-1" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
+
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            </div>
+        </header>
+    </div>
+
+    <!-- Sliding Navbar -->
+    <div class="border-bottom shadow-sm">
+        <div class="nav-scroller container py-1 mb-1">
+            <nav class="nav d-flex justify-content-betwee align-items-center">
+                <span class="nav d-block">
+            <a class="p-2 text-muted" href="#">Trending</a>
+            <a class="p-2 text-muted" href="#">Real Estate News</a>
+            <a class="p-2 text-muted" href="#">Home Decoration</a>
+            <a class="p-2 text-muted" href="#">Market Trends</a>
+            <a class="p-2 text-muted" href="#">Lifestyle</a>
+            <a class="p-2 text-muted" href="#">Culture</a>
+            <a class="p-2 text-muted" href="#">Politics</a></span>
+            <span class="text-center ml-auto mt-1 py-md-0">
+                <a class="p-2" href="http://">
+                    <img src="./images/facebook.svg" alt="facebook link">
+                </a>
+                <a class="p-2" href="http://">
+                    <img src="./images/instagram.svg" alt="instagram link">
+                </a>
+                <a class="p-2" href="http://">
+                    <img src="./images/linkedin.svg" alt="linkedin link">
+                </a>
+            </span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Post carousel -->
+    <div id="carouselExampleCaptions" class="sliding-posts carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner bg-dark w-100">
+          <div class="carousel-item active">
+            <img src="./images/posts/post-big.png" class="d-block w-100" alt="Post image">
+            <div class="carousel-caption text-left container">
+              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist 
+                Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./images/posts/image 36.png" class="d-block w-100" alt="Post image">
+            <div class="carousel-caption text-left  container">
+              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
+              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./images/posts/image 37.png" class="d-block w-100" alt="Post image">
+            <div class="carousel-caption text-left container">
+              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
+              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./images/posts/image 38.png" class="d-block w-100" alt="Post image">
+            <div class="carousel-caption text-left container">
+              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
+              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./images/posts/image 39.png" class="d-block w-100" alt="Post image">
+            <div class="carousel-caption text-left container">
+              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
+              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAin body -->
+    <main role="main" class="container my-5 py-5">
+
+        <!-- Posts -->
+        <div class="posts row mb-2">
+            
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/post.png" height="48" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/image 39.png" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/image 38.png" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/image 37.png" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/image 36.png" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/post.png" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/post.png" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="./images/posts/post.png" alt="Card image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
+                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
+                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mt-5">
+              <li class="page-item disabled">
+                <a class="page-link rounded" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+              </li>
+              <li class="page-item active"><a class="page-link rounded" href="#">1</a></li>
+              <li class="page-item"><a class="page-link rounded" href="#">2</a></li>
+              <li class="page-item"><a class="page-link rounded" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link rounded" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+    </main>
+

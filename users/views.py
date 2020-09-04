@@ -130,8 +130,8 @@ def logout(request):
 
 def resend_activation_email(request):
     '''To resend activation email to a user'''
-
-    return send_activation_email(request, request.user)
+    send_activation_email(request, request.user)
+    return HttpResponse('Verification email sent')
 
 
 def activate_email(request, uid, token):

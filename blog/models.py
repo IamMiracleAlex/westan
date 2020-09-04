@@ -33,20 +33,20 @@ class Post(models.Model):
         return reverse("blog:single", args=[self.pk, self.slug])
 
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if not self.pk:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=False)
+# class Comment(models.Model):
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     body = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#     active = models.BooleanField(default=False)
 
-    class Meta:
-        ordering = ('created_at',)
+#     class Meta:
+#         ordering = ('created_at',)
 
-    def __str__(self):
-        return f'Comment by {self.name} on {self.post}'                                                                           
+#     def __str__(self):
+#         return f'Comment by {self.name} on {self.post}'                                                                           
