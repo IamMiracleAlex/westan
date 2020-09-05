@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from .forms import CommentForm
-# from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib import messages
@@ -14,8 +13,6 @@ def blog_index(request, tag_slug=None):
     object_list = Post.objects.filter(status=Post.PUBLISHED)
     tag = None
     featured_posts = object_list.filter(featured=True)
-
-    all_tags = Tag.objects.all()[:7]
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -35,7 +32,6 @@ def blog_index(request, tag_slug=None):
     return render(request, 'blog/blog_index.html', {'posts': posts,
                                         'page': page, 'tag': tag,
                                     'featured_posts': featured_posts,
-                                    'all_tags': all_tags,
                                     })
 
 
@@ -78,18 +74,29 @@ def blog_single(request, pk, slug):
 
 
 
-
-                                                
-
-def search(request):
+                                              
+def blog_search(request):
     results = []
     query = None
     
-    if 'query' in request.GET:
-        query = request.GET['query']
+    if 'q' in request.GET:
+        query = request.GET['q']
 
-        results = Post.objects.filter(title__icontains=query)
-    return render(request, 'blog/search.html', {'query': query,
+        queryset = Post.objects.filter(title__icontains=query)
+
+        paginator = Paginator(queryset, 1) # 3 posts per page
+        page = request.GET.get('page')
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            # if page is not an intger deliver the first page
+            results = paginator.page(1)
+        except EmptyPage:
+            #  if page is out of range deliver last page of results
+            results = paginator.page(paginator.num_pages)
+
+    
+    return render(request, 'blog/blog_search.html', {'query': query,
                                             'results': results})
 
 

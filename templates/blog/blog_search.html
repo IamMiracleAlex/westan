@@ -43,13 +43,47 @@
 
       <!-- MAin body -->
     <main role="main" class="container my-5">
-        <h1 class="results"><strong>Search Results for House Designs</strong></h1>
-        <p class="title mb-5 text-secondary">Showing 1 to 18 of 47</p>
+
+      {% if query %}
+
+        <h2 class="results"><strong>Search Results for "{{ query }}"</strong></h2>
+        <p class="title mb-5 text-secondary">
+        {% with results.paginator.count as total_results %}
+                Found {{ total_results }} result{{ total_results|pluralize }}
+            {% endwith %}
+        </p>
+
+
 
         <!-- Posts -->
         <div class="posts row mb-2">
-            
+
+        {% for post in results %}
             <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="{{ post.image.url }}" height="48" alt="Post Image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2">
+                        <small class="p-2 font-weight-bold"> 
+                            {% for tag in post.tags.all %}
+                                {{ tag.name }} {% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                          </small></span>
+                        <h4 class="card-title mt-2"><strong><a href="{{post.get_absolute_url}}" class="stretched-link"></a> {{ post.title }} </a></strong></h4>
+                        <p class="card-text"> {{ post.author.full_name }},  {{ post.created_at|date }} </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+           {% empty %}
+
+            <h3>There are no results for your query.</h3>
+
+
+        {% endfor %}
+            
+            {% comment %} <div class="col-md-4 mb-4">
                 <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
                   <img class="card-img" src="{% static 'img/blog/post.png' %}" alt="Card image">
                   <div class="card-img-overlay d-flex flex-column-reverse">
@@ -144,25 +178,17 @@
                     </div>
                   </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
     
         </div>
 
-        <!-- Pagination -->
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center mt-5">
-            <li class="page-item disabled">
-              <a class="page-link rounded" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-            </li>
-            <li class="page-item active"><a class="page-link rounded" href="#">1</a></li>
-            <li class="page-item"><a class="page-link rounded" href="#">2</a></li>
-            <li class="page-item"><a class="page-link rounded" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link rounded" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
-    </main>
+      {% endif %}
+
+          <!-- Pagination -->
+
+        {% include 'partials/pagination.html' with posts=results %}
+</main>
+
 
 
         

@@ -1,4 +1,6 @@
 {% load static %}
+{% load custom_tags %}
+
     <!-- Main navbar -->
     <div class="border-bottom">
         <header class="blog-header container py-2">
@@ -37,16 +39,18 @@
         <div class="nav-scroller container py-1 mb-1">
             <nav class="nav d-flex justify-content-betwee align-items-center">
                 <span class="nav d-block">
+
+            {# template tag #}
+            {% get_tags as all_tags %}
+
+                <!--tagss-->
             {% for tags in all_tags %}
+
             <a class="p-2 text-muted" href="{% url "blog:posts_by_tag" tags.slug %}">{{ tags.name }}</a>
-            {% comment %} <a class="p-2 text-muted" href="#">Real Estate News</a>
-            <a class="p-2 text-muted" href="#">Home Decoration</a>
-            <a class="p-2 text-muted" href="#">Market Trends</a>
-            <a class="p-2 text-muted" href="#">Lifestyle</a>
-            <a class="p-2 text-muted" href="#">Culture</a>
-            <a class="p-2 text-muted" href="#">Politics</a> {% endcomment %}
+            
             {% endfor %}
                  </span>
+                 
             <span class="text-center ml-auto mt-1 py-md-0">
                 <a class="p-2" href="https://web.facebook.com/WestanHomesNG">
                     <img src="{% static 'img/social/facebook.svg' %}" alt="facebook link">
