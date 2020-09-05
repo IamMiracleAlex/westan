@@ -1,0 +1,307 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+   <style>
+    .post .card img {
+      height: 450px;
+      object-fit: cover;
+      opacity: 0.6;
+    }
+
+    .card .price {
+    padding: 5px 13px !important;
+    background-color: rgba(0, 0, 0, 0.555);
+    width: min-content;
+    height: min-content;
+  }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+{% endblock extrastyle %}
+
+{% block title %} Blog - {% endblock title %}
+
+
+
+
+{% block content %}
+
+{% include 'partials/blog_navbar.html' %}
+
+
+
+  <main role="main" class="container mt-5">
+    <div class="row">
+      <!-- blog-main col -->
+      <div class="post col-md-9 blog-main">
+
+        <!-- Post Image -->
+        <div class="card shadow-sm bg-dark text-white text-white border-0 mb-5" style="min-width: 18rem;">
+          <img class="card-img" src="{% static 'img/blog/post.png' %}" alt="Card image">
+          <div class="card-img-overlay d-flex flex-column-reverse">
+            <div class="px-3">
+              <span class="category mt-auto price rounded text-white bg-danger pb-2 px-2"><small
+                  class="p-2 font-weight-bold">News</small></span>
+              <h4 class="card-title mt-3 w-75"><strong>Looking for a New Place? Use This Time to Create Your
+                  Wishlist</strong></h4>
+              <p class="card-text">Drake Oyle, Jun 21, 2019</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog post -->
+        <div class="blog-post">
+          <p class="h5 mb-3 mt-5 font-weight-bold">Video Tour</p>
+          <h2 class="blog-post-title">Sample blog post</h2>
+          <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+
+          <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic
+            typography, images, and code are all supported.</p>
+          <hr>
+          <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus.
+            Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est
+            at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+          <blockquote>
+            <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu
+              leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+          </blockquote>
+          <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum.
+            Aenean lacinia bibendum nulla sed consectetur.</p>
+          <h2>Heading</h2>
+          <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus,
+            nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac,
+            vestibulum at eros.</p>
+          <h3>Sub-heading</h3>
+          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+          <pre><code>Example code block</code></pre>
+          <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce
+            dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+          <h3>Sub-heading</h3>
+          <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia
+            bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac
+            cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <ul>
+            <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+            <li>Donec id elit non mi porta gravida at eget metus.</li>
+            <li>Nulla vitae elit libero, a pharetra augue.</li>
+          </ul>
+          <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+          <ol>
+            <li>Vestibulum id ligula porta felis euismod semper.</li>
+            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+            <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+          </ol>
+          <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+        </div>
+
+        <p class="my-4 d-block d-md-none"><strong>Drake Oyle</strong> is an author with an eye for the classics, an
+          architect and an alumni of the Harvard Institute of Architecture.</p>
+
+        <!-- /.blog-post -->
+
+        <!-- Comments -->
+        <div class="comments">
+          <h1>Comments</h1>
+          <ul class="list-unstyled">
+            <li class="media my-4 border p-3 rounded">
+              <img src="{% static 'img/blog/comment.png' %}" class="mr-3" alt="...">
+              <div class="media-body">
+                <strong>Cras:</strong> sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lac. 
+                <br>
+                <small>
+                  <span class="text-muted mr-3">4 months ago</span>
+                  <!-- <a href="" class="text-secondary"><img src="{% static 'img/blog/reply.svg" alt=""> Reply</a> -->
+                </small>
+              </div>
+            </li>
+            <li class="media my-4 border p-3 rounded">
+              <img src="{% static 'img/blog/comment.png' %}" class="mr-3" alt="...">
+              <div class="media-body">
+                <strong>Cras:</strong> sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+                <br>
+                <small>
+                  <span class="text-muted mr-3">4 months ago</span>
+                  <!-- <a href="" class="text-secondary"><img src="{% static 'img/blog/reply.svg" alt=""> Reply</a> -->
+                </small>
+              </div>
+            </li>
+            <li class="media my-4 border p-3 rounded">
+              <img src="{% static 'img/blog/comment.png' %}" class="mr-3" alt="...">
+              <div class="media-body">
+                <strong>Cras:</strong> sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
+                odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate
+                fringilla. Donec lacinia congue felis in faucibus.
+                <br>
+                <small>
+                  <span class="text-muted mr-3">4 months ago</span>
+                  <!-- <a href="" class="text-secondary"><img src="{% static 'img/blog/reply.svg" alt=""> Reply</a> -->
+                </small>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
+        <!-- Write post -->
+        <div class="write-comment my-5">
+          <h1>Write a response</h1>
+          <form class="comment-form border p-4 p-md-5">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input type="text" class="form-control bg-light" id="name" placeholder="Your name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Email</label>
+                <input type="email" class="form-control bg-light" id="inputEmail4" placeholder="email@me.com">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputAddress">Response</label>
+              <!-- <input type="text" class="form-control bg-light" id="inputAddress"> -->
+              <textarea class="form-control bg-light w-100" name="" id="inputAddress" cols="30" rows="5"
+                placeholder="Write your response here"></textarea>
+            </div>
+            <button type="submit" class="btn text-white top-color w-100">POST RESPONSE</button>
+          </form>
+        </div>
+
+
+
+      </div>
+      <!-- /.blog-main -->
+
+      <!-- Blog sidebar -->
+      <aside class="col-md-3 blog-sidebar">
+
+        <!-- Author -->
+        <div class="card shadow-sm bg-white text-dark text-white d-none d-md-block" style="min-width: 18rem;">
+          <img class="card-img" src="{% static 'img/blog/author.png' %}" height="250" alt="Card image">
+        </div>
+        <p class="my-4 d-none d-md-block"><strong>Drake Oyle</strong> is an author with an eye for the classics, an
+          architect and an alumni of the Harvard Institute of Architecture.</p>
+
+        <!-- Similar posts -->
+        <div class="my-5">
+          <span class="category top-color mt-auto price rounded text-white bg-secondary py-1 pb-2 px-2"><small
+            class="p-2 font-weight-bold">Similar Posts </small></span> <br>
+          <li class="media row my-4">
+            <img src="{% static 'img/blog/post.png' %}" class="col-4 mx-0" height="75" alt="Small post">
+            <div class="media-body">
+              <a href="/single-blog.html" class="h6 mt-0 mb-1 text-dark">31 Ways to Decorate your new Home by yourself</a>
+              Drake Oyle, Jun 21, 2019
+            </div>
+          </li>
+          <li class="media row my-3">
+            <img src="{% static 'img/blog/post.png' %}" class="col-4 mx-0" height="75" alt="Small post">
+            <div class="media-body">
+              <a href="/single-blog.html" class="h6 mt-0 mb-1 text-dark">31 Ways to Decorate your new Home by yourself</a>
+              Drake Oyle, Jun 21, 2019
+            </div>
+          </li>
+          <li class="media row my-3">
+            <img src="{% static 'img/blog/post.png' %}" class="col-4 mx-0" height="75" alt="Small post">
+            <div class="media-body">
+              <a href="/single-blog.html" class="h6 mt-0 mb-1 text-dark">31 Ways to Decorate your new Home by yourself</a>
+              Drake Oyle, Jun 21, 2019
+            </div>
+          </li>
+        </div>
+
+
+
+        <!-- Property Cards -->
+        <div class="my-5">
+          <span class="category top-color mt-auto price rounded text-white py-1 pb-2 px-2"><small
+            class="p-2 font-weight-bold">Featured Properties</small></span>
+          <div class="card shadow-sm bg-white my-4 text-dark text-white" style="min-width: 18rem;">
+            <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
+            <div class="card-img-overlay d-flex justify-content-between">
+              <p></p>
+              <h5 class="price rounded text-white">$78,096</h5>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
+              <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted mb-0 d-flex justify-content-between">
+                <span>10 Rooms</span>
+                <span>5 Baths</span>
+                <span>7 Bathrooms</span>
+                <span>678m<sup>2</sup></span>
+              </small>
+            </div>
+          </div>
+          <div class="card shadow-sm bg-white my-4 text-dark text-white" style="min-width: 18rem;">
+            <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
+            <div class="card-img-overlay d-flex justify-content-between">
+              <p></p>
+              <h5 class="price rounded text-white">$78,096</h5>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
+              <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted mb-0 d-flex justify-content-between">
+                <span>10 Rooms</span>
+                <span>5 Baths</span>
+                <span>7 Bathrooms</span>
+                <span>678m<sup>2</sup></span>
+              </small>
+            </div>
+          </div>
+          <div class="card shadow-sm bg-white my-4 text-dark text-white" style="min-width: 18rem;">
+            <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
+            <div class="card-img-overlay d-flex justify-content-between">
+              <p></p>
+              <h5 class="price rounded text-white">$78,096</h5>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
+              <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted mb-0 d-flex justify-content-between">
+                <span>10 Rooms</span>
+                <span>5 Baths</span>
+                <span>7 Bathrooms</span>
+                <span>678m<sup>2</sup></span>
+              </small>
+            </div>
+          </div>
+        </div>
+
+      </aside><!-- /.blog-sidebar -->
+
+    </div><!-- /.row -->
+
+  </main><!-- /.container -->
+
+
+
+
+{% include 'partials/footer.html' %}
+
+{% endblock content %}

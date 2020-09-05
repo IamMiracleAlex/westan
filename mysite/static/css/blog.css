@@ -1,0 +1,150 @@
+/* stylelint-disable selector-list-comma-newline-after */
+
+.blog-header {
+    line-height: 1;
+  }
+
+  .sliding-posts h4,
+  .sliding-posts p {
+    max-width: 600px;
+  }
+
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+  }
+
+  
+  
+  .display-4 {
+    font-size: 2.5rem;
+  }
+
+  footer {
+    background-color: #EBF5F7;
+    color: #73738D;
+  }
+
+  footer .row h5 {
+    color: #222222;
+    font-size: 14px;
+  }
+  footer .row a {
+    font-size: 14px;
+  }
+  footer .brand {
+    height: 48px;
+  }
+
+  /* footer img {
+    height: 20px;
+  } */
+  
+
+  @media (max-width: 768px) {
+    .blog-header .navbar-brand img {
+      height: 36px !important;
+    }
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+    header {
+      padding: 0;
+    }
+    .sliding-posts h4,
+    .sliding-posts p {
+      max-width: 300px;
+    }
+    .masthead {padding: 4rem 0 3rem;}
+    .masthead h1 {font-size: 24px;}
+    .title {
+      font-size: 18px;
+    }
+    .subtitle {
+      font-size: 14px;
+    }
+    form {
+      background-color: transparent;
+    }
+    footer .row h5,
+    footer .row a {
+      font-size: 12px;
+    }
+    footer .brand {
+      height: 24px;
+    }
+  
+    footer img {
+      height: 24px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .display-4 {
+      font-size: 3rem;
+    }
+  }
+  
+  .nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
+  }
+  
+  .nav-scroller .nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
+    text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .nav-scroller .nav-link {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: .875rem;
+  }
+  
+  .card-img-right {
+    height: 100%;
+    border-radius: 0 3px 3px 0;
+  }
+  
+  .flex-auto {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+  }
+  
+  .h-250 { height: 250px; }
+  @media (min-width: 768px) {
+    .h-md-250 { height: 250px; }
+  }
+  
+  .pagination li {
+    margin: 5px !important;
+    border-radius: 4px !important;
+
+  }
+  .pagination li a {
+    color: #003330 !important;
+    background-color: #EBF5F7;
+    font-size: medium;
+  }
+  .pagination .active a {
+    color: #EBF5F7 !important;
+    background-color: #003330 !important;
+    border: 0;
+  }
+
+  .top-color {
+    background-color: #fc8210 !important;
+    border: 0;
+  }
+  
+  

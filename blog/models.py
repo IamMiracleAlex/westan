@@ -10,15 +10,19 @@ from users.models import User
 
 
 class Post(models.Model):
-   
-    title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique=True, blank=True, null=True)
+
+    DRAFT, PUBLISH = 0, 1
+    status_choices = ((DRAFT, 'Draft'),
+                    (PUBLISH, 'Publish'))
+
+    title = models.CharField(max_length=150)
+    slug = models.SlugField(max_length=250, blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='blog', blank=True)  
+    status = models.SmallIntegerField(default=DRAFT, choices=status_choices)
+    image = models.ImageField(upload_to='blog', blank=True, null=True)  
     views = models.BigIntegerField(default=0)                          
 
     tags = TaggableManager()                                                  
@@ -37,7 +41,7 @@ class Post(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-# class Comment(models.Model):
+class Comment(models.Model):
 #     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
 #     body = models.TextField()
@@ -49,4 +53,5 @@ class Post(models.Model):
 #         ordering = ('created_at',)
 
 #     def __str__(self):
-#         return f'Comment by {self.name} on {self.post}'                                                                           
+#         return f'Comment by {self.name} on {self.post}'  
+    pass                                                                         

@@ -21,11 +21,11 @@ INSTALLED_APPS = [
     'users',
     'listings',
     'blog',
-    'transactions'
+    'transactions',
 
     'taggit',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
 
 ]
 
