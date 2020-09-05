@@ -4,18 +4,18 @@
         <header class="blog-header container py-2">
             <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1 d-none d-md-block">
-                <a class="text-muted p-2" href="/blog.html">Blog</a>
-                <a class="text-muted p-2" href="/listings.html">Find Properties</a>
-                <a class="text-muted p-2" href="/index.html">Back to Westan</a>
+                <a class="text-muted p-2" href="{% url 'blog:blog_index' %}">Blog</a>
+                <a class="text-muted p-2" href="{% url 'listings:listings' %}">Find Properties</a>
+                <a class="text-muted p-2" href="{% url 'listings:index' %}">Back to Westan</a>
             </div>
             <div class="col-4 text-center">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{% url 'listings:index' %}">
                     <img src="{% static 'img/logo.svg' %}" alt="Westan Logo" srcset="">
                 </a>
             </div>
             
             <div class="col-6 col-md-4 pt-2 d-flex justify-content-end align-items-center rounded">
-              <label class="sr-only" for="inlineFormInputGroup">Username</label>
+              <label class="sr-only" for="inlineFormInputGroup">Search</label>
               <div class="input-group mb-2">
                 <input type="text" class="form-control border-right-0" id="inlineFormInputGroup" placeholder="Search">
                 <div class="input-group-prepend">
@@ -37,21 +37,24 @@
         <div class="nav-scroller container py-1 mb-1">
             <nav class="nav d-flex justify-content-betwee align-items-center">
                 <span class="nav d-block">
-            <a class="p-2 text-muted" href="#">Trending</a>
-            <a class="p-2 text-muted" href="#">Real Estate News</a>
+            {% for tags in all_tags %}
+            <a class="p-2 text-muted" href="{% url "blog:posts_by_tag" tags.slug %}">{{ tags.name }}</a>
+            {% comment %} <a class="p-2 text-muted" href="#">Real Estate News</a>
             <a class="p-2 text-muted" href="#">Home Decoration</a>
             <a class="p-2 text-muted" href="#">Market Trends</a>
             <a class="p-2 text-muted" href="#">Lifestyle</a>
             <a class="p-2 text-muted" href="#">Culture</a>
-            <a class="p-2 text-muted" href="#">Politics</a></span>
+            <a class="p-2 text-muted" href="#">Politics</a> {% endcomment %}
+            {% endfor %}
+                 </span>
             <span class="text-center ml-auto mt-1 py-md-0">
-                <a class="p-2" href="http://">
+                <a class="p-2" href="https://web.facebook.com/WestanHomesNG">
                     <img src="{% static 'img/social/facebook.svg' %}" alt="facebook link">
                 </a>
-                <a class="p-2" href="http://">
+                <a class="p-2" href="https://instagram.com/westanhomesng">
                     <img src="{% static 'img/social/instagram.svg' %}" alt="instagram link">
                 </a>
-                <a class="p-2" href="http://">
+                <a class="p-2" href="hhttps://www.linkedin.com/company/westanhomesng/">
                     <img src="{% static 'img/social/linkedin.svg' %}" alt="linkedin link">
                 </a>
             </span>

@@ -36,182 +36,92 @@
 
 {% block content %}
 
-{% include 'partials/blog_navbar.html' %}
+{% include 'partials/blog_navbar.html' with all_tags=all_tags %}
    
 
     <!-- Post carousel -->
     <div id="carouselExampleCaptions" class="sliding-posts carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+
+          {% for featured_post in featured_posts %}
+
+          <li data-target="#carouselExampleCaptions" data-slide-to="{{ forloop.counter }}" class="{% if forloop.first %} active {% endif %}"></li>
+          
+           {% empty %}
+
+          {% endfor %}
         </ol>
+
         <div class="carousel-inner bg-dark w-100">
-          <div class="carousel-item active">
-            <img src="{% static 'img/blog/post-big.png' %}" class="d-block w-100" alt="Post image">
+
+          {% for featured_post in featured_posts %}
+          <div class="carousel-item {% if forloop.first %} active {% endif %} ">
+            <img src="{{ featured_post.image.url }}" class="d-block w-100" alt="Post image">
             <div class="carousel-caption text-left container">
-              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist 
-                Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2">
+              <small class="p-2 font-weight-bold">
+               {% for tag in featured_post.tags.all %}
+                    {{ tag.name }} {% if not forloop.last %},{% endif %}
+                {% endfor %}
+              </small></span>
+              <h4 class="mt-2"><strong><a href="{{ featured_post.get_absolute_url }}" class="text-white stretched-link">{{ featured_post.title }}</a></strong></h4>
+              <p>{{ featured_post.body|safe|truncatewords_html:10 }}</p>
             </div>
           </div>
-          <div class="carousel-item">
-            <img src="{% static 'img/blog/image 36.png' %}" class="d-block w-100" alt="Post image">
-            <div class="carousel-caption text-left  container">
-              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
-              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="{% static 'img/blog/image 37.png' %}" class="d-block w-100" alt="Post image">
-            <div class="carousel-caption text-left container">
-              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
-              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="{% static 'img/blog/image 38.png' %}" class="d-block w-100" alt="Post image">
-            <div class="carousel-caption text-left container">
-              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
-              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="{% static 'img/blog/image 39.png' %}" class="d-block w-100" alt="Post image">
-            <div class="carousel-caption text-left container">
-              <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">Trending</small></span>
-              <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-            </div>
-          </div>
+          
+          {% empty %}
+            <h2>No featured posts yet</h2>
+          {% endfor %}
+          
+
         </div>
       </div>
 
       <!-- MAin body -->
     <main role="main" class="container my-5 py-5">
 
+      {% if tag %}
+
+            <h2>Posts tagged with "{{ tag.name }}"</h2>
+            <br> <br>
+
+        {% endif %}
+
         <!-- Posts -->
         <div class="posts row mb-2">
+            {% for post in posts %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
+                  <img class="card-img" src="{{ post.image.url }}" height="48" alt="Post Image">
+                  <div class="card-img-overlay d-flex flex-column-reverse">
+                    <div class="text-white">
+                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2">
+                        <small class="p-2 font-weight-bold"> 
+                            {% for tag in post.tags.all %}
+                                {{ tag.name }} {% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                          </small></span>
+                        <h4 class="card-title mt-2"><strong><a href="{{post.get_absolute_url}}" class="stretched-link"></a> {{ post.title }} </a></strong></h4>
+                        <p class="card-text"> {{ post.author.full_name }},  {{ post.created_at|date }} </p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            {% empty %}
+
+            <h2>No posts yet</h2>
+
+        {% endfor %}
             
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/post.png' %}" height="48" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/image 39.png' %}" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/image 38.png' %}" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/image 37.png' %}" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/image 36.png' %}" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/post.png' %}" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/post.png' %}" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card shadow-sm bg-dark text-dark text-white border-0" style="min-width: 18rem;">
-                  <img class="card-img" src="{% static 'img/blog/post.png' %}" alt="Card image">
-                  <div class="card-img-overlay d-flex flex-column-reverse">
-                    <div class="text-white">
-                        <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                        <h4 class="card-title mt-2"><strong><a href="./single-blog.html" class="stretched-link"></a>Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                        <p class="card-text">Drake Oyle, Jun 21, 2019</p>
-                    </div>
-                  </div>
-                </div>
-            </div>
-    
         </div>
 
+
         <!-- Pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center mt-5">
-              <li class="page-item disabled">
-                <a class="page-link rounded" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-              </li>
-              <li class="page-item active"><a class="page-link rounded" href="#">1</a></li>
-              <li class="page-item"><a class="page-link rounded" href="#">2</a></li>
-              <li class="page-item"><a class="page-link rounded" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link rounded" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
+
+        {% include 'partials/pagination.html' with posts=posts %}
+
+
+
     </main>
 
 {% include 'partials/footer.html' %}

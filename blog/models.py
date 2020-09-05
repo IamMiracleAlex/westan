@@ -11,9 +11,9 @@ from users.models import User
 
 class Post(models.Model):
 
-    DRAFT, PUBLISH = 0, 1
+    DRAFT, PUBLISHED = 0, 1
     status_choices = ((DRAFT, 'Draft'),
-                    (PUBLISH, 'Publish'))
+                    (PUBLISHED, 'Published'))
 
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=250, blank=True, null=True)
@@ -22,8 +22,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.SmallIntegerField(default=DRAFT, choices=status_choices)
-    image = models.ImageField(upload_to='blog', blank=True, null=True)  
-    views = models.BigIntegerField(default=0)                          
+    image = models.ImageField(upload_to='blog', null=True)  
+    views = models.BigIntegerField(default=0)  
+    featured = models.BooleanField(default=False, help_text='Whether post should appear on slide')                        
 
     tags = TaggableManager()                                                  
 
@@ -34,7 +35,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("blog:single", args=[self.pk, self.slug])
+        return reverse("blog:blog_single", args=[self.pk, self.slug])
 
     def save(self, *args, **kwargs):
         if not self.pk:

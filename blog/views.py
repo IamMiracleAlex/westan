@@ -1,35 +1,42 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from .forms import CommentForm
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib import messages
 
+from .models import Post, Comment
+
+
 
 def blog_index(request, tag_slug=None):
-    # object_list = Post.objects.filter(published=True)
-    # tag = None
+    object_list = Post.objects.filter(status=Post.PUBLISHED)
+    tag = None
+    featured_posts = object_list.filter(featured=True)
 
-    # if tag_slug:
-    #     tag = get_object_or_404(Tag, slug=tag_slug)
-    #     object_list = object_list.filter(tags__in=[tag])
+    all_tags = Tag.objects.all()[:7]
 
-    # paginator = Paginator(object_list, 6) # 3 posts per page
-    # page = request.GET.get('page')
-    # try:
-    #     posts = paginator.page(page)
-    # except PageNotAnInteger:
-    #     # if page is not an intger deliver the first page
-    #     posts = paginator.page(1)
-    # except EmptyPage:
-    #     #  if page is out of range deliver last page of results
-    #     posts = paginator.page(paginator.num_pages)
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
 
-    return render(request, 'blog/blog_index.html', #{'posts': posts,
-                                               # 'page': page, 'tag': tag}
-                                                )
+    paginator = Paginator(object_list, 3) # 3 posts per page
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an intger deliver the first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        #  if page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, 'blog/blog_index.html', {'posts': posts,
+                                        'page': page, 'tag': tag,
+                                    'featured_posts': featured_posts,
+                                    'all_tags': all_tags,
+                                    })
 
 
 

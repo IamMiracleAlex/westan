@@ -9,7 +9,7 @@ from .forms import PostAdminForm
 class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
 
-    list_display = ('title', 'author', 'status','views','created_at', 'updated_at')
+    list_display = ('title', 'author', 'status','views', 'featured','created_at', 'updated_at')
     list_filter = ('created_at', 'status')
     search_fields = ('title', 'body')
     raw_id_fields = ('author',)
