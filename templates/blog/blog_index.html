@@ -40,6 +40,9 @@
    
 
     <!-- Post carousel -->
+
+  {% if not tag %}  {# hide carousel when no tags #}
+
     <div id="carouselExampleCaptions" class="sliding-posts carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
 
@@ -76,6 +79,11 @@
 
         </div>
       </div>
+
+{% endif %}
+
+
+
 
       <!-- MAin body -->
     <main role="main" class="container my-5 py-5">

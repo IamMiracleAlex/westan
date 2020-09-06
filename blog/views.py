@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from .forms import CommentForm
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib import messages
+from django.db.models import F
+
 
 from .models import Post, Comment
 
@@ -40,36 +42,39 @@ def blog_index(request, tag_slug=None):
 def blog_single(request, pk, slug):
     # post = get_object_or_404(Post, slug=slug, pk=pk)
     post = get_object_or_404(Post, pk=pk)
+    post.views += 1
+    post.save()
 
     # list of active comments for this post
-    comments = post.comment_set.filter(active=True)
+    # comments = post.comment_set.filter(active=True)
 
-    new_comment = None
+    # new_comment = None
 
-    if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            #create from object but don't save to the db
-            new_comment = comment_form.save(commit=False)
-            new_comment.post = post # assign current post to the comment
-            new_comment.save() # save comment to db
+    # if request.method == 'POST':
+    #     comment_form = CommentForm(data=request.POST)
+    #     if comment_form.is_valid():
+    #         #create from object but don't save to the db
+    #         new_comment = comment_form.save(commit=False)
+    #         new_comment.post = post # assign current post to the comment
+    #         new_comment.save() # save comment to db
         
-            # comment_form = CommentForm()
-    else:
-        comment_form = CommentForm()
+    #         # comment_form = CommentForm()
+    # else:
+    #     comment_form = CommentForm()
 
 
     # List of similar posts
     post_tags_ids = post.tags.values_list('id', flat=True)
 
-    similar_posts = Post.objects.filter(published=True).filter(
+    similar_posts = Post.objects.filter(status=Post.PUBLISHED).filter(
                                         tags__in=post_tags_ids).exclude(id=post.id)
 
     similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by(
-                                        '-same_tags',)[:4]
+                                        '-same_tags')[:4]
         
-    return render(request, 'blog/blog_single.html', {'post':post, 'comments': comments,
-                                                'new_comment': new_comment, 'comment_form': comment_form,
+    return render(request, 'blog/blog_single.html', {'post':post, 
+                                                    # 'comments': comments,
+                                                # 'new_comment': new_comment, 'comment_form': comment_form,
                                                 'similar_posts': similar_posts})
 
 
@@ -101,4 +106,6 @@ def blog_search(request):
 
 
 def test(request):
-    return render(request, 'blog/blog_search.html')
+    # print(request.META)
+    # print(request.META['REMOTE_ADDR'])
+    return render(request, 'blog/blog_single.html')
