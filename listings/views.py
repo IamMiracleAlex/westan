@@ -4,22 +4,22 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .models import Listing
 
 
-def index(request):
-    return render(request, 'listings/index.html')
+def index(request):  #home page
+    return render(request, 'listings/home.html')
 
 
 def listings(request):
-    properties = Listing.objects.order_by('-list_date').filter(is_published=True)
+    # properties = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-    paginator = Paginator(properties, 6)
-    page = request.GET.get('page')
-    paged_properties = paginator.get_page(page)
+    # paginator = Paginator(properties, 6)
+    # page = request.GET.get('page')
+    # paged_properties = paginator.get_page(page)
 
-    context = {
-        'properties': paged_properties
-    }
+    # context = {
+    #     'properties': paged_properties
+    # }
 
-    return render(request, 'listings/listings.html', context)
+    return render(request, 'listings/all_listings.html')
 
 
 def single_listing(request, id, slug):
