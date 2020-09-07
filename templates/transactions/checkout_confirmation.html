@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+<style>
+  form label {
+    color: #73738D;
+  }
+  .upload-button-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  .upload-button {
+    background-color: #FC8210;
+    color: #fff;
+    padding: 8px 20px;
+    font-size: 14px;
+    margin: auto 60px;
+  }
+  .upload-button-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 50px;
+    top: 0;
+    opacity: 0;
+  }
+  .submit-button {
+    background-color: #FC8210 !important;
+    color: #fff !important;
+  }
+</style>
+
+<link rel="stylesheet" href="{% static 'css/uploadstyle.css' %}"> 
+
+{% endblock extrastyle %}
+
+{% block title %} Checkout Confirmation - {% endblock title %}
+
+
+
+
+{% block content %}
+
+{% include 'partials/navbar.html' %}
+ 
+
+    <div class="my-1 my-md-4 py-5"></div>
+
+
+
+    <div class="text-center mb-5">
+        <p class="h1"><strong>Confirmation Form</strong> </p>
+        <p class="h3 col-12 col-md-6 mx-auto text-secondary">Upload bank teller or transfer screenshot and enter your transaction details to confirm payment.</p>
+    </div>
+    
+    <div class="container">
+      <form class="auth col-12 col-md-8 mx-md-auto border p-3 p-md-5 needs-validation rounded mb-5 pb-5 bg-white text-left" novalidate>
+          <p class="text-center h4 mb-3 mb-md-5 pt-3 pt-md-0"><strong>Transaction Details</strong> </p>
+          <div class="form-row">
+            <div class="col-md-6  form-col px-3">
+              <div class="mb-3">
+                <label for="bankPayedTo">Bank Payed to</label>
+                <select class="custom-select" id="bankPayedTo" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option>Zenith</option>
+                  <option>First Bank</option>
+                </select>
+                <div class="invalid-tooltip">
+                  Please select a bank.
+                </div>
+              </div>
+              
+              <label for="myFile">Upload Teller/Transaction Image</label>
+              <div class="wrapper mb-3 ">
+                <div class="box">
+                  <div class="js--image-preview"></div>
+                  <div class="upload-options">
+                    <label>Upload
+                      <input type="file" class="image-upload" accept="image/*" />
+                    </label>
+                  </div>
+                </div>
+          
+              </div>
+               
+            </div>
+
+            <div class="col-md-6 form-col px-3">
+              <div class="mb-3">
+                <label for="payersName">Payer's name</label>
+                <input type="text" class="form-control" id="payersName" placeholder="Payer's name" required>
+                <div class="invalid-tooltip">
+                  Please enter Payer's name.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="amountPaid">Amount Paid</label>
+                <input type="number" class="form-control" id="amountPaid" required>
+                <div class="invalid-tooltip">
+                  Please enter the amount paid.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="tellerNo">Transaction/Teller Number</label>
+                <input type="text" class="form-control" id="tellerNo" required>
+                <div class="invalid-tooltip">
+                  Please enter the teller number.
+                </div>
+              </div>
+              <div class="form-group py-auto">
+                <button class="submit-button btn w-100 mb-1 mx-auto" type="submit">Confirm Payment</button>
+              </div>
+            </div>
+          </div>
+          
+      </form>
+    </div>
+      
+
+      <div class="py-5"></div>
+
+      
+      <script>
+      // JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                }, false);
+            });
+            }, false);
+        })();
+      </script>
+
+
+      <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+      <script src="{% static 'js/uploadHelper.js' %}"></script>
+      <script src="{% static 'js/upload-img.js' %}"></script>
+  {% endblock content %}
+
+

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+<style>
+  body {
+    background-image: none;
+  }
+  /* .card {
+    background-color: #F9FEFF !important;
+    border: 1px solid #E0E0F4;
+  }
+  .card-header {background-color: #EBF5F7;}
+  .card-text {
+    font-size: 12px !important;
+
+  }
+  .card-title {
+    font-size: 16px !important;
+    color: #003333;
+  } */
+  .container .card {
+      border-radius: 10px !important;
+  }
+  .property-detail {
+      background-color: hsla(190, 43%, 95%, 0.9) !important;
+      color: #003333;
+      /* opacity: 0.5; */
+      border-radius: 10px;
+      border: 1px solid hsla(240, 10%, 50%, 0.7) !important;
+  }
+  .card-body .card-text,
+  .card-footer {
+      color: #5A6F6F;
+  }
+  .card-footer {
+      font-size: 14px !important;
+  }
+  .btn-dash {
+    background-color: #FC8210 !important;
+    color: #ffffff;
+  }
+</style>
+
+{% endblock extrastyle %}
+
+{% block title %} CPayment Successful - {% endblock title %}
+
+
+
+{% block content %}
+
+{% include 'partials/navbar.html' %}
+
+
+  
+
+    <div class="my-1 my-md-4 py-5"></div>
+
+
+
+    <div class="text-center mb-5">
+        <p class="h1"><strong>Pay Successful</strong> </p>
+        <p class="h3 col-12 col-md-7 mx-auto text-secondary">Your are now the proud owner of El Classique Mansion, your property documents will be processed soon.</p>
+    </div>
+
+    <div class="container">
+      <div class="col-md-9 mx-auto">
+        <div class="card shadow-sm mb-3 overflow-hidden">
+            <img src="{% static 'img/blog/post-big.png' %}" class="card-img rounded-0 h-100" alt="...">
+                <div class="card-img-overlay px-3 px-md-5 d-flex flex-col-reverse">
+                    <div class="property-detail rounded bg-secondary w-100 mt-auto border">
+                        <h5 class="price rounded text-white float-right bg-secondary px-3 py-2 mt-4 mr-4 d-none d-md-block">$78,096</h5>
+                        <div class="card-body ml-3">
+                            <h4 class="card-title p-0 mb-0"><strong>El Classico Mansion</strong></h4>
+                            <p class="card-text text-secondary d-none d-md-block">
+                                <img src="{% static 'img/location.svg' %}" alt="">
+                                Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.
+                            </p>
+                        </div>
+                        
+                        <div class="card-footer d-none d-md-block">
+                            <div class="mb-0 ">
+                              <span class="ml-3">10 Rooms</span>
+                              <span class="ml-3">5 Baths</span>
+                              <span class="ml-3">7 Bathrooms</span>
+                              <span class="ml-3">678m<sup>2</sup></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+          </div>
+      </div>
+      <div class="text-center">
+        <a href="" type="submit" class="btn btn-dash px-5 border-0 mt-4">Go to Dashboard</a>
+      </div>
+      
+    </div>
+
+    
+
+      <div class="py-5"></div>
+
+      
+  {% endblock content %}

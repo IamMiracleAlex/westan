@@ -104,8 +104,3 @@ def blog_search(request):
     return render(request, 'blog/blog_search.html', {'query': query,
                                             'results': results})
 
-
-def test(request):
-    # print(request.META)
-    # print(request.META['REMOTE_ADDR'])
-    return render(request, 'blog/blog_single.html')

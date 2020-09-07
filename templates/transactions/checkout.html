@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+<style>
+ body {
+    background-image: none;
+  }
+  .card {
+    background-color: #F9FEFF !important;
+    border: 1px solid #E0E0F4;
+  }
+  .card-header {background-color: #EBF5F7;}
+  .card-text {
+    font-size: 12px !important;
+
+  }
+  .card-title {
+    font-size: 16px !important;
+    color: #003333;
+  }
+  form {
+    font-size: 14px;
+  }
+  .main-button {background-color: #FC8210 !important;}
+  .second-button {
+    color: #FC8210 !important;
+    border: 1px solid #FC8210 !important;
+    background-color: #fff !important;
+  }
+</style>
+{% endblock extrastyle %}
+
+{% block title %} Checkout - {% endblock title %}
+
+
+
+
+{% block content %}
+
+{% include 'partials/navbar.html' %}
+
+
+
+    <div class="my-1 my-md-4 py-5"></div>
+
+
+
+    <div class="text-center mb-5">
+        <p class="h1"><strong>Checkout</strong> </p>
+        <p class="h3 col-12 col-md-7 mx-auto text-secondary">Choose a bank account to pay or transfer to, pay via transfer or deposit.  Confirm or edit your personal details and proceed to enter your transaction details upon payment.</p>
+    </div>
+
+    <div class="container">
+      <div class="row mx-auto col-md-9">
+        <div class="col border rounded text-center p-4 p-md-5 mr-0 mr-md-3 mb-4">
+          <p class="h4 pb-3">Our Bank Accounts </p>
+          <div class="card mb-3">
+            <div class="card-header">Zenith Bank Nig Plc</div>
+            <div class="card-body py-2">
+              <p class="card-text mb-0">Account Name</p>
+              <h5 class="card-title">Westan Realtors Nig Ltd</h5>
+              <p class="card-text mb-0">Account No</p>
+              <h5 class="card-title">0765234943</h5>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">Zenith Bank Nig Plc</div>
+            <div class="card-body py-2">
+              <p class="card-text mb-0">Account Name</p>
+              <h5 class="card-title">Westan Realtors Nig Ltd</h5>
+              <p class="card-text mb-0">Account No</p>
+              <h5 class="card-title">0765234943</h5>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header">Zenith Bank Nig Plc</div>
+            <div class="card-body py-2">
+              <p class="card-text mb-0">Account Name</p>
+              <h5 class="card-title">Westan Realtors Nig Ltd</h5>
+              <p class="card-text mb-0">Account No</p>
+              <h5 class="card-title">0765234943</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col border rounded ml-0 ml-md-3  p-4 p-md-5">
+          <p class="h4 pb-3 text-center font-weight-bold">Checkout Form</p>
+          <form class="needs-validation mb-0" novalidate>
+              <div class="mb-3">
+                <label for="validationTooltip01">Buyer's name</label>
+                <input type="text" class="form-control" id="validationTooltip01" required>
+              </div>
+              <div class="mb-3">
+                <label for="validationTooltip02">Last name</label>
+                <textarea class="form-control w-100" name="" id="validationTooltip02" rows="4" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="validationTooltip03">Phone number</label>
+                <input type="number" class="form-control" id="validationTooltip03" required>
+              </div>
+              <div class="mb-3">
+                <label for="validationTooltip04">Payment method</label>
+                <select class="custom-select" id="validationTooltip04" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option>Bank Transfer</option>
+                  <option>Bank Deposit</option>
+                </select>
+              </div>
+              <button class="main-button btn btn-primary w-100 mb-3 border-0" type="submit">Enter Transaction Details</button>
+              <button class="second-button btn btn-primary w-100 mb-0" type="submit">Confirm Payment Later</button>
+          </form>
+        </div>
+      </div>
+    </div>
+      
+
+    
+      <div class="py-5"></div>
+
+      
+      <script>
+      // JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                }, false);
+            });
+            }, false);
+        })();
+      </script>
+
+  {% endblock content %}

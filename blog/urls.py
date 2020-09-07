@@ -9,7 +9,4 @@ urlpatterns = [
     path('tag/<slug:tag_slug>/', views.blog_index, name='posts_by_tag'),
     path('search/', views.blog_search, name='blog_search'),
 
-
-
-    path('test', views.test, name='test'),
 ]
