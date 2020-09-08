@@ -8,4 +8,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('listings/', views.listings, name='listings'),
     path('listing/-<int:id>/<slug:slug>/', views.single_listing, name='single_lisitng'),
+    path('test/', views.test, name='test'),
 ]

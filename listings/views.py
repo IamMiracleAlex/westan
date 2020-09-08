@@ -9,14 +9,14 @@ def index(request):  #home page
 
 
 def listings(request):
-    # properties = Listing.objects.order_by('-list_date').filter(is_published=True)
+    # listings = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-    # paginator = Paginator(properties, 6)
+    # paginator = Paginator(listings, 6)
     # page = request.GET.get('page')
-    # paged_properties = paginator.get_page(page)
+    # paged_listings = paginator.get_page(page)
 
     # context = {
-    #     'properties': paged_properties
+    #     'listings': paged_listings
     # }
 
     return render(request, 'listings/all_listings.html')
@@ -24,10 +24,10 @@ def listings(request):
 
 def single_listing(request, id, slug):
 
-    prop = get_object_or_404(Listing, id=id, slug=slug)
-    context = {
-        'prop' : prop
-    }
+    # listing = get_object_or_404(Listing, id=id, slug=slug)
+    # context = {
+    #     'listing' : listing
+    # }
     return render(request, 'listings/single_listing.html', context)
 
 
@@ -77,3 +77,6 @@ def search(request):
     return render(request, 'listings/search.html', context) 
 
 
+def test(request):
+
+    return render(request, 'listings/single_listings.html')

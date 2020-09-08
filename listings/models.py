@@ -5,7 +5,6 @@ from django.utils import timezone
 class Listing(models.Model):
     
     # title = models.CharField(max_length=50)
-    # address = models.CharField(max_length=200)
     # city = models.CharField(max_length=40)
     # state = models.CharField(max_length=40)
     # zipcode = models.CharField(max_length=20)
@@ -29,3 +28,6 @@ class Listing(models.Model):
    
     def __str__(self):
         return self.title
+
+    def get_address(self):
+        pass    
