@@ -1,5 +1,6 @@
 from django.db import models
-from django.utils import timezone
+from django.urls import reverse
+from django.utils.text import slugify
 
 from utils.tools import generate_unique_id
 

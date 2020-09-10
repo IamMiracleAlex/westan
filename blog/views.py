@@ -4,15 +4,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.models import Tag
 from django.db.models import Count
 from django.contrib import messages
-from django.db.models import F
 
-
-from .models import Post, Comment
+from blog.models import Post
 
 
 
 def blog_index(request, tag_slug=None):
-    object_list = Post.objects.filter(status=Post.PUBLISHED)
+    object_list = Post.objects.filter(status=Post.PUBLISHED).order_by('-created_at')
     tag = None
     featured_posts = object_list.filter(featured=True)
 

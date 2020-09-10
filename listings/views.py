@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from .models import Listing
+from listings.models import Listing
 
 
 def index(request):  #home page
@@ -9,17 +9,25 @@ def index(request):  #home page
 
 
 def listings(request):
-    # listings = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-    # paginator = Paginator(listings, 6)
-    # page = request.GET.get('page')
-    # paged_listings = paginator.get_page(page)
+    queryset = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-created_at')
 
-    # context = {
-    #     'listings': paged_listings
-    # }
+    paginator = Paginator(object_list, 3) # 3 posts per page
+    page = request.GET.get('page')
+    try:
+        listings = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an intger deliver the first page
+        listings = paginator.page(1)
+    except EmptyPage:
+        #  if page is out of range deliver last page of results
+        listings = paginator.page(paginator.num_pages)
+   
+    context = {
+        'listings': listings
+    }
 
-    return render(request, 'listings/all_listings.html')
+    return render(request, 'listings/all_listings.html', context)
 
 
 def single_listing(request, id, slug):
