@@ -3,7 +3,7 @@
 # from django.db import models
 
 # from listings.models import Listing
-
+# from users.models import User
 
 # class Transaction(models.Model):
 #     SUBMITTED, PROCESSING, SUCCESS, FAILED, CANCELED = range(5)
@@ -34,19 +34,9 @@
 # 		validators=[MinValueValidator(Decimal('0.00'))]
 # 	)
 	
-# 	# fee = models.DecimalField(
-# 	# 	default=0.00,
-# 	# 	decimal_places=2,
-# 	# 	max_digits=12,
-# 	# 	validators=[MinValueValidator(Decimal('0.00'))]
-# 	# )
-# 	total = models.DecimalField(
-# 		default=0.00,
-# 		decimal_places=2,
-# 		max_digits=12,
-# 		validators=[MinValueValidator(Decimal('0.00'))]
-# 	)
+
+
 # 	memo = models.CharField(max_length=200, null=True, blank=True)
-	
+	# buyer
 # 	created_at = models.DateTimeField(auto_now_add=True, null=True)
 # 	updated_at = models.DateTimeField(auto_now=True, null=True)
