@@ -40,3 +40,10 @@
 	# buyer
 # 	created_at = models.DateTimeField(auto_now_add=True, null=True)
 # 	updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    # def save(self, *args, **kwargs):
+    #     if not self.pk:
+    #         self.slug = slugify(self.title)
+    #         self.reference = generate_unique_id(Listing, 'reference', len=10)
+
+    #     super().save(*args, **kwargs)

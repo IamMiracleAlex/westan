@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-from users.models import User
 from utils.tools import generate_unique_id
 
 
@@ -26,16 +25,15 @@ class Listing(models.Model):
     bathrooms = models.IntegerField(blank=True, null=True)
     garage = models.IntegerField(blank=True, null=True)
     area = models.FloatField()
-    photo_main = models.ImageField(upload_to='listings')
-    photo_1 = models.ImageField(upload_to='listings', blank=True, null=True)
-    photo_2 = models.ImageField(upload_to='listings', blank=True, null=True)
-    photo_3 = models.ImageField(upload_to='listings', blank=True, null=True)
-    photo_4 = models.ImageField(upload_to='listings', blank=True, null=True)
+    photo_main = models.ImageField(upload_to='listings/img')
+    photo_1 = models.ImageField(upload_to='listings/img', blank=True, null=True)
+    photo_2 = models.ImageField(upload_to='listings/img', blank=True, null=True)
+    photo_3 = models.ImageField(upload_to='listings/img', blank=True, null=True)
+    photo_4 = models.ImageField(upload_to='listings/img', blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=DRAFT)
     video = models.FileField(upload_to='listings/video', blank=True, null=True)
     vr_image = models.ImageField(upload_to='listings/vr', blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
-    # author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     # location fileds for maps
     city = models.CharField(max_length=50)
     street = models.CharField(max_length=50)
@@ -57,17 +55,18 @@ class Listing(models.Model):
         pass    
 
     def get_absolute_url(self):
-        return reverse("blog:blog_single", args=[self.pk, self.slug])
+        return reverse("listings:single_lisitng", args=[self.pk, self.slug])
 
     def save(self, *args, **kwargs):
         if not self.pk:
             self.slug = slugify(self.title)
+            self.reference = generate_unique_id(Listing, 'reference', len=10)
+
         super().save(*args, **kwargs)
 
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.refer_code = generate_unique_id(User, 'refer_code')
-        super(User, self).save(*args, **kwargs)
+
+
+
 
 # class WishList(models.Model):
 #     pass
