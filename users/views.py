@@ -110,8 +110,8 @@ def signup(request, refer_code=None):
 def logout(request):
     auth.logout(request)
     messages.info(request, "You're now logged out")
-    # return redirect('index')
-    return HttpResponse('You are now logged out')
+    return redirect('listings:index')
+    # return HttpResponse('You are now logged out')
 
 
 

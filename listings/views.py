@@ -79,5 +79,5 @@ def search(request):
 
 def test(request):
 
-    return render(request, 'listings/search_listings.html')
-    # return render(request, 'listings/single_listings.html')
+    # return render(request, 'listings/search_listings.html')
+    return render(request, 'listings/single_listings.html')
