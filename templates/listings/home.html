@@ -75,12 +75,11 @@
 					
 
 					<div class="col-12 col-md-3 mb-2 mb-md-0 py-2 border-left" style="background-color: #EBF5F7;">
-						<select class="custom-select custom-select-lg bg-transparent border-0" id="exampleFormControlSelect1"
+						<select class="custom-select custom-select-lg bg-transparent border-0" name='type'
 							placeholder="Enter your email...">
-							<option value="0">Land</option>
-							<option value="1">House</option>
-							{% comment %} <option value="3">Mall</option>
-							<option value="4">Hall</option> {% endcomment %}
+							<option value="0">House</option>
+							<option value="1">Land</option>
+
 						</select>
 					</div>
 					<div class="col-12 col-md-3">
@@ -91,13 +90,13 @@
 		</div>
 
 		<p class="d-none d-md-block my-auto pt-5">
-			<a class="px-2" href="http://">
+			<a class="px-2" href="https://web.facebook.com/WestanHomesNG">
 				<img src="{% static 'img/social/facebook.svg' %}" alt="facebook link">
 			</a>
-			<a class="px-2" href="http://">
+			<a class="px-2" href="https://instagram.com/westanhomesng"
 				<img src="{% static 'img/social/instagram.svg' %}" alt="instagram link">
 			</a>
-			<a class="px-2" href="http://">
+			<a class="px-2" href="https://www.linkedin.com/company/westanhomesng/">
 				<img src="{% static 'img/social/linkedin.svg' %}" alt="linkedin link">
 			</a>
 		</p>
@@ -182,6 +181,10 @@
 							</div>
 						</div>
 					</div>
+					 {% empty %}
+
+         		 <h3>No Featured Listings Yet</h3>
+
 					{% endfor %}
 
 				</div>

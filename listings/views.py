@@ -36,12 +36,59 @@ def single_listing(request, id, slug):
     context = {
         # 'listing' : listing
     }
-    return render(request, 'listings/single_listing.html', context)
+    return render(request, 'listings/single_listings.html', context)
 
 
 
 
 def search(request):
+
+    results = []
+    
+    query = request.GET['q'] if 'q' in request.GET else None
+    type = request.GET['type'] if 'type' in request.GET else None
+
+    queryset = Listing.objects.filter(type__iexact=type)
+
+    if query:
+        queryset = queryset.filter(title__icontains=query)
+
+    context = {
+       
+        'listings': queryset,
+        'values': request.GET
+    }
+    
+    return render(request, 'listings/search_listings.html', context) 
+
+
+
+    # results = []
+    # query = None
+    
+    # if 'q' in request.GET:
+    #     query = request.GET['q']
+
+    #     queryset = Post.objects.filter(title__icontains=query)
+
+    #     paginator = Paginator(queryset, 1) # 3 posts per page
+    #     page = request.GET.get('page')
+    #     try:
+    #         results = paginator.page(page)
+    #     except PageNotAnInteger:
+    #         # if page is not an intger deliver the first page
+    #         results = paginator.page(1)
+    #     except EmptyPage:
+    #         #  if page is out of range deliver last page of results
+    #         results = paginator.page(paginator.num_pages)
+
+    
+    # return render(request, 'blog/blog_search.html', {'query': query,
+    #                                         'results': results})
+
+
+
+
     # query_list = Listing.objects.order_by('-list_date') 
 
     # # keywords
@@ -74,18 +121,3 @@ def search(request):
     #     price = request.GET['price']
     #     if price:
     #         query_list = query_list.filter(price__lte=price)             
-
-    context = {
-        # 'state_choices': state_choices,
-        # 'bedroom_choices': bedroom_choices,
-        # 'price_choices': price_choices,
-        # 'properties': query_list,
-        # 'values': request.GET
-    }
-    return render(request, 'listings/search_listings.html', context) 
-
-
-def test(request):
-
-    # return render(request, 'listings/search_listings.html')
-    return render(request, 'listings/single_listings.html')

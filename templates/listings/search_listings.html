@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static humanize %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
@@ -57,24 +57,20 @@
                   </strong>
                 </h1>
               <div class="col-md-12 col-lg-9 mx-auto">
-                <form >
+                <form action="{% url 'listings:search' %}" method='GET'>
                   <div class="form-row">
                     <div class="col-12 col-md-6 mb-2 mb-md-0 py-2" style="background-color: #EBF5F7;" >
-                      <input type="text" class="form-control form-control-lg bg-transparent border-0 pl-4 py-2" placeholder="Search property locations...">
+                      <input type="text" name='q' value='{{ values.q }}' class="form-control form-control-lg bg-transparent border-0 pl-4 py-2" placeholder="Search property locations...">
                     </div>
-                    <!-- <div class="col-12 col-md-3 mb-2 mb-md-0 py-2 border-left">
-                      <input type="text" class="form-control form-control-lg border-0" placeholder="Enter your email...">
-                    </div> -->
+                   
                     <div class="col-12 col-md-3 mb-2 mb-md-0 py-2 border-left" style="background-color: #EBF5F7;">
-                      <select class="custom-select custom-select-lg bg-transparent border-0" id="exampleFormControlSelect1" placeholder="Enter your email...">
-                        <option value="1">Land</option>
-                        <option value="2">House</option>
-                        <option value="3">Mall</option>
-                        <option value="4">Hall</option>
+                      <select class="custom-select custom-select-lg bg-transparent border-0" name='type' placeholder="Enter your email...">
+                        <option value="0">House</option>
+							          <option value="1">Land</option>
                       </select>
                     </div>
                     <div class="col-12 col-md-3">
-                      <button type="submit" class="btn btn-block btn-lg text-white w-100 py-3">Sign up!</button>
+                      <button type="submit" class="btn btn-block btn-lg text-white w-100 py-3">Search</button>
                     </div>
                   </div>
                 </form>
@@ -85,100 +81,94 @@
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                       <div class="modal-body bg-light rounded-lg">
-                        <form class="p-5" novalidate>
+                        <form class="p-5" action="{% url 'listings:search' %}" method='GET'>
                           <p class="text-center h4 mb-3 mb-md-5"><strong>Filters</strong> </p>
                           
                             <div class="form-row">
-                              <div class="col-md-3 mb-3">
-                                <label for="maxPrice">Price</label>
-                                <select class="custom-select" id="maxPrice">
-                                  <option value="1" disabled selected>Max Price</option>
-                                  <option value="2">400</option>
-                                  <option value="3">500</option>
-                                  <option value="4">600</option>
-                                  <option value="5">700</option>
-                                </select>
+                           
+                              <div class="col-md-6 mb-4">
+                                 <label for="noBathrooms">Search property locations</label>
+                                <input class="form-control bg-white" name='q' type="text" value='{{ values.q }}' placeholder="Search property locations" aria-label="Search">
                               </div>
-                              <div class="col-md-3 mb-3">
-                                <label for="minPrice" class="text-light">State</label>
-                                <select class="custom-select" id="minPrice">
-                                  <option value="1" disabled selected>Min Price</option>
-                                  <option value="2">400</option>
-                                  <option value="3">500</option>
-                                  <option value="4">600</option>
-                                  <option value="5">700</option>
-                                </select>
-                              </div>
+
                               <div class="col-md-6 mb-3">
-                                <label for="noRooms">Number of Rooms</label>
-                                <select class="custom-select" id="noRooms">
-                                  <option disabled selected value=""></option>
-                                  <option value="1" disabled selected>Number of Rooms</option>
-                                  <option value="2">4</option>
-                                  <option value="3">5</option>
-                                  <option value="4">6</option>
-                                  <option value="5">7</option>
+                                <label for="noRooms">Type</label>
+                                <select name='type' class="custom-select" id="noRooms">
+                                  <option value="0">House</option>
+                                  <option value="1">Land</option>
                                 </select>
                               </div>
                             </div>
                             <div class="form-row">
-                              <div class="col-md-3 mb-3">
-                                <label for="maxArea">Area (square feet)</label>
-                                <select class="custom-select" id="maxArea">
-                                  <option value="1" disabled selected>Max Area</option>
-                                  <option value="2">50</option>
-                                  <option value="3">100</option>
-                                  <option value="4">150</option>
-                                  <option value="5">200</option>
-                                </select>
-                              </div>
-                              <div class="col-md-3 mb-3">
-                                <label for="minArea" class="text-light">Min Area</label>
-                                <select class="custom-select" id="minArea">
-                                  <option value="1" disabled selected>Min Area</option>
-                                  <option value="2">400</option>
-                                  <option value="3">500</option>
-                                  <option value="4">600</option>
-                                  <option value="5">700</option>
+                            
+                               <div class="col-md-6 mb-4">
+                                <label for="noBathrooms">Number of Bedrooms</label>
+                                <select name='bedrooms' class="custom-select" id="noBathrooms">
+                                  <option value="0" disabled selected>Number of Bedrooms</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6+</option>
                                 </select>
                               </div>
                               
                               <div class="col-md-6 mb-3">
                                 <label for="noBathrooms">Number of Bathrooms</label>
-                                <select class="custom-select" id="noBathrooms">
-                                  <option value="1" disabled selected>Number of Bathrooms</option>
-                                  <option value="2">4</option>
-                                  <option value="3">5</option>
-                                  <option value="4">6</option>
-                                  <option value="5">7</option>
+                                <select name='bathrooms' class="custom-select" id="noBathrooms">
+                                  <option value="0" disabled selected>Number of Bathrooms</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6+</option>
                                 </select>
                               </div>
                             </div>
                             <div class="form-row">
-                              <div class="col-md-6 mb-4">
-                                <label for="noBathrooms">Number of Bathrooms</label>
-                                <select class="custom-select" id="noBathrooms">
-                                  <option value="1" disabled selected>Number of Bathrooms</option>
-                                  <option value="2">4</option>
-                                  <option value="3">5</option>
-                                  <option value="4">6</option>
-                                  <option value="5">7</option>
+                              
+                              <div class="col-md-3 mb-3">
+                                <label for="maxPrice">Price</label>
+                                <select name='maxprice' class="custom-select" id="maxPrice">
+                                  <option value="0" disabled selected>Max Price</option>
+                                  <option value="100000">100,000</option>
+                                  <option value="250000">250,000</option>
+                                  <option value="500000">500,000</option>
+                                  <option value="750000">750,000</option>
+                                  <option value="1000000">1 million</option>
+                                  <option value="2000000">2 million</option>
+                                  <option value="5000000">5 million</option>
+                                  <option value="10000000">10 million</option>
+                                  <option value="20000000">20 million+</option>
                                 </select>
                               </div>
-                              <div class="col-md-6 mb-4">
-                                <label for="ageHouse">Age of House</label>
-                                <select class="custom-select" id="ageHouse">
-                                  <option value="1" disabled selected>Age of House</option>
-                                  <option value="2">4</option>
-                                  <option value="3">5</option>
-                                  <option value="4">6</option>
-                                  <option value="5">7</option>
+                              <div class="col-md-3 mb-3">
+                                <label for="minPrice" class="text-light">State</label>
+                                <select name='minprice' class="custom-select" id="minPrice">
+                                  <option value="0" disabled selected>Min Price</option>
+                                  <option value="100000">100,000</option>
+                                  <option value="250000">250,000</option>
+                                  <option value="500000">500,000</option>
+                                  <option value="750000">750,000</option>
+                                  <option value="1000000">1 million</option>
+                                  <option value="2000000">2 million</option>
+                                  <option value="5000000">5 million</option>
+                                  <option value="10000000">10 million</option>
+                                  <option value="20000000">20 million+</option>
                                 </select>
+                              </div> 
+
+                              <div class="col-md-6 mb-4">
+                                 <label for="reference">Property Reference</label>
+                                <input class="form-control bg-white" name='reference' type="text" placeholder="Get exact property with reference" aria-label="Reference">
                               </div>
+
                             </div>
                             
                             <div class="form-row">
@@ -211,7 +201,7 @@
     <main class=" py-5">
       <div class="container">
         <div class="mb-3 d-flex justify-content-between align-items-center">
-          <span class="h4 text-uppercase">featured listings</span>
+          <span class="h4 text-uppercase">search results</span>
           <span class="">
             <span class="mr-2">Quick filters</span>
             <div class="btn-group">
@@ -249,325 +239,48 @@
 
 
 
+       <!-- Listings -->
         <div class="row">
           
           
-          <!-- Single card start-->
+        {% for listing in listings %}
+
           <div class="col-md-4 py-3">
             <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
+              <img class="card-img" src="{{ listing.image.url }}" alt="Card image">
               <div class="card-img-overlay d-flex justify-content-between">
                 <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
+                <h5 class="price rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
               </div>
               <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+                <h4 class="card-title"><strong><a href="{{ listing.get_absolute_url }}" class="stretched-link"></a>{{ listing.title }}</strong></h4>
+                <p class="card-text">{{ listing.get_address }}.</p>
               </div>
               <div class="card-footer">
                 <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
+                  <span>{{ listing.bedrooms }} Rooms</span>
+                  <span>{{ listing.bathrooms }} Baths</span>
+                  <span>{{ listing.garage }} Parking spaces</span>
+                  <span>{{ listing.area}}m<sup>2</sup></span>
                 </small>
               </div>
             </div>
           </div>
-          <!-- Single card end-->
+
+           {% empty %}
+
+          <h4 class='mt-5'>Listings matching your search not found</h4>
+
+          {% endfor %}
+
           
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
+        </div>      <!-- Listings end-->
 
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 py-3">
-            <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-              <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-              <div class="card-img-overlay d-flex justify-content-between">
-                <p></p>
-                <h5 class="price rounded text-white">$78,096</h5>
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-                <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted mb-0 d-flex justify-content-between">
-                  <span>10 Rooms</span>
-                  <span>5 Baths</span>
-                  <span>7 Bathrooms</span>
-                  <span>678m<sup>2</sup></span>
-                </small>
-              </div>
-            </div>
-          </div>
 
-        </div>
+         <!-- Pagination -->
+        {% include 'partials/pagination.html' with posts=listings %}
 
-        <!-- Pagination -->
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center mt-5">
-            <li class="page-item disabled">
-              <a class="page-link rounded" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-            </li>
-            <li class="page-item active"><a class="page-link rounded" href="#">1</a></li>
-            <li class="page-item"><a class="page-link rounded" href="#">2</a></li>
-            <li class="page-item"><a class="page-link rounded" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link rounded" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
+
       </div>
     </main>
     <!-- Listings end -->
