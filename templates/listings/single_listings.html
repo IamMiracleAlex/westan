@@ -142,14 +142,14 @@
           <p class="h2 d-none d-md-block font-weight-bold text-orange">N 450,000</p>
         </div>
 
-        <p class="h5 text-muted">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+        <p class="h5 text-muted">{{ listing.get_address }}.</p>
         <div class="pt-2 d-inline d-flex option-buttons">
-          <a href="./checkout.html" class="btn-sm bg-orange text-white rounded px-3 py-2">BUY NOW</a hr>
-          <a href="./checkout.html"  class="bg-shade btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2">ADD TO WISHLIST</a>
+          <a href="./checkout.html" class="btn-sm bg-orange text-white rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
+          <a href="./checkout.html"  class="bg-shade btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2 text-decoration-none">Save <span> &#x1f499;</span></a>
           <a href="./checkout.html"  class="bg-shade btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2">
             <img src="{% static 'img/share-2.svg' %}" alt="" srcset="">
           </a>
-          <a href="./listings.html"  class="d-none d-md-block back-btn btn-sm border-0 ml-3 px-3 py-2">
+          <a href="{% url 'listings:listings' %}"  class="d-none d-md-block back-btn btn-sm border-0 ml-3 px-3 py-2">
             Back to Listings
           </a>
         </div>
