@@ -12,7 +12,7 @@ def listings(request):
 
     queryset = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-created_at')
 
-    paginator = Paginator(object_list, 3) # 3 posts per page
+    paginator = Paginator(queryset, 3) # 3 posts per page
     page = request.GET.get('page')
     try:
         listings = paginator.page(page)

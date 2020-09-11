@@ -12,7 +12,7 @@ from blog.models import Post
 def blog_index(request, tag_slug=None):
     object_list = Post.objects.filter(status=Post.PUBLISHED).order_by('-created_at')
     tag = None
-    featured_posts = object_list.filter(featured=True)
+    featured_posts = object_list.filter(featured=True).filter(status=Post.PUBLISHED).order_by('-created_at')
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)

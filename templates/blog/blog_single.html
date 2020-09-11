@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load humanize %}
+{% load custom_tags %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
@@ -144,64 +146,35 @@
         <div class="my-5">
           <span class="category top-color mt-auto price rounded text-white py-1 pb-2 px-2"><small
             class="p-2 font-weight-bold">Featured Properties</small></span>
+
+            {# template tag #}
+            {% featured_listings as featured_listings %}
+
+            {% for listing in featured_listings %}
+
           <div class="card shadow-sm bg-white my-4 text-dark text-white" style="min-width: 18rem;">
-            <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
+            <img class="card-img" src="{{ listing.image.url }}" alt="Card image">
             <div class="card-img-overlay d-flex justify-content-between">
               <p></p>
-              <h5 class="price rounded text-white">$78,096</h5>
+              <h5 class="price rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
             </div>
             <div class="card-body">
-              <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-              <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+              <h4 class="card-title"><strong><a href="{{ listing.get_absolute_url }}" class="stretched-link"></a>{{ listing.title }}</strong></h4>
+              <p class="card-text">{{ listing.get_address }}.</p>
             </div>
             <div class="card-footer">
               <small class="text-muted mb-0 d-flex justify-content-between">
-                <span>10 Rooms</span>
-                <span>5 Baths</span>
-                <span>7 Bathrooms</span>
-                <span>678m<sup>2</sup></span>
+                <span>{{ listing.bedrooms }} Rooms</span>
+                <span>{{ listing.bathrooms }} Baths</span>
+                <span>{{ listing.garage }} Garage </span>
+                <span>{{ listing.area }}m<sup>2</sup></span>
               </small>
             </div>
           </div>
-          <div class="card shadow-sm bg-white my-4 text-dark text-white" style="min-width: 18rem;">
-            <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-            <div class="card-img-overlay d-flex justify-content-between">
-              <p></p>
-              <h5 class="price rounded text-white">$78,096</h5>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-              <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted mb-0 d-flex justify-content-between">
-                <span>10 Rooms</span>
-                <span>5 Baths</span>
-                <span>7 Bathrooms</span>
-                <span>678m<sup>2</sup></span>
-              </small>
-            </div>
-          </div>
-          <div class="card shadow-sm bg-white my-4 text-dark text-white" style="min-width: 18rem;">
-            <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-            <div class="card-img-overlay d-flex justify-content-between">
-              <p></p>
-              <h5 class="price rounded text-white">$78,096</h5>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title"><strong><a href="./single-listing.html" class="stretched-link"></a>El Classico Mansion</strong></h4>
-              <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted mb-0 d-flex justify-content-between">
-                <span>10 Rooms</span>
-                <span>5 Baths</span>
-                <span>7 Bathrooms</span>
-                <span>678m<sup>2</sup></span>
-              </small>
-            </div>
-          </div>
-        </div>
+
+          {% endfor %}
+
+        </div> 
 
       </aside><!-- /.blog-sidebar -->
 

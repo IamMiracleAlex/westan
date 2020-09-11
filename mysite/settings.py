@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     
     'users',
     'listings',
@@ -86,6 +87,7 @@ USE_TZ = True
 
 TIME_ZONE = 'Africa/Lagos'
 
+# USE_THOUSAND_SEPARATOR = True
 
 STATIC_URL = '/static/'
 

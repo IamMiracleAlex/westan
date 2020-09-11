@@ -18,9 +18,9 @@
             
             <div class="col-6 col-md-4 pt-2 d-flex justify-content-end align-items-center rounded">
                 <form action="{% url 'blog:blog_search' %}" method="GET">
-              <label class="sr-only" for="inlineFormInputGroup">Search</label>
+              <label class="sr-only" for="search">Search</label>
               <div class="input-group mb-2">
-                <input type="text" class="form-control border-right-0" id="inlineFormInputGroup" name='q' placeholder="Search" required>
+                <input type="text" class="form-control border-right-0" id="search" name='q' value='{{ query }}' placeholder="Search" required>
                 <div class="input-group-prepend">
                   <button class="input-group-text bg-white border-left-0 rounded" aria-label="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-1" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>

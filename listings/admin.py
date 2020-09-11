@@ -10,7 +10,7 @@ from listings.forms import ListingAdminForm
 class ListingAdmin(admin.ModelAdmin):
     form = ListingAdminForm
     
-    list_display = ('reference','title', 'status', 'availability', 'type','views','state', 'featured','created_at', 'updated_at')
+    list_display = ('reference','title','price', 'status', 'availability', 'type','views','state', 'featured','created_at', 'updated_at')
     list_filter = ('status', 'availability','featured', 'type')
     search_fields = ('title', 'reference')
     date_hierarchy = 'created_at'

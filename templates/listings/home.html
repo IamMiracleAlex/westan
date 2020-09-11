@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static humanize %}
+{% load custom_tags %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
@@ -59,32 +60,31 @@
 <!-- Hero -->
 <section class="masthead container">
 	<div class="col-md-12">
-		<h1 class="col-md mt-5 mt-md-0 mb-5 text-uppercase">
+		<h1 class="col-md mt-5 mt-md-0 mb-5f text-uppercase">
 			<strong>
 				The smartest decision you can make is to invest in Real estate.
 			</strong>
 		</h1>
 		<div class="col-md-12 col-lg-9 mb-5">
-			<form>
+			<form action="{% url 'listings:search' %}" method='GET' >
 				<div class="form-row">
 					<div class="col-12 col-md-6 mb-2 mb-md-0 py-2" style="background-color: #EBF5F7;">
-						<input type="text" class="form-control form-control-lg bg-transparent border-0 pl-4 py-2"
+						<input type="text" name='q' class="form-control form-control-lg bg-transparent border-0 pl-4 py-2"
 							placeholder="Search property locations...">
 					</div>
-					<!-- <div class="col-12 col-md-3 mb-2 mb-md-0 py-2 border-left">
-									<input type="text" class="form-control form-control-lg border-0" placeholder="Enter your email...">
-								</div> -->
+					
+
 					<div class="col-12 col-md-3 mb-2 mb-md-0 py-2 border-left" style="background-color: #EBF5F7;">
 						<select class="custom-select custom-select-lg bg-transparent border-0" id="exampleFormControlSelect1"
 							placeholder="Enter your email...">
-							<option value="1">Land</option>
-							<option value="2">House</option>
-							<option value="3">Mall</option>
-							<option value="4">Hall</option>
+							<option value="0">Land</option>
+							<option value="1">House</option>
+							{% comment %} <option value="3">Mall</option>
+							<option value="4">Hall</option> {% endcomment %}
 						</select>
 					</div>
 					<div class="col-12 col-md-3">
-						<button type="submit" class="btn btn-block btn-lg text-white w-100 py-3">Sign up!</button>
+						<button type="submit" class="btn btn-block btn-lg text-white w-100 py-3">Search</button>
 					</div>
 				</div>
 			</form>
@@ -152,123 +152,38 @@
 			<span class="title h4 text-uppercase">featured listings</span>
 			<a href="{% url 'listings:listings' %}" class="subtitle">All listings</a>
 		</p>
+
+          
 		<div class="row mx-auto my-auto">
 			<div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
 				<div class="carousel-inner w-100" role="listbox">
-					<div class="carousel-item active">
+
+ 			 {# template tag #}
+            {% featured_listings as featured_listings %}
+
+				{% for listing in featured_listings %}
+
+					<div class="carousel-item {% if forloop.first %} active {% endif %} ">
 						<div class="col-md-4">
 							<div class="card shadow-sm">
-								<img class="card-img-top" src="{% static 'img/listing.png' %}" alt="Card image cap">
+								<a href="{{ listing.get_absolute_url }}"><img class="card-img-top" src="{{ listing.image.url }}" alt="Card image cap"></a>
 								<div class="card-body">
-									<h4 class="card-title"><strong>El Classico Mansion</strong></h4>
-									<p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+									<h4 class="card-title"><strong>{{ listing.title }}</strong></h4>
+									<p class="card-text">{{ listing.get_address }}.</p>
 								</div>
 								<div class="card-footer">
 									<small class="text-muted mb-0 d-flex justify-content-between">
-										<span>10 Rooms</span>
-										<span>5 Baths</span>
-										<span>7 Bathrooms</span>
-										<span>678m<sup>2</sup></span>
+										<span>{{ listing.bedrooms }} Rooms</span>
+										<span>{{ listing.bathrooms }} Baths</span>
+										<span>{{ listing.garage }} Garage</span>
+										<span>{{ listing.area }}m<sup>2</sup></span>
 									</small>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="carousel-item">
-						<div class="col-md-4">
-							<div class="card shadow-sm">
-								<img class="card-img-top" src="{% static 'img/listing.png' %}" alt="Card image cap">
-								<div class="card-body">
-									<h4 class="card-title"><strong>El Classico Mansion</strong></h4>
-									<p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted mb-0 d-flex justify-content-between">
-										<span>10 Rooms</span>
-										<span>5 Baths</span>
-										<span>7 Bathrooms</span>
-										<span>678m<sup>2</sup></span>
-									</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="col-md-4">
-							<div class="card shadow-sm">
-								<img class="card-img-top" src="{% static 'img/listing.png' %}" alt="Card image cap">
-								<div class="card-body">
-									<h4 class="card-title"><strong>El Classico Mansion</strong></h4>
-									<p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted mb-0 d-flex justify-content-between">
-										<span>10 Rooms</span>
-										<span>5 Baths</span>
-										<span>7 Bathrooms</span>
-										<span>678m<sup>2</sup></span>
-									</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="col-md-4">
-							<div class="card shadow-sm">
-								<img class="card-img-top" src="{% static 'img/listing.png' %}" alt="Card image cap">
-								<div class="card-body">
-									<h4 class="card-title"><strong>El Classico Mansion</strong></h4>
-									<p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted mb-0 d-flex justify-content-between">
-										<span>10 Rooms</span>
-										<span>5 Baths</span>
-										<span>7 Bathrooms</span>
-										<span>678m<sup>2</sup></span>
-									</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="col-md-4">
-							<div class="card shadow-sm">
-								<img class="card-img-top" src="{% static 'img/listing.png' %}" alt="Card image cap">
-								<div class="card-body">
-									<h4 class="card-title"><strong>El Classico Mansion</strong></h4>
-									<p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted mb-0 d-flex justify-content-between">
-										<span>10 Rooms</span>
-										<span>5 Baths</span>
-										<span>7 Bathrooms</span>
-										<span>678m<sup>2</sup></span>
-									</small>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="col-md-4">
-							<div class="card shadow-sm">
-								<img class="card-img-top" src="{% static 'img/listing.png' %}" alt="Card image cap">
-								<div class="card-body">
-									<h4 class="card-title"><strong>El Classico Mansion</strong></h4>
-									<p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted mb-0 d-flex justify-content-between">
-										<span>10 Rooms</span>
-										<span>5 Baths</span>
-										<span>7 Bathrooms</span>
-										<span>678m<sup>2</sup></span>
-									</small>
-								</div>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
+
 				</div>
 				<a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
 					<span class="carousel-control-prev-icon bg-dark border border-white text-dark shadow rounded-circle"
@@ -281,7 +196,6 @@
 				</a>
 			</div>
 		</div>
-
 
 	</div>
 	<!-- Featured Listings end -->

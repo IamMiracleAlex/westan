@@ -18,6 +18,7 @@ class Listing(models.Model):
     AVAILABILITY_CHOICES = [(SOLD, 'Sold'), (AVAILABLE, 'Available'), (LEASED, 'Leased')]   
     
     title = models.CharField(max_length=50)
+    street = models.CharField(max_length=50)
     city = models.CharField(max_length=40)
     state = models.CharField(max_length=40)
     description = models.TextField(blank=True)
@@ -26,19 +27,16 @@ class Listing(models.Model):
     bathrooms = models.IntegerField(blank=True, null=True)
     garage = models.IntegerField(blank=True, null=True)
     area = models.FloatField()
-    photo_main = models.ImageField(upload_to='listings/img')
-    photo_1 = models.ImageField(upload_to='listings/img', blank=True, null=True)
-    photo_2 = models.ImageField(upload_to='listings/img', blank=True, null=True)
-    photo_3 = models.ImageField(upload_to='listings/img', blank=True, null=True)
-    photo_4 = models.ImageField(upload_to='listings/img', blank=True, null=True)
+    image = models.ImageField(verbose_name='Main Image', upload_to='listings/img')
+    image_1 = models.ImageField(upload_to='listings/img', blank=True, null=True)
+    image_2 = models.ImageField(upload_to='listings/img', blank=True, null=True)
+    image_3 = models.ImageField(upload_to='listings/img', blank=True, null=True)
+    image_4 = models.ImageField(upload_to='listings/img', blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, default=DRAFT)
     video = models.FileField(upload_to='listings/video', blank=True, null=True)
     vr_image = models.ImageField(upload_to='listings/vr', blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
     # location fileds for maps
-    city = models.CharField(max_length=50)
-    street = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
     type = models.SmallIntegerField(choices=TYPE_CHOICES, default=HOUSE)
     availability = models.SmallIntegerField(choices=AVAILABILITY_CHOICES, default=AVAILABLE)
     views = models.BigIntegerField(default=0)
@@ -53,7 +51,7 @@ class Listing(models.Model):
         return self.title
 
     def get_address(self):
-        pass    
+        return f'{self.street}, {self.city}, {self.state}'    
 
     def get_absolute_url(self):
         return reverse("listings:single_lisitng", args=[self.pk, self.slug])
