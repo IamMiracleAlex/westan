@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static humanize %}
+{% load custom_tags %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
@@ -36,7 +37,7 @@
   </style>
 {% endblock extrastyle %}
 
-{% comment %} {% block title %}  {{listing.title}} - {% endblock title %} {% endcomment %}
+{% block title %}  {{listing.title}} {% endblock title %}
 
 
 
@@ -51,86 +52,115 @@
       <div class="row my-3 my-md-5">
         <!-- Post carousel -->
         <div id="carouselExampleCaptions" class="col-12 col-md-10 sliding-posts carousel slide" data-ride="carousel">
+
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+
+            {% if listing.image_1 %}
             <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            {% endif %}
+
+            {% if listing.image_2 %}
             <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            {% endif %}
+
+            {% if listing.image_3 %}
             <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+            {% endif %}
+
+            {% if listing.image_4 %}
             <li data-target="#carouselExampleCaptions" data-slide-to="4"></li>
+            {% endif %}
+
           </ol>
           <div class="carousel-inner rounded overflow-hidden bg-dark w-100">
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images" class="carousel-item active">
+            <a href="{{ listing.image.url }}" data-lightbox="home-images" class="carousel-item active">
               <div>
-                <img src="{% static 'img/single-listing.png' %}" class="d-block w-100" alt="Post image">
-                <!-- <div class="carousel-caption text-left container">
-                  <span class="category mt-auto price rounded text-white bg-danger pb-1 px-2"><small class="p-2 font-weight-bold">News</small></span>
-                  <h4 class="mt-2"><strong><a href="#" class="text-white stretched-link">Looking for a New Place? Use This Time to Create Your Wishlist 
-                    Looking for a New Place? Use This Time to Create Your Wishlist</a></strong></h4>
-                  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div> -->
+                <img src="{{ listing.image.url }}" class="d-block w-100" alt="Post image">
+                
                 <div class="card-img-overlay d-flex justify-content-between">
                   <p></p>
-                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white">$78,096</h5>
+                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
                 </div>
               </div>
             </a>
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images" class="carousel-item">
+            {% if listing.image_1 %}
+            <a href="{{ listing.image_1.url }}" data-lightbox="home-images" class="carousel-item">
               <div>
-                <img src="{% static 'img/single-listing.png' %}" class="d-block w-100" alt="Post image">
+                <img src="{{ listing.image_1.url }}" class="d-block w-100" alt="Post image">
                 <div class="card-img-overlay d-flex justify-content-between">
                   <p></p>
-                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white">$78,096</h5>
+                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
                 </div>
               </div>
             </a>
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images" class="carousel-item">
+            {% endif %}
+
+            {% if listing.image_2 %}
+            <a href="{{ listing.image_2.url }}" data-lightbox="home-images" class="carousel-item">
               <div>
-                <img src="{% static 'img/single-listing.png' %}" class="d-block w-100" alt="Post image">
+                <img src="{{ listing.image_2.url }}" class="d-block w-100" alt="Post image">
                 <div class="card-img-overlay d-flex justify-content-between">
                   <p></p>
-                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white">$78,096</h5>
+                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
                 </div>
               </div>
             </a>
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images" class="carousel-item">
+            {% endif %}
+            
+            {% if listing.image_3 %}
+            <a href="{{ listing.image_3.url}}" data-lightbox="home-images" class="carousel-item">
               <div>
-                <img src="{% static 'img/single-listing.png' %}" class="d-block w-100" alt="Post image">
+                <img src="{{ listing.image_3.url}}" class="d-block w-100" alt="Post image">
                 <div class="card-img-overlay d-flex justify-content-between">
                   <p></p>
-                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white">$78,096</h5>
+                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
                 </div>
               </div>
             </a>
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images" class="carousel-item">
+            {% endif %}
+
+            {% if listing.image_4 %}
+            <a href="{{ listing.image_4.url }}" data-lightbox="home-images" class="carousel-item">
               <div>
-                <img src="{% static 'img/single-listing.png' %}" class="d-block w-100" alt="Post image">
+                <img src="{{ listing.image_4.url }}" class="d-block w-100" alt="Post image">
                 <div class="card-img-overlay d-flex justify-content-between">
                   <p></p>
-                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white">$78,096</h5>
+                  <h5 class="price mx-2 mx-md-3 font-weight-bold rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
                 </div>
               </div>
             </a>
+            {% endif %}
+
           </div>
         </div>
 
         <!-- Lightbox Thumbnails -->
         <div class="d-none d-md-block col-md-2 px-0 pr-2 mx-0 thumbs">
 
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images">
-              <img src="{% static 'img/thumb.png' %}" alt="product thumbnails" class="img-fluid mb-3 shadow-sm rounded">
+            {% if listing.image_1 %}
+            <a href="{{ listing.image_1.url }}" data-lightbox="home-images">
+              <img src="{{ listing.image_1.url }}" alt="product thumbnails" class="img-fluid mb-3 shadow-sm rounded">
             </a>
+            {% endif %}
 
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images">
-              <img src="{% static 'img/thumb.png' %}" alt="product thumbnails" class="img-fluid mb-3 shadow-sm rounded">
+            {% if listing.image_2 %}
+            <a href="{{ listing.image_2.url }}" data-lightbox="home-images">
+              <img src="{{ listing.image_2.url }}" alt="product thumbnails" class="img-fluid mb-3 shadow-sm rounded">
             </a>
+            {% endif %}
 
-            <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images">
-              <img src="{% static 'img/thumb.png' %}" alt="product thumbnails" class="img-fluid mb-3 shadow-sm rounded">
+            {% if listing.image_3 %}
+            <a href="{{ listing.image_3.url }}" data-lightbox="home-images">
+              <img src="{{ listing.image_3.url }}" alt="product thumbnails" class="img-fluid mb-3 shadow-sm rounded">
             </a>
+            {% endif %}
 
-            <!-- <a href="{% static 'img/single-listing.png' %}" data-lightbox="home-images">
-              <img src="{% static 'img/thumb.png' %}" alt="product thumbnails" class="img-fluid shadow-sm rounded">
-            </a> -->
+            {% if listing.image_4 %}
+             <a href="{{ listing.image_4.url }}" data-lightbox="home-images">
+              <img src="{{ listing.image_4.url }}" alt="product thumbnails" class="img-fluid shadow-sm rounded">
+            </a> 
+            {% endif %}
 
         </div>
       </div>
@@ -138,17 +168,17 @@
 
       <div class="mb-5">
         <div class="d-flex justify-content-between">
-          <p class="h2"><strong>El Classique Mansion</strong> </p>
-          <p class="h2 d-none d-md-block font-weight-bold text-orange">N 450,000</p>
+          <p class="h2"><strong>{{ listing.title }}</strong> </p>
+          <p class="h2 d-none d-md-block font-weight-bold text-orange"><span>&#8358;</span> {{listing.price|intcomma}}</p>
         </div>
 
         <p class="h5 text-muted">{{ listing.get_address }}.</p>
         <div class="pt-2 d-inline d-flex option-buttons">
           <a href="./checkout.html" class="btn-sm bg-orange text-white rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
           <a href="./checkout.html"  class="bg-shade btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2 text-decoration-none">Save <span> &#x1f499;</span></a>
-          <a href="./checkout.html"  class="bg-shade btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2">
+          <button class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 share-btn">
             <img src="{% static 'img/share-2.svg' %}" alt="" srcset="">
-          </a>
+          </button>
           <a href="{% url 'listings:listings' %}"  class="d-none d-md-block back-btn btn-sm border-0 ml-3 px-3 py-2">
             Back to Listings
           </a>
@@ -166,17 +196,7 @@
       <!-- Main details -->
       <div class="col-md-8 w-100">
         <p class="h5 mb-3 font-weight-bold">Property Description</p>
-        <p class="text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Quis imperdiet massa tincidunt nunc. Dui faucibus in ornare quam
-          viverra orci sagittis. Duis at consectetur lorem donec massa sapien. Mattis molestie a iaculis at erat
-          pellentesque adipiscing commodo. Nulla aliquet enim tortor at auctor urna nunc id. Non blandit massa enim nec
-          dui nunc mattis enim. Nec tincidunt praesent semper feugiat nibh sed. Quis enim lobortis scelerisque fermentum
-          dui faucibus in ornare. Massa eget egestas purus viverra accumsan. Integer feugiat scelerisque varius morbi.
-          Viverra vitae congue eu consequat ac felis donec et. Gravida in fermentum et sollicitudin ac. Vel pharetra vel
-          turpis nunc eget.
-          Morbi tristique senectus et netus et malesuada fames ac turpis. Leo vel orci porta non pulvinar neque laoreet
-          suspendisse. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Fringilla phasellus faucibus
-          scelerisque eleifend donec pretium vulputate.</p>
+        <p class="text-secondary">{{ listing.description|safe }}</p>
       </div>
 
        <!-- Sidebar -->
@@ -188,23 +208,23 @@
           </li>
           <li
             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 py-2 pt-3 px-5">
-            Rooms
-            <span class="text-secondary">10</span>
-          </li>
-          <li
-            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 py-2 px-5">
             Bedrooms
-            <span class="text-secondary">5</span>
+            <span class="text-secondary">{{ listing.bedrooms }}</span>
           </li>
           <li
             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 py-2 px-5">
             Bathrooms
-            <span class="text-secondary">6</span>
+            <span class="text-secondary">{{ listing.bathrooms }}</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 py-2 px-5">
+            Garage
+            <span class="text-secondary">{{ listing.garage }}</span>
           </li>
           <li
             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 py-2 px-5">
             Area
-            <span class="text-secondary">375m<sup>2</sup></span>
+            <span class="text-secondary">{{ listing.area }}m<sup>2</sup></span>
           </li>
           <li
             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center border-0 py-2 px-5">
@@ -266,18 +286,6 @@
             width="100%" height="100%" frameborder="0" style="border:0"></iframe>
         </div>
 
-        <!-- <p class="h5 mb-3 mt-5 font-weight-bold">Video Tour</p>
-        <div class="card shadow border embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"
-            allowfullscreen></iframe>
-        </div>
-
-        <p class="h5 mb-3 mt-5 font-weight-bold">360 Picture</p>
-        <div class="card shadow border embed-responsive embed-responsive-16by9">
-          <iframe width="600" height="400" allowfullscreen style="border-style:none;"
-            src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/jfk.jpg"></iframe>
-        </div> -->
-
 
         <!-- Video/ 360 tab -->
         <div class="my-5 video-tab">
@@ -291,10 +299,8 @@
           <div class="mt-5">
             <div class="tab-content" id="nav-tabContent">
               <div class="card shadow border embed-responsive embed-responsive-16by9 tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                <!-- <div class="card shadow border embed-responsive embed-responsive-16by9"> -->
                   <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"
                     allowfullscreen></iframe>
-                <!-- </div> -->
               </div>
               <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                 <div class="card shadow border embed-responsive embed-responsive-16by9">
@@ -321,73 +327,43 @@
     <div class="row">
 
       <p class="h5 col-12 font-weight-bold">Featured Properties</p>
+
       <!-- Single card start-->
+
+          {# template tag #}
+        {% featured_listings count=3 as featured_listings %}
+
+				{% for listing in featured_listings %}
+
       <div class="col-md-4 py-3">
         <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-          <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
+          <img class="card-img" src="{{ listing.image.url }}" alt="Card image">
           <div class="card-img-overlay d-flex justify-content-between">
             <p></p>
-            <h5 class="price rounded text-white">$78,096</h5>
+            <h5 class="price rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
           </div>
           <div class="card-body">
-            <h4 class="card-title"><strong><a href="#" class="stretched-link"></a>El Classico Mansion</strong></h4>
-            <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
+            <h4 class="card-title"><strong><a href="{{ listing.get_absolute_url }}" class="stretched-link"></a>{{ listing.title }}</strong></h4>
+            <p class="card-text">{{ listing.get_address }}.</p>
           </div>
           <div class="card-footer">
             <small class="text-muted mb-0 d-flex justify-content-between">
-              <span>10 Rooms</span>
-              <span>5 Baths</span>
-              <span>7 Bathrooms</span>
-              <span>678m<sup>2</sup></span>
+              <span>{{ listing.bedrooms }} Rooms</span>
+              <span>{{ listing.bathrooms }} Baths</span>
+              <span>{{ listing.garage }} Garage</span>
+              <span>{{ listing.area }}m<sup>2</sup></span>
             </small>
           </div>
         </div>
       </div>
+
+       {% empty %}
+
+         		 <h3>No Featured Listings Yet</h3>
+
+					{% endfor %}
+
       <!-- Single card end-->
-
-      <div class="col-md-4 py-3">
-        <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-          <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-          <div class="card-img-overlay d-flex justify-content-between">
-            <p></p>
-            <h5 class="price rounded text-white">$78,096</h5>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title"><strong><a href="#" class="stretched-link"></a>El Classico Mansion</strong></h4>
-            <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted mb-0 d-flex justify-content-between">
-              <span>10 Rooms</span>
-              <span>5 Baths</span>
-              <span>7 Bathrooms</span>
-              <span>678m<sup>2</sup></span>
-            </small>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4 py-3">
-        <div class="card shadow-sm bg-white text-dark text-white" style="min-width: 18rem;">
-          <img class="card-img" src="{% static 'img/listing.png' %}" alt="Card image">
-          <div class="card-img-overlay d-flex justify-content-between">
-            <p></p>
-            <h5 class="price rounded text-white">$78,096</h5>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title"><strong><a href="#" class="stretched-link"></a>El Classico Mansion</strong></h4>
-            <p class="card-text">Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted mb-0 d-flex justify-content-between">
-              <span>10 Rooms</span>
-              <span>5 Baths</span>
-              <span>7 Bathrooms</span>
-              <span>678m<sup>2</sup></span>
-            </small>
-          </div>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -397,6 +373,28 @@
 {% include 'partials/footer.html' %}
 
 
+<script>
+const shareBtn = document.querySelector('.share-btn');
+
+shareBtn.addEventListener('click', () => {
+  if (navigator.share) {
+    navigator.share({
+      title: '{{ listing.title }}',
+      text: 'Check out this property on',
+      url: window.location.href
+    }).then(() => {
+      console.log('Thanks for sharing!');
+    })
+    .catch(err => {
+      console.log(`Couldn't share because of`, err.message);
+    });
+  } else {
+    console.log('web share not supported');
+  }
+});
+
+</script>
+
 {% endblock content %}
 
 
@@ -404,5 +402,55 @@
 
   <script src="{% static 'js/lightbox.js' %}"></script>
 
+    <script>
 
+    var $add_to = $('#add_to');
+
+      $("#add_to").click(function () {
+     
+       $.ajax({
+        url: '{% url 'add_watchlist' %}',
+        data: {
+          'movie_id' : {{ movie.pk }}
+        },
+        dataType: 'json',
+        beforeSend: function () {
+            $add_to.text('Loading...' );
+        },
+        success: function (data) {
+          if (data.final_status) {
+            $("#add_to").text('');
+            $("#add_to").append("<i class='fa fa-check'></i>"+ " IN WATCHLIST");
+          }else{
+            $("#add_to").text('');
+          $("#add_to").append("<i class='fa fa-plus'></i>"+ " ADD TO WATCHLIST")
+          }
+          if (data.auth) {
+             alert(data.auth)
+          }
+        }
+      });
+
+      });     
+      
+      </script>
 {% endblock javascript %}
+
+
+                  {% comment %} {% for watch in watches %}
+                        {% if watch.status %}
+                           <button id="add_to" name="add_watchlist" type="submit" class="bg_color add_to px-3 py-2"> 
+                        <i class="fa fa-check"></i> IN WATCHLIST
+                    </button>
+                        {% else %}
+                           <button id="add_to" name="add_watchlist" type="submit" class="bg_color add_to px-3 py-2"> 
+                        <i class="fa fa-plus"></i> ADD TO WATCHLIST
+                    </button>
+                        {% endif %}
+                    
+                    {% empty %}
+                      <button id="add_to" name="add_watchlist" type="submit" class="bg_color add_to px-3 py-2"> 
+                    <i class="fa fa-plus"></i> ADD TO WATCHLIST
+                    </button>
+                    {% endfor %}
+                   {% endcomment %}

@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import JsonResponse
 
-from listings.models import Listing
+from listings.models import Listing, WishList
 
 
 def index(request):  #home page
@@ -31,13 +32,47 @@ def listings(request):
 
 
 def single_listing(request, id, slug):
+    wish = None
 
     listing = get_object_or_404(Listing, id=id)
+    
+    if request.user.is_authenticated:
+        try:
+            wish = WishList.objects.get(user=request.user, listing=listing)
+        except Exception as e:
+            pass
+
     context = {
-        'listing' : listing
+        'listing' : listing, 'wish': wish,
     }
     return render(request, 'listings/single_listings.html', context)
 
+
+def add_watchlist(request):
+    final_status, auth = None, None
+
+    if request.user.is_authenticated:
+
+        listing_id = request.GET.get('listing_id', None)
+        listing = Listing.objects.get(pk=listing_id)
+
+        try:
+            wished = WishList.objects.get(
+                listing=listing, user=request.user)
+            wished.status = not wished.status
+            wished.save()  
+            final_status = wished.status 
+        except:
+
+            wish = WishList.objects.create(user=request.user, listing=listing, status=True)
+            final_status = True
+
+    else:
+        auth = "Please login to add Listing to your watch list"
+
+    data = {'final_status': final_status, 'auth': auth}
+
+    return JsonResponse(data)
 
 
 

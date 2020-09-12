@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 from utils.tools import generate_unique_id
+from users.models import User
 
 
 
@@ -67,5 +68,13 @@ class Listing(models.Model):
 
 
 
-# class WishList(models.Model):
-#     pass
+class WishList(models.Model):
+    user = models.ForeignKey(User, models.DO_NOTHING)  
+    listing = models.ForeignKey(Listing, models.DO_NOTHING)  
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.status}'
+    
