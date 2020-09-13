@@ -48,7 +48,7 @@ def single_listing(request, id, slug):
     return render(request, 'listings/single_listings.html', context)
 
 
-def add_watchlist(request):
+def add_wishlist(request):
     final_status, auth = None, None
 
     if request.user.is_authenticated:
@@ -68,7 +68,7 @@ def add_watchlist(request):
             final_status = True
 
     else:
-        auth = "Please login to add Listing to your watch list"
+        auth = "Please login to add this listing to your wish list"
 
     data = {'final_status': final_status, 'auth': auth}
 

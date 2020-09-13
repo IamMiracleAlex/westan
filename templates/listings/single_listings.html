@@ -174,8 +174,8 @@
 
         <p class="h5 text-muted">{{ listing.get_address }}.</p>
         <div class="pt-2 d-inline d-flex option-buttons">
-          <a href="./checkout.html" class="btn-sm bg-orange text-white rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
-          <a href="./checkout.html"  class="bg-shade btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2 text-decoration-none">Save <span> &#x1f499;</span></a>
+          <a href="{% url 'transactions:checkout' %}" class="btn-sm bg-orange text-white rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
+          <button id='save'  class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2"> {% if wish.status %} Saved <span> &#x1f49a;</span> {% else %} Save <span> &#x1f499;</span> {% endif %} </button>
           <button class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 share-btn">
             <img src="{% static 'img/share-2.svg' %}" alt="" srcset="">
           </button>
@@ -404,26 +404,26 @@ shareBtn.addEventListener('click', () => {
 
     <script>
 
-    var $add_to = $('#add_to');
+    var $save = $('#save');
 
-      $("#add_to").click(function () {
+      $("#save").click(function () {
      
        $.ajax({
-        url: '{% url 'add_watchlist' %}',
+        url: '{% url 'listings:add_wishlist' %}',
         data: {
-          'movie_id' : {{ movie.pk }}
+          'listing_id' : {{ listing.id }}
         },
         dataType: 'json',
-        beforeSend: function () {
-            $add_to.text('Loading...' );
-        },
+       // beforeSend: function () {
+      //      $save.text('Loading...' );
+       // },
         success: function (data) {
           if (data.final_status) {
-            $("#add_to").text('');
-            $("#add_to").append("<i class='fa fa-check'></i>"+ " IN WATCHLIST");
+            $("#save").text('');
+            $("#save").append("Saved <span> &#x1f49a;</span>");
           }else{
-            $("#add_to").text('');
-          $("#add_to").append("<i class='fa fa-plus'></i>"+ " ADD TO WATCHLIST")
+            $("#save").text('');
+          $("#save").append("Save <span> &#x1f499;</span>")
           }
           if (data.auth) {
              alert(data.auth)
@@ -435,8 +435,11 @@ shareBtn.addEventListener('click', () => {
       
       </script>
 {% endblock javascript %}
+{% comment %} 
+Save <span> &#x1f499;</span>
 
-
+Saved <span> &#x1f49a;</span>
+ {% endcomment %}
                   {% comment %} {% for watch in watches %}
                         {% if watch.status %}
                            <button id="add_to" name="add_watchlist" type="submit" class="bg_color add_to px-3 py-2"> 
