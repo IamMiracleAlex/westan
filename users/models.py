@@ -39,7 +39,7 @@ class User(AbstractUser):
         return "{} {}".format(self.first_name, self.last_name)
 
     def __str__(self):
-        return "{} {} @: {}".format(self.first_name, self.last_name, self.email)
+        return "{} {} - {}".format(self.first_name, self.last_name, self.email)
 
     def save(self, *args, **kwargs):
         if not self.pk:

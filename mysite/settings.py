@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'taggit',
     'ckeditor',
     'ckeditor_uploader',
+    'django_google_maps',
 
 ]
 
@@ -114,6 +115,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
+
+GOOGLE_MAPS_API_KEY = 'AIzaSyBwo2GyU_dC_Tl3nFtFXCRm-aBs0sPLqho'
 
 # try:
 #     from .production import *

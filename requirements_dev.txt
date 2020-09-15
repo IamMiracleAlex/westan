@@ -5,3 +5,4 @@ pillow==7.2.0   #core - images
 django-ckeditor==5.9.0  #blog
 django-js-asset==1.2.2  #ckeditor - blog
 django-taggit==1.3.0    #blog
+django-google-maps==0.12.2  #maps

@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+from django_google_maps import fields as map_fields
+
 from utils.tools import generate_unique_id
 from users.models import User
 
@@ -37,6 +39,9 @@ class Listing(models.Model):
     video = models.FileField(upload_to='listings/video', blank=True, null=True)
     vr_image = models.ImageField(upload_to='listings/vr', blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
+    address = map_fields.AddressField(max_length=200, blank=True, null=True)
+    geolocation = map_fields.GeoLocationField(max_length=100, blank=True, null=True)
+
     # location fileds for maps
     type = models.SmallIntegerField(choices=TYPE_CHOICES, default=HOUSE)
     availability = models.SmallIntegerField(choices=AVAILABILITY_CHOICES, default=AVAILABLE)

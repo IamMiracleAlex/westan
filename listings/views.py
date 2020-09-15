@@ -3,6 +3,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import JsonResponse
 
 from listings.models import Listing, WishList
+from listings.forms import ListingMapForm
 
 
 def index(request):  #home page
@@ -33,6 +34,7 @@ def listings(request):
 
 def single_listing(request, id, slug):
     wish = None
+    form = ListingMapForm()
 
     listing = get_object_or_404(Listing, id=id)
     
@@ -43,7 +45,7 @@ def single_listing(request, id, slug):
             pass
 
     context = {
-        'listing' : listing, 'wish': wish,
+        'listing' : listing, 'wish': wish, 'form': form,
     }
     return render(request, 'listings/single_listings.html', context)
 
