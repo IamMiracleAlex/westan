@@ -179,7 +179,11 @@
           <button class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 share-btn">
             <img src="{% static 'img/share-2.svg' %}" alt="" srcset="">
           </button>
-          <a href="{% url 'listings:listings' %}"  class="d-none d-md-block back-btn btn-sm border-0 ml-3 px-3 py-2">
+          <button class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2">  
+         <img class='mr-2' src="{%static 'img/eye.svg' %}" alt=""> {{ listing.views }} view{{ listing.views|pluralize }}
+          </button>
+
+          <a href="{% url 'listings:listings' %}"  class="d-none d-md-block back-btn btn-sm border-0 ml-2 px-3 py-2">
             Back to Listings
           </a>
         </div>

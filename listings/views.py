@@ -37,7 +37,9 @@ def single_listing(request, id, slug):
     form = ListingMapForm()
 
     listing = get_object_or_404(Listing, id=id)
-    
+    listing.views += 1
+    listing.save()
+
     if request.user.is_authenticated:
         try:
             wish = WishList.objects.get(user=request.user, listing=listing)
