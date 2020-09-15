@@ -482,6 +482,47 @@
 
 {% block javascript %}
 
+{% comment %} <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> {% endcomment %}
+
+{% comment %} <script>
+	$(document).on('submit', '#subscribe_form', function(e){
+    var form = $(this);
+ 
+        $.ajax({
+            url: form.attr("action"),
+            data: form.serialize(),
+            type: form.attr("method"),
+            dataType: 'json',
+			cache: false,
+			success: function(data) {
+				alert(data.success)
+			},
+            error: function() {
+                alert('error');
+            }
+    });
+    	return false;
+		//e.preventDefault();
+
+
+    });
+    </script> 
+	{% endcomment %}
+
+	{% comment %} <script>
+	
+	(function($){
+        $("body").on("submit", "#form", function(e){
+            e.preventDefault();
+            var form = $(e.target);
+            $.post( form.attr("action"), form.serialize(), function(res){
+                console.log(res);
+            });
+        });
+	)(jQuery);
+
+	</script> {% endcomment %}
+
 <script>
 	$('#recipeCarousel').carousel({
 		interval: 10000
@@ -506,4 +547,22 @@
 	});
 </script>
 
+
+
 {% endblock javascript %}
+
+{% comment %} if (data.success) {
+                    //swal("Good job!", "You clicked the button!", "success");
+                    swal({
+                        title: "Newsletter Subscription!",
+                        text: data.success,
+                        icon: "success",
+                        button: "Done!",
+                    }); 
+
+					alert(data.success)
+                    document.getElementById("subscribe_form").reset();
+
+					onsubmit="return validateData();
+                } {% endcomment %}
+

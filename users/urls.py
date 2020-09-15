@@ -12,6 +12,7 @@ urlpatterns = [
     path('s/<str:refer_code>/', views.signup, name='signup'),
     path('activate-email/<str:uid>/<str:token>/', views.activate_email, name='activate_email'),
     path('resend-activation-email/', views.resend_activation_email, name='resend_activation_email'),
-    
+    path('subscribe/', views.subscribe, name='subscribe'),
+
     path('test/', views.test, name='test'),
 ]

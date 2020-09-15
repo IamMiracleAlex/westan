@@ -130,3 +130,36 @@ def search(request):
         'values': request.GET
     }
     return render(request, 'listings/search_listings.html', context) 
+
+
+def sort(request, by=None):
+    queryset = None
+
+    if by == 'maxprice':
+        queryset = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-price')
+
+    if by == 'minprice':
+        queryset = Listing.objects.filter(status=Listing.PUBLISHED).order_by('price')
+
+    if by == 'latest':
+        queryset = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-created_at')
+
+    if by == 'popular':
+        queryset = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-views')
+
+    paginator = Paginator(queryset, 3) # 3 posts per page
+    page = request.GET.get('page')
+    try:
+        listings = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an intger deliver the first page
+        listings = paginator.page(1)
+    except EmptyPage:
+        #  if page is out of range deliver last page of results
+        listings = paginator.page(paginator.num_pages)
+   
+    context = {
+        'listings': listings
+    }
+
+    return render(request, 'listings/all_listings.html', context)

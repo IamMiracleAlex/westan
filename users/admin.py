@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from utils.mixins import ExportCsvMixin
-from .models import User
+from .models import User, Subscribe
 
 
 @admin.register(User)
@@ -28,3 +28,14 @@ class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
         if obj.referer:
             return obj.referer.full_name()
         return None
+
+
+
+@admin.register(Subscribe)
+class SubscribeAdmin(admin.ModelAdmin, ExportCsvMixin):
+    list_display = ['email', 'active', 'created_at', 'updated_at' ]
+    list_filters = ['active', 'created_at']
+    search_fields = ('email',)
+
+    actions = ["export_as_csv"] 
+

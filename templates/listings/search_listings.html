@@ -47,15 +47,17 @@
 
 {% include 'partials/navbar.html' %}
   
-  
+  <br> <br>
       <!-- Hero -->
           <section class="masthead container">
             <div class="col-md-12">
-                <h1 class="col-md-12 mb-5 mx-auto text-center">
+                <h2 class="col-md-12 mb-5 mx-auto text-center">
                   <strong>
-                    Mansions at Ibeju-Lekki, Lagos state - 120 Results
+                     {% with listings.paginator.count as total_results %}
+                      Found {{ total_results }} result{{ total_results|pluralize }}
+                    {% endwith %}
                   </strong>
-                </h1>
+                </h2>
               <div class="col-md-12 col-lg-9 mx-auto">
                 <form action="{% url 'listings:search' %}" method='GET'>
                   <div class="form-row">
@@ -203,15 +205,14 @@
         <div class="mb-3 d-flex justify-content-between align-items-center">
           <span class="h4 text-uppercase">search results</span>
           <span class="">
-            <span class="mr-2">Quick filters</span>
+            <span class="mr-2">Sort By</span>
             <div class="btn-group">
               <button type="button" class="btn btn-muted border border-secondary btn-sm dropdown-toggle mr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Area
+                Popularity
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
+              <a href="{% url 'listings:sort' 'latest' %}"><button class="dropdown-item" type="button">Latest</button></a>
+              <a href="{% url 'listings:sort' 'popular' %}"> <button class="dropdown-item" type="button">Popular</button></a>
               </div>
             </div>
             <div class="btn-group">
@@ -219,19 +220,8 @@
                 Price
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
-              </div>
-            </div>
-            <div class="btn-group">
-              <button type="button" class="btn btn-muted border border-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Distance
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
+              <a href="{% url 'listings:sort' 'maxprice' %}"><button class="dropdown-item" type="button">Max Price</button></a>
+              <a href="{% url 'listings:sort' 'minprice' %}"> <button class="dropdown-item" type="button">Min Price</button></a>
               </div>
             </div>
           </span>
@@ -260,7 +250,7 @@
                 <small class="text-muted mb-0 d-flex justify-content-between">
                   <span>{{ listing.bedrooms }} Rooms</span>
                   <span>{{ listing.bathrooms }} Baths</span>
-                  <span>{{ listing.garage }} Parking spaces</span>
+                  <span>{{ listing.garage }} Garage</span>
                   <span>{{ listing.area}}m<sup>2</sup></span>
                 </small>
               </div>

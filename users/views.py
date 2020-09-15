@@ -5,10 +5,11 @@ from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator  
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
-from .models import User
+from users.models import User, Subscribe
 from utils.handlers import send_activation_email
+
 
 
 
@@ -176,9 +177,20 @@ def test(request):
 
 
 def subscribe(request):
-    if request.method == 'POST':
-        sub = Subscribe(email=request.POST['email'])
-        sub.save()
-        messages.success(request, 'Your subscription was successfull!')
-        return redirect('blog:index')
+    data = {}
+    email = request.POST['email'] if 'email' in request.POST else None
 
+    if email:
+        if Subscribe.objects.filter(email=email).exists():
+            data['success'] = 'You are already subscribed!'
+
+        else:
+            Subscribe.objects.create(email=email, active=True)
+            data['success'] = 'Your subscription was successful!'
+    else:
+        data['success'] = 'Please add an email address!'
+
+    return JsonResponse(data)
+
+    # send msg reply
+    # return redirect('index')

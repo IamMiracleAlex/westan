@@ -48,11 +48,10 @@
 
 {% include 'partials/navbar.html' %}
 
-
       <!-- Hero -->
           <section class="masthead container">
             <div class="col-md-12">
-                <h1 class="col-md-12 mb-5 mx-auto text-center text-uppercase">
+                <h1 class="col-md-12 mt-5 mt-md-0 mb-5 mx-auto text-center text-uppercase">
                   <strong>
                     search for GREAT properties AT AMAZING PRICES
                   </strong>
@@ -204,16 +203,14 @@
         <dix class="mb-3 d-flex justify-content-between align-items-center">
           <span class="h4 text-uppercase">All listings</span>
           <span class="">
-            <span class="mr-2">Quick filters</span>
+            <span class="mr-2">Sort By</span>
             <div class="btn-group">
               <button type="button" class="btn btn-muted border border-secondary btn-sm dropdown-toggle mr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Area
+                Popularity
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-              <a href="https://www.google.com"><button class="dropdown-item" type="button">Action</button></a>
-                {% comment %} <button class="dropdown-item" type="button">Action</button> {% endcomment %}
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
+              <a href="{% url 'listings:sort' 'latest' %}"><button class="dropdown-item" type="button">Latest</button></a>
+              <a href="{% url 'listings:sort' 'popular' %}"> <button class="dropdown-item" type="button">Popular</button></a>
               </div>
             </div>
             <div class="btn-group">
@@ -221,21 +218,11 @@
                 Price
               </button>
               <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
+              <a href="{% url 'listings:sort' 'maxprice' %}"><button class="dropdown-item" type="button">Max Price</button></a>
+              <a href="{% url 'listings:sort' 'minprice' %}"> <button class="dropdown-item" type="button">Min Price</button></a>
               </div>
             </div>
-            <div class="btn-group">
-              <button type="button" class="btn btn-muted border border-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Distance
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
-              </div>
-            </div>
+          
           </span>
         </dix>
 

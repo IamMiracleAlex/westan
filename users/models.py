@@ -45,3 +45,18 @@ class User(AbstractUser):
         if not self.pk:
             self.refer_code = generate_unique_id(User, 'refer_code')
         super(User, self).save(*args, **kwargs)
+
+
+class Subscribe(models.Model):
+
+    email = models.EmailField(max_length=100)
+    active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+
+    class Meta:
+        verbose_name_plural = "Subscribers"
+
+    def __str__(self):
+        return self.email

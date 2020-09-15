@@ -302,24 +302,44 @@
           </div>
           <div class="mt-5">
             <div class="tab-content" id="nav-tabContent">
-              <div class="card shadow border embed-responsive embed-responsive-16by9 tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY"
-                    allowfullscreen>
-                    </iframe>
 
-                  {% comment %} <video width="320" height="240" controls>
-                    <source src="movie.mp4" type="video/mp4">
+              {% if listing.video %}
+
+              <div class="card shadow border embed-responsive embed-responsive-16by9 tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                  
+                  <video width="320" height="240" controls>
+                    <source src="{{ listing.video.url }}" type="video/mp4">
                     <source src="movie.ogg" type="video/ogg">
                     Your browser does not support the video tag.
-                  </video> {% endcomment %}
+                  </video>
 
-
-              </div>
-              <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                <div class="card shadow border embed-responsive embed-responsive-16by9">
-                  <iframe width="600" height="400" allowfullscreen style="border-style:none;"
-                    src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=https://pannellum.org/images/jfk.jpg"></iframe>
                 </div>
+
+                {% else %} 
+            
+                <div class="card shadow border tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                  
+                  <div class='p-5 ' > <img width='100%' src=" {% static 'img/logo.svg' %} " alt=""> </div>
+
+                 </div>
+
+                {% endif %}
+
+              <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+
+                {% if listing.vr_image %}
+
+                <div class="card shadow border ">
+                  <img width='100%' src="{{ listing.vr_image.url }}">
+                </div>
+
+                {% else %}
+
+               <div class='card shadow border p-5'> 
+                    <img width='100%' src=" {% static 'img/logo.svg' %} " alt=""> </div>
+                </div>
+                {% endif %}
+
               </div>
               
             </div>
@@ -448,25 +468,10 @@ shareBtn.addEventListener('click', () => {
       
       </script>
 {% endblock javascript %}
+
 {% comment %} 
 Save <span> &#x1f499;</span>
 
 Saved <span> &#x1f49a;</span>
  {% endcomment %}
-                  {% comment %} {% for watch in watches %}
-                        {% if watch.status %}
-                           <button id="add_to" name="add_watchlist" type="submit" class="bg_color add_to px-3 py-2"> 
-                        <i class="fa fa-check"></i> IN WATCHLIST
-                    </button>
-                        {% else %}
-                           <button id="add_to" name="add_watchlist" type="submit" class="bg_color add_to px-3 py-2"> 
-                        <i class="fa fa-plus"></i> ADD TO WATCHLIST
-                    </button>
-                        {% endif %}
-                    
-                    {% empty %}
-                      <button id="add_to" name="add_watchlist" type="submit" class="bg_color add_to px-3 py-2"> 
-                    <i class="fa fa-plus"></i> ADD TO WATCHLIST
-                    </button>
-                    {% endfor %}
-                   {% endcomment %}
+ 

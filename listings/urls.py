@@ -10,4 +10,5 @@ urlpatterns = [
     path('listing/<int:id>/<slug:slug>/', views.single_listing, name='single_lisitng'),
     path('search/', views.search, name='search'),
     path('add-wishlist/', views.add_wishlist, name='add_wishlist'),
+    path('sort/<str:by>', views.sort, name='sort'),
 ]
