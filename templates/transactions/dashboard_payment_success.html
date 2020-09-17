@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  .container .card {
+      border-radius: 10px !important;
+  }
+  .property-detail {
+      background-color: hsla(190, 43%, 95%, 0.9) !important;
+      color: #003333;
+      /* opacity: 0.5; */
+      border-radius: 10px;
+      border: 1px solid hsla(240, 10%, 50%, 0.7) !important;
+  }
+  .card-body .card-text,
+  .card-footer {
+      color: #5A6F6F;
+  }
+  .card-footer {
+      font-size: 14px !important;
+  }
+    </style>
+{% endblock extrastyle %}
+
+{% block title %} Clients Dashboard {% endblock title %}
+
+
+
+
+{% block content %}
+
+
+<body class="container-fluid" style="background-image: none;">
+    <div class="header">
+        <!-- Navbar -->
+    {% include 'partials/dashboard_navbar.html' %}
+    </div>
+
+    <div class="row">
+        <!-- Sidebar -->
+         {% include 'partials/dashboard_sidebar.html' %}
+        <!-- Sidebar ends -->
+
+        <!-- Main content -->
+        <main role="main" class="col-md h-100 overflow-aut p-4">
+            <div class="py-5 d-block d-md-none"></div>
+
+            <!-- Heading and Filters -->
+            <div class="row mb-4 d-flex align-items-end">
+                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Payment Status</h3>
+                <div class="col-auto d-none d-md-flex align-items-center">
+                    <a href="/dashboard/client-properties.html" class="col-auto btn bg-orange text-white px-4 ml-3">Back to Properties</a>
+                </div>
+
+            </div>
+
+            <!-- Cards -->
+            <div class="row">
+                <!-- Transactions -->
+                <div class="col">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h2 class="font-weight-bold text-center pt-5 pb-2 mb-md-0">Payment Successful</h2>
+                            <p class="h5 col-12 col-md-7 text-center pb-4 mx-auto text-secondary">Your are now the proud owner of El Classique Mansion, your property documents will be processed soon.</p>
+
+                            <div class="container">
+                                <div class="col-md-9 mx-auto">
+                                  <div class="card shadow-sm mb-3 overflow-hidden">
+                                      <img src="{% static 'img/blog/post-big.png' %}" class="card-img rounded-0 h-100" alt="...">
+                                          <div class="card-img-overlay px-3 px-md-5 d-flex flex-col-reverse">
+                                              <div class="property-detail rounded bg-secondary w-100 mt-auto border">
+                                                  <h5 class="price rounded text-white float-right bg-secondary px-3 py-2 mt-4 mr-4 d-none d-md-block">$78,096</h5>
+                                                  <div class="card-body ml-3">
+                                                      <h4 class="card-title p-0 mb-0"><strong>El Classico Mansion</strong></h4>
+                                                      <p class="card-text text-secondary d-none d-md-block">
+                                                          <img src="{% static 'img/location.svg' %}" alt="">
+                                                          Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.
+                                                      </p>
+                                                  </div>
+                                                  
+                                                  <div class="card-footer d-none d-md-block">
+                                                      <div class="mb-0 ">
+                                                        <span class="ml-3">10 Rooms</span>
+                                                        <span class="ml-3">5 Baths</span>
+                                                        <span class="ml-3">7 Bathrooms</span>
+                                                        <span class="ml-3">678m<sup>2</sup></span>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                  <a href="/dashboard/client.html" type="submit" class="btn bg-orange text-white px-5 border-0 mt-4">Go to Dashboard</a>
+                                </div>
+                                
+                              </div>
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+            </div>
+
+            
+        </main>
+    </div>
+
+
+
+</body>
+
+{% endblock content %}

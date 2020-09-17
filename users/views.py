@@ -117,18 +117,20 @@ def logout(request):
 
 
 # @login_required
-# def dashboard(request):
-#     # pylint: disable = no-member
-#     user_contacts = Contact.objects.order_by(
-#         '-contact_date').filter(user_id=request.user.id)
-#     context = {
-#         'contacts': user_contacts
-#     }
-#     return render(request, 'users/dashboard.html', context)
+def client_dashboard(request):
+    # user_contacts = Contact.objects.order_by(
+    #     '-contact_date').filter(user_id=request.user.id)
+    context = {
+        # 'contacts': user_contacts
+    }
+    return render(request, 'users/client.html', context)
 
 
+def marketer_dashboard(request):
+    pass
 
 
+@login_required
 def resend_activation_email(request):
     '''To resend activation email to a user'''
     send_activation_email(request, request.user)

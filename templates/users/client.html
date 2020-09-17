@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    .pie-img {
+        margin-top: -175px !important;
+    }
+    .pie-img .fa {
+        font-size: 20px;
+    }
+</style>
+{% endblock extrastyle %}
+
+{% block title %} Clients Dashboard {% endblock title %}
+
+
+
+
+{% block content %}
+
+
+<body class="container-fluid">
+    <div class="header">
+        {% include 'partials/dashboard_navbar.html' %}
+    </div>
+    <div class="row">
+    
+        <!-- Sidebar -->
+        {% include 'partials/dashboard_sidebar.html' %}
+        <!-- Sidebar ends -->
+
+
+        <!-- Main content -->
+        <main role="main" class="col-md h-100 overflow-aut p-4">
+            <div class="py-5 d-block d-md-none"></div>
+
+            <!-- Heading and Filters -->
+            <div class="row mb-4 d-flex align-items-end">
+                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Dashboard</h3>
+                <div class="col-auto d-none d-md-flex align-items-center">
+                    <label class="sr-only" for="inlineFormInputGroup">Search</label>
+                    <div class="input-group overflow-hidden rounded border">
+                        <input type="text" class="form-control border-0" id="inlineFormInputGroup" placeholder="Search">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white border-0">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../listings.html" class="col-auto btn bg-orange text-white px-4 ml-3">Go to Listings</a>
+                </div>
+
+            </div>
+
+            <!-- Cards -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-4 widget-flat overflow-hidden">
+                        <div class="card-body text-center">
+                            <img src="{% static 'img/desc-images/easy.png' %}" class="rounded img-responsive w-50" alt="">
+                            <span class=" d-block">
+                                <p class="grey my-2">Ongoing Purchases</p>
+                                <p class="h2 md-h5 font-weight-bold">3.5 Plots</p>
+                            </span>
+                        </div> 
+                        <!-- card footer-->
+                        <div class="card-footer border-top bg-white d-flex justify-content-around">
+                            <span class="text-center d-block">
+                                <p class="h5 font-weight-bold pb-0 mb-0">12.5M</p>
+                                <p class="grey">Total Cost</p>
+                            </span>
+                            <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
+                            <span class="text-center d-block">
+                                <p class="h5 font-weight-bold pb-0 mb-0">320K</p>
+                                <p class="grey">Amount Paid</p>
+                            </span>
+                            <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
+                            <span class="text-center d-block">
+                                <p class="h5 font-weight-bold pb-0 mb-0">90K</p>
+                                <p class="grey">Amount Due</p>
+                            </span>
+                        </div>
+                    </div> <!-- end card-->
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-4 widget-flat">
+                        <div class="card-body">
+                            <div class="position-relative d-block">
+                                <div class="mx-auto w-75">
+                                    <canvas class="" id="chartCanvas" width="165" height="165" aria-label="Payment Progress" role="img"></canvas>
+                                
+                                </div>
+                                <div class="pie-img position-absolute text-center w-100 mb-5">
+                                    <i class="fa fa-credit-card p-4 rounded-circle orange bg-light-red" aria-hidden="true"></i>
+                                    <p class="h2 font-weight-bold pb-0 mb-0">68.5%</p>
+                                    <p class="grey">Payment Progress</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- card footer-->
+                        <div class="card-footer mt-1 border-top bg-white d-flex justify-content-around">
+                            <span class="text-center d-block">
+                                <p class="grey pb-0 mb-0">Pending Payment</p>
+                                <p class="h5 font-weight-bold">N90,000</p>
+                                
+                            </span>
+                            <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
+                            <span class="text-center d-block pt-1">
+                                <a href="/dashboard/client-pay.html" class="col-auto btn bg-orange text-white px-4 ml-3">Pay Now</a>
+                            </span>
+                            
+                        </div>
+                    </div> <!-- end card-->
+                </div>
+                
+                <!-- Transactions -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mt-2">Transactions</h5>
+
+                            <div class="table-responsive">
+                                <table class="table table-centered nowrap table-hover mb-0 dtr-inline collapsed">
+                                    <thead>
+                                        <tr class="border-top border-bottom">
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Property</th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}"
+                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
+                                                    alt="">
+                                                Plazora Villa Rea
+                                            </td>
+                                            <td class="border-0 pt-3 red">
+                                                Pending
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}"
+                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
+                                                    alt="">
+                                                Plazora Villa Rea
+                                            </td>
+                                            <td class="border-0 pt-3 green">
+                                                Processing
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}"
+                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
+                                                    alt="">
+                                                Plazora Villa Rea
+                                            </td>
+                                            <td class="border-0 pt-3 blue">
+                                                Allocated
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mt-2">Allocated Properties</h5>
+
+                            <div class="table-responsive">
+                                <table class="table table-centered nowrap table-hover mb-0 dtr-inline collapsed">
+                                    <thead>
+                                        <tr class="border-top border-bottom">
+                                            <th class="text-muted border-0 py-2 order-0 font-weight-normal">Property
+                                            </th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal d-none d-md-block">
+                                                Details</th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                <span class=" d-none d-md-inline">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, </span>Lagos
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                <span class=" d-none d-md-inline">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, </span>Lagos
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                <span class=" d-none d-md-inline">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, </span>Lagos
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+            </div>
+
+            
+            
+        </main>
+    </div>
+
+
+
+    <!-- Graphs -->
+    <script src="{% static 'js/Chart.min.js' %}"></script>
+
+    <script>
+        // This demo uses the Chartjs javascript library
+        // Simple yet flexible JavaScript charting for designers & developers
+        // Webite: https://www.chartjs.org
+        // CDN: https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js
+
+        const percent = 84;
+        const color = '#01713c';
+        const canvas = 'chartCanvas';
+        const container = 'chartContainer';
+
+        const percentValue = percent; // Sets the single percentage value
+        const colorGreen = color, // Sets the chart color
+            animationTime = '1400'; // Sets speed/duration of the animation
+
+        const chartCanvas = document.getElementById(canvas), // Sets canvas element by ID
+            chartContainer = document.getElementById(container), // Sets container element ID
+            divElement = document.createElement('div'), // Create element to hold and show percentage value in the center on the chart
+            domString = '<div class="chart__value"><p>' + percentValue + '%</p></div>'; // String holding markup for above created element
+
+        // Create a new Chart object
+        const doughnutChart = new Chart(chartCanvas, {
+            type: 'doughnut', // Set the chart to be a doughnut chart type
+            data: {
+                datasets: [
+                    {
+                        data: [percentValue, 100 - percentValue], // Set the value shown in the chart as a percentage (out of 100)
+                        backgroundColor: ['#FC8210'], // The background color of the filled chart
+                        borderWidth: 0 // Width of border around the chart
+                    }
+                ]
+            },
+            options: {
+                cutoutPercentage: 84, // The percentage of the middle cut out of the chart
+                responsive: true, // Set the chart to not be responsive
+                tooltips: {
+                    enabled: false // Hide tooltips
+                },
+                rotation: 135
+            }
+        });
+
+        Chart.defaults.global.animation.duration = animationTime; // Set the animation duration
+
+        divElement.innerHTML = domString; // Parse the HTML set in the domString to the innerHTML of the divElement
+        chartContainer.appendChild(divElement.firstChild); // Append the divElement within the chartContainer as it's child
+
+    </script>
+
+</body>
+
+{% endblock content %}

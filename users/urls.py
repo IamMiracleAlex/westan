@@ -13,6 +13,8 @@ urlpatterns = [
     path('activate-email/<str:uid>/<str:token>/', views.activate_email, name='activate_email'),
     path('resend-activation-email/', views.resend_activation_email, name='resend_activation_email'),
     path('subscribe/', views.subscribe, name='subscribe'),
+    path('dashboard/client/', views.client_dashboard, name='client_dashboard'),
+    path('dashboard/marketer/', views.marketer_dashboard, name='marketer_dashboard'),
 
     path('test/', views.test, name='test'),
 ]

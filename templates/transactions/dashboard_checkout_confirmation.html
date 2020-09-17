@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/uploadstyle.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock extrastyle %}
+
+{% block title %} Client Dashboard - Checkout Confirmation {% endblock title %}
+
+
+{% block content %}
+
+
+<!-- Main content -->
+
+<body class="container-fluid" style="background-image: none;">
+    <div class="header">
+        <!-- Navbar -->
+    {% include 'partials/dashboard_navbar.html' %}
+    
+    </div>
+    <div class="row">
+        <!-- Sidebar -->
+       {% include 'partials/dashboard_sidebar.html' %}
+        <!-- Sidebar ends -->
+
+        <!-- Main content -->
+        <main role="main" class="col-md h-100 overflow-aut p-4">
+            <div class="py-5 d-block d-md-none"></div>
+
+            <!-- Heading and Filters -->
+            <div class="row mb-4 d-flex align-items-end">
+                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Payment Confirmation</h3>
+                <div class="col-auto d-none d-md-flex align-items-center">
+                    
+                    <a href="/dashboard/client-properties.html" class="col-auto btn bg-orange text-white px-4 ml-3">Back to Properties</a>
+                </div>
+
+            </div>
+
+            <!-- Cards -->
+            <div class="row">
+                <!-- Transactions -->
+                <div class="col">
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <p class="h5 col-12 col-md-7 text-center pt-5 pb-4 mx-auto text-secondary">Upload bank teller or transfer screenshot and enter your transaction details to confirm payment.</p>
+
+                            <div class="container">
+                                <form class="auth col-12 col-md-8 mx-md-auto border p-3 p-md-5 needs-validation rounded mb-5 pb-5 bg-white text-left" novalidate>
+                                    <p class="text-center h4 mb-3 mb-md-5 pt-3 pt-md-0"><strong>Transaction Details</strong> </p>
+                                    <div class="form-row">
+                                      <div class="col-md-6  form-col px-3">
+                                        <div class="mb-3">
+                                          <label for="bankPayedTo">Bank Payed to</label>
+                                          <select class="custom-select" id="bankPayedTo" required>
+                                            <option selected disabled value="">Choose...</option>
+                                            <option>Zenith</option>
+                                            <option>First Bank</option>
+                                          </select>
+                                          <div class="invalid-tooltip">
+                                            Please select a bank.
+                                          </div>
+                                        </div>
+                                        
+                                        <label for="myFile">Upload Teller/Transaction Image</label>
+                                        <div class="wrapper mb-3">
+                                          <div class="box w-100">
+                                            <div class="js--image-preview"></div>
+                                            <div class="upload-options">
+                                              <label>Upload
+                                                <input type="file" class="image-upload" accept="image/*" />
+                                              </label>
+                                            </div>
+                                          </div>
+                                    
+                                        </div>
+                                         
+                                      </div>
+                          
+                                      <div class="col-md-6 form-col px-3">
+                                        <div class="mb-3">
+                                          <label for="payersName">Payer's name</label>
+                                          <input type="text" class="form-control" id="payersName" placeholder="Payer's name" required>
+                                          <div class="invalid-tooltip">
+                                            Please enter Payer's name.
+                                          </div>
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="amountPaid">Amount Paid</label>
+                                          <input type="number" class="form-control" id="amountPaid" required>
+                                          <div class="invalid-tooltip">
+                                            Please enter the amount paid.
+                                          </div>
+                                        </div>
+                                        <div class="mb-3">
+                                          <label for="tellerNo">Transaction/Teller Number</label>
+                                          <input type="text" class="form-control" id="tellerNo" required>
+                                          <div class="invalid-tooltip">
+                                            Please enter the teller number.
+                                          </div>
+                                        </div>
+                                        <div class="form-group py-auto">
+                                          <button class="bg-orange text-white btn w-100 mb-1 mx-auto" type="submit">Confirm Payment</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                </form>
+                              </div>
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+            </div>
+
+            
+        </main>
+    </div>
+
+
+    <script>
+        // JavaScript for disabling form submissions if there are invalid fields
+          (function() {
+              'use strict';
+              window.addEventListener('load', function() {
+              // Fetch all the forms we want to apply custom Bootstrap validation styles to
+              var forms = document.getElementsByClassName('needs-validation');
+              // Loop over them and prevent submission
+              var validation = Array.prototype.filter.call(forms, function(form) {
+                  form.addEventListener('submit', function(event) {
+                  if (form.checkValidity() === false) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                  }
+                  form.classList.add('was-validated');
+                  }, false);
+              });
+              }, false);
+          })();
+        </script>
+ </body> 
+{% endblock content %}
+
+{% block javascript %}
+    <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+    <script src="{% static 'js/uploadHelper.js' %}"></script>
+    <script src="{% static 'js/upload-img.js' %}"></script>
+{% endblock javascript %}
+
+ 

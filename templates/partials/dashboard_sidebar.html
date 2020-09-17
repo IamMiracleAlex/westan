@@ -1,0 +1,52 @@
+{% load static %}
+
+<nav id="sidebarMenu" class="sidebar col-md-2 d-md-block py-4 px- bg-white shadow-sm border-right collapse">
+    <a href="{% url 'listings:index' %}"><img src="{% static 'img/logo.svg' %}" width="100" alt="" class="img-responsive pl-3"></a>
+
+    <div class="sidebar-sticky text-danger pt-5">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% endif %} d-flex align-items-center" href=" {% if 'dashboard/client' in request.path %} {% url 'users:client_dashboard' %} {% else %} {% url 'users:marketer_dashboard' %} {% endif %}">
+                    <i class="fa fa-th-large mr-2" aria-hidden="true"></i>
+                    Dashboard <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if 'dashboard/profile' in request.path %} active {% endif %} d-flex align-items-center" href="/dashboard/profile.html">
+                    <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                    My Profile
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if 'dashboard/properties' in request.path %} active {% endif %} d-flex align-items-center" href="/dashboard/client-properties.html">
+                    <i class="fa fa-building mr-2" aria-hidden="true"></i>
+                    Properties
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center" href="#">
+                    <i class="fa fa-shopping-bag mr-2" aria-hidden="true"></i>
+                    Wishlist
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center" href="#">
+                    <i class="fa fa-cog mr-2" aria-hidden="true"></i>
+                    Settings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center" href="#">
+                    <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="author my-5 py-5 text-cente pl-3 d-none d-md-block">
+        <img src="{% static 'img/blog/author.png' %}" width="100" alt=""
+            class="img-responsive rounded-circle border mt-5">
+        <p class="i d-block pt-2">Guddy Miracle</p>
+    </div>
+</nav>

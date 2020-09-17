@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock extrastyle %}
+
+{% block title %} Property Invoice {% endblock title %}
+
+
+
+
+{% block content %}
+
+
+   
+<body class="container-fluid">
+    <div class="header">
+        <!-- Navbar -->
+       {% include 'partials/dashboard_navbar.html' %}
+    </div>
+    <div class="row">
+        <!-- Sidebar -->
+
+        {% include 'partials/dashboard_sidebar.html' %}
+
+        <!-- Sidebar ends -->
+
+        <!-- Main content -->
+        <main role="main" class="col-md h-100 overflow-aut p-4">
+            <div class="py-5 d-block d-md-none"></div>
+
+            <!-- Heading and Filters -->
+            <div class="row mb-4 d-flex align-items-end d-print-none">
+                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Property Invoice</h3>
+                <div class="col-auto d-none d-md-flex align-items-center">
+                    <a href="/dashboard/client-properties.html" class="col-auto btn orange border-orange bg-white px-4 ml-3">Back to Properties</a>
+                    <a href="javascript:window.print()" class="col-auto btn bg-orange text-white px-4 ml-3">Print</a>
+                </div>
+
+            </div>
+
+
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-2 p-md-5">
+
+                            <!-- Invoice Logo-->
+                            <div class="clearfix position-relative">
+                                <div class="float-left position-absolute mb-3 d-none d-md-block">
+                                    <img src="{% static 'img/logo.svg' %}" alt="" height="40">
+                                </div>
+                                <div class="text-center pt-3 pt-md-0">
+                                    <h2 class="m-0 pb-2 d-print-none font-weight-bold">Westan Realtors (Nig) Ltd</h2>
+                                    <address>Palm Royal Estate,
+                                        Off Ibeju-Lekki,
+                                        Ikeja, Lagos,
+                                        Nigeria.<br>
+                                        <span>Email: contact@westanrealtors.com</span>
+                                    </address>
+                                </div>
+                            </div>
+
+                            <!-- Invoice Detail-->
+                            <div class="row mt-4 mt-md-5">
+                                <div class="col-sm-4">
+                                    <h6>Client</h6>
+                                    <address>
+                                        Lynne K. Higby<br>
+                                        795 Folsom Ave, Suite 600<br>
+                                        San Francisco, CA 94107<br>
+                                        <span>Phone: (123) 456-7890</span>
+                                    </address>
+                                </div> <!-- end col-->
+
+                                <div class="col-sm-4 order-sm-0 text-center pt-auto">
+                                    <h4>Sales Reciept</h4>
+                                </div> <!-- end col-->
+
+                                <div class="col-sm-4">
+                                    <div class="float-sm-right">
+                                        <p class="font-13 mb-0">Invoice number</p>
+                                        <p class="h4">AZ-489-P20</p>
+                                        <p class="font-13">Date: &nbsp; Jan 17, 2028</p>
+                                    </div>
+                                </div><!-- end col -->
+                            </div>    
+                            <!-- end row -->        
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table mt-4">
+                                            <thead>
+                                            <tr><th>Item</th>
+                                                <th>Description</th>
+                                                <th>Quantity</th>
+                                                <th>Unit Cost</th>
+                                                <th class="text-right">Total</th>
+                                            </tr></thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    Rogue 4 Bedroom Flat, <br/>
+                                                    Palm Royal Estate,
+                                                    Off Ibeju-Lekki,
+                                                    Ikeja, Lagos,
+                                                    Nigeria.
+                                                </td>
+                                                <td>1</td>
+                                                <td>$1799.00</td>
+                                                <td class="text-right">$1799.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                    <b>Warranty</b> <br/>
+                                                    Two Year Extended Warranty -
+                                                    Parts and Labor
+                                                </td>
+                                                <td>3</td>
+                                                <td>$499.00</td>
+                                                <td class="text-right">$1497.00</td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end table-responsive-->
+                                </div> <!-- end col -->
+                            </div>
+                            <!-- end row -->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="clearfix pt-3">
+                                        <h6 class="text-muted">Notes:</h6>
+                                        <small>
+                                            All accounts are to be paid within 7 days from receipt of
+                                            invoice. To be paid by cheque or credit card or direct payment
+                                            online. If account is not paid within 7 days the credits details
+                                            supplied as confirmation of work undertaken will be charged the
+                                            agreed quoted fee noted above.
+                                        </small>
+                                    </div>
+                                </div> <!-- end col -->
+                                <div class="col-sm-6">
+                                    <div class="float-right mt-3 mt-sm-0">
+                                        <p><b>Sub-total:</b> <span class="float-right">$4120.00</span></p>
+                                        <p><b>VAT (12.5):</b> <span class="float-right">$515.00</span></p>
+                                        <h3>$4635.00 USD</h3>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div> <!-- end col -->
+                            </div>
+                            <!-- end row-->
+
+                            <!-- end buttons -->
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card -->
+                </div> <!-- end col-->
+            </div>
+            <!-- end row -->
+
+
+
+
+            
+            
+        </main>
+    </div>
+
+</body>
+
+  {% endblock content %}

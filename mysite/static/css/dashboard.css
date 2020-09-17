@@ -1,0 +1,100 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #F8F8F8 !important;
+    font-size: 14px;
+    color: #003333;
+}
+
+.sidebar {
+    font-family: 'Rubik', sans-serif;
+    max-width: 220px;
+}
+
+.sidebar,
+[role="main"] {
+    height: 100vh !important;
+}
+
+[role="main"] {
+    overflow-y: scroll;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    font-size: 14px;
+    color: #73738D !important;
+    /* filter: invert(0.5); */
+}
+
+.sidebar .nav-link:hover {
+    color: #033 !important;
+}
+
+.sidebar .nav-item .active {
+    color: #033 !important;
+}
+
+.stats .fa {
+    font-size: 24px;
+}
+
+.grey {
+    color: #73738D !important;
+}
+
+.green {
+    color: #31bfbf;
+}
+
+.red {
+    color: #ff3a29;
+}
+
+.blue {
+    color: #1943EF;
+}
+
+.orange { color: #fc8210;}
+
+.bg-orange { background-color: #fc8210;}
+
+.border-orange {border: 1px solid #fc8210 !important;}
+
+.bg-grey {
+    background-color: #EAEAEA !important;
+}
+
+.bg-green {
+    background-color: #31bfbf;
+}
+
+.bg-red {
+    background-color: #ff3a29;
+}
+
+.bg-blue {
+    background-color: #1943EF;
+}
+
+.bg-light-green {
+    background-color: #d6f2f2;
+}
+
+.bg-light-red {
+    background-color: #ffe5d3;
+}
+
+.bg-light-blue {
+    background-color: #dad7fe;
+}
+
+.card {
+    border-radius: 10px !important;
+}
+
+.font-12 {
+    font-size: 12px;
+}

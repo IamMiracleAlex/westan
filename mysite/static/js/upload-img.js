@@ -91,4 +91,3 @@ function initImageUpload(box) {
     }
   }
   
-  //# sourceURL=pen.js
