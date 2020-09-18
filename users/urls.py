@@ -15,6 +15,7 @@ urlpatterns = [
     path('subscribe/', views.subscribe, name='subscribe'),
     path('dashboard/client/', views.client_dashboard, name='client_dashboard'),
     path('dashboard/marketer/', views.marketer_dashboard, name='marketer_dashboard'),
+    path('dashboard/profile/', views.profile, name='profile'),
 
     path('test/', views.test, name='test'),
 ]

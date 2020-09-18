@@ -127,7 +127,8 @@ def client_dashboard(request):
 
 
 def marketer_dashboard(request):
-    pass
+    return render(request, 'users/marketer.html',)
+
 
 
 @login_required
@@ -172,9 +173,8 @@ def activate_email(request, uid, token):
 
 
 
-def test(request):
-    return render(request, 'registration/password_reset_email.html')
-    # return render(request, 'users/emails/activation_email.html')
+def profile(request):
+    return render(request, 'users/profile.html')
 
 
 
@@ -196,3 +196,7 @@ def subscribe(request):
 
     # send msg reply
     # return redirect('index')
+
+
+def test(request):
+    pass

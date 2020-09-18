@@ -11,4 +11,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('add-wishlist/', views.add_wishlist, name='add_wishlist'),
     path('sort/<str:by>', views.sort, name='sort'),
+    path('dashboard/marketer/properties/', views.dashboard_marketer_properties, name='dashboard_marketer_properties'),
+    path('dashboard/client/properties/', views.dashboard_client_properties, name='dashboard_client_properties'),
+    path('dashboard/client/property/<int:id>/<slug:slug>/', views.dashboard_client_single_properties, name='dashboard_client_single_properties'),
 ]

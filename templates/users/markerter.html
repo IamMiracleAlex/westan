@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Westan Realtors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Marketer Dashboard: Westan Realtors</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Favicons -->
+    <meta name="theme-color" content="#563d7c">
+    
+    <!-- dashboard css -->
+    <link rel="stylesheet" href="./dashboard.css">
+
+</head>
+
+<body class="container-fluid">
+    <div class="header">
+        <!-- Navbar -->
+        <nav
+            class="container navbar navbar-expand-lg fixed-top navbar-light bg-white border-bottom d-block d-md-none box-shadow-sm">
+            <a class="navbar-brand" href="#">
+                <img src="../images/Westan Logo.svg" alt="Westan Logo" srcset="">
+            </a>
+            <button class="navbar-toggler border-0 float-right pt-3" type="button" data-toggle="collapse"
+                data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto text-center">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link ml-0 ml-md-3" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ml-0 ml-md-3" href="../listings.html">All Listings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/dashboard/client.html">
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/profile.html">
+                            My Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/client-properties.html">
+                            Properties
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Wishlist
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="sidebar col-md-2 d-md-block py-4 px- bg-white shadow-sm border-right collapse">
+            <img src="../images/Westan Logo.svg" width="100" alt="" class="img-responsive pl-3">
+
+            <div class="sidebar-sticky text-danger pt-5">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active d-flex align-items-center" href="/dashboard/marketer.html">
+                            <i class="fa fa-th-large mr-2" aria-hidden="true"></i>
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="#">
+                            <i class="fa fa-user mr-2" aria-hidden="true"></i>
+                            My Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="#">
+                            <i class="fa fa-shopping-cart mr-2" aria-hidden="true"></i>
+                            Sales
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="/dashboard/marketer-properties.html">
+                            <i class="fa fa-building mr-2" aria-hidden="true"></i>
+                            Properties
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="#">
+                            <i class="fa fa-users mr-2" aria-hidden="true"></i>
+                            Clients
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="#">
+                            <i class="fa fa-cog mr-2" aria-hidden="true"></i>
+                            Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="#">
+                            <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="author my-5 py-5 text-cente pl-3 d-none d-md-block">
+                <img src="../images/posts/author.png" width="100" alt=""
+                    class="img-responsive rounded-circle border mt-5">
+                <p class="i d-block pt-2">Guddy Miracle</p>
+            </div>
+        </nav>
+        <!-- Sidebar ends -->
+
+        <!-- Main content -->
+        <main role="main" class="col-md h-100 overflow-aut p-4">
+            <div class="py-5 d-block d-md-none"></div>
+
+            <!-- Heading and Filters -->
+            <div class="row mb-4 d-flex align-items-end">
+                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Dashboard</h3>
+                <div class="col-auto d-none d-md-flex align-items-center">
+                    <label class="sr-only" for="inlineFormInputGroup">Search</label>
+                    <div class="input-group overflow-hidden rounded border">
+                        <input type="text" class="form-control border-0" id="inlineFormInputGroup" placeholder="Search">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white border-0">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../listings.html" class="col-auto btn bg-orange text-white px-4 ml-3">Go to Listings</a>
+                </div>
+
+            </div>
+
+            <!-- Dashboard Stats Cards -->
+            <div class="stats row">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-4 widget-flat">
+                        <div class="card-body d-flex">
+                            <div class="float-left mr-3">
+                                <i class="fa fa-cut p-3 rounded-circle blue bg-light-blue" aria-hidden="true"></i>
+                            </div>
+                            <div class="">
+                                <h4 class="mb-0">14 Properties</h4>
+                                <p class="text-nowrap text-muted mb-0">Sales</p>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-4 widget-flat">
+                        <div class="card-body d-flex">
+                            <div class="float-left mr-3">
+                                <i class="fa fa-money p-3 rounded-circle bg-light-green green bg-light-green"
+                                    aria-hidden="true"></i>
+                            </div>
+                            <div class="">
+                                <h4 class="mb-0">$44,765.00</h4>
+                                <p class="text-nowrap text-muted mb-0">Total Sales Value</p>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-4 widget-flat">
+                        <div class="card-body d-flex">
+                            <div class="float-left mr-3">
+                                <i class="fa fa-credit-card p-3 rounded-circle orange bg-light-red" aria-hidden="true"></i>
+                            </div>
+                            <div class="">
+                                <h4 class="mb-0">$4,365.00</h4>
+                                <p class="text-nowrap text-muted mb-0">Commission Earned</p>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div>
+
+            
+            <div class="row">
+                <div class="col-md-8">
+                    
+                    <!-- Monthly Stats -->
+                    <div class="card border-0 py-4 shadow-sm mb-4 widget-flat">
+                        <!-- Card Header -->
+                        <div class="header border-bottom">
+                            <div class="d-flex px-3 mb-2">
+                                <h5 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0 pt-1">Monthly
+                                    Statistics</h5>
+                                <div class="col-auto btn-group">
+                                    <button type="button" class="btn btn-sm  dropdown-toggle " data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        2019
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <button class="dropdown-item" type="button">Action</button>
+                                        <button class="dropdown-item" type="button">Another action</button>
+                                        <button class="dropdown-item" type="button">Something else here</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body px-4 d-flex">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <!-- Card Footer -->
+                        <div class="footer border-top text-center">
+                            <div class="d-flex justify-content-around mt-3">
+                                <span>
+                                    <span>
+                                        <span class="px-2 rounded-circle bg-blue"></span>
+                                        &nbsp;Sales
+                                    </span>
+                                    <span class="px-2">
+                                        <span class="px-2 rounded-circle bg-green"></span>
+                                        &nbsp;Commission
+                                    </span>
+                                    <span>
+                                        <span class="px-2 rounded-circle bg-red"></span>
+                                        &nbsp;Sales Value
+                                    </span>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div> <!-- end card-->
+
+                    <!-- Trending -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mt-2">Top Selling Products</h5>
+
+                            <div class="table-responsive">
+                                <table class="table table-centered nowrap table-hover mb-0 dtr-inline collapsed">
+                                    <thead>
+                                        <tr class="border-top border-bottom">
+                                            <th class="text-muted border-0 py-2 order-0 font-weight-normal">Property
+                                            </th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal d-none d-md-block">
+                                                Details</th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border-0 pt-3">
+                                                <img src="../images/dash-thumb.jpg" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                                <span class="text-muted d-none d-md-inline"> - Ikeja, Lagos</span>
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                            </td>
+                                            <td class="border-0 pt-3 text-primary">
+                                                $6,518.18
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="../images/dash-thumb.jpg" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                                <span class="text-muted d-none d-md-inline"> - Ikeja, Lagos</span>
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                            </td>
+                                            <td class="border-0 pt-3 text-primary">
+                                                $6,518.18
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="../images/dash-thumb.jpg" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                                <span class="text-muted d-none d-md-inline"> - Ikeja, Lagos</span>
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                            </td>
+                                            <td class="border-0 pt-3 text-primary">
+                                                $6,518.18
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+
+                </div> <!-- end col-->
+
+                <div class="col-md-4 mb-4">
+                    <!-- Referrals -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mt-2">Referrals</h5>
+
+                            <div class="table-responsive">
+                                <table class="table table-centered nowrap table-hover mb-0 dtr-inline collapsed">
+                                    <thead>
+                                        <tr class="border-top border-bottom">
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Referral</th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Town/City</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="../images/dash-thumb.jpg"
+                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
+                                                    alt="">
+                                                Jelima Chibuzor
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                Abakaliki
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="../images/dash-thumb.jpg"
+                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
+                                                    alt="">
+                                                Jelima Chibuzor
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                Abakaliki
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0">
+                                                <img src="../images/dash-thumb.jpg"
+                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
+                                                    alt="">
+                                                Jelima Chibuzor
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                Abakaliki
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col-->
+            </div>
+        </main>
+    </div>
+
+
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!-- Graphs -->
+    <script src="./Chart.min.js"></script>
+
+    <script>
+        var ctx = document.getElementById("myChart");
+        var barChartData = {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Sales',
+				backgroundColor: '#1943EF',
+				data: [ 12, 19, 3, 5, 2, 3, 9 ]
+			}, {
+				label: 'Commission',
+				backgroundColor: '#31bfbf',
+				data: [ 17, 21, 9, 3, 4, 7, 12 ]
+			}, {
+				label: 'Sales Value',
+				backgroundColor: '#ff3a29',
+				data: [ 7, 9, 13, 11, 9, 13, 7 ]
+			}]
+
+		};
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					},
+					responsive: true,
+					scales: {
+						xAxes: [{
+							stacked: true,
+						}],
+						yAxes: [{
+							stacked: true
+						}]
+                    },
+                        legend: {
+                        display: false,
+                    },
+				}
+        });
+    </script>
+</body>
+
+</html>

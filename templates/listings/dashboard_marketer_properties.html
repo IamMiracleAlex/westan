@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock extrastyle %}
+
+{% block title %} Marketer Dashboard - Properties {% endblock title %}
+
+
+
+{% block content %}
+
+
+<body class="container-fluid">
+    <div class="header">
+        <!-- Navbar -->
+    {% include 'partials/dashboard_navbar.html' %}
+    </div>
+
+    <div class="row">
+        <!-- Sidebar -->
+         {% include 'partials/dashboard_sidebar.html' %}
+        <!-- Sidebar ends -->
+
+
+        <!-- Main content -->
+        <main role="main" class="col-md h-100 overflow-aut p-4">
+            <div class="py-5 d-block d-md-none"></div>
+
+            <!-- Heading and Filters -->
+            <div class="row mb-3 mb-md-4 d-flex align-items-end">
+                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Properties</h3>
+                <div class="col-auto d-non d-md-flex align-items-center">
+                    <label class="sr-only" for="inlineFormInputGroup">Search</label>
+                    <div class="input-group overflow-hidden rounded border">
+                        <input type="text" class="form-control border-0" id="inlineFormInputGroup" placeholder="Search">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-white border-0">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="../listings.html" class="col-auto d-none d-md-block btn bg-orange text-white px-4 ml-3">Go to Listings</a>
+                </div>
+
+            </div>
+
+
+            <!-- Monthly Stats -->
+            <div class="row">
+                <div class="col">
+                    
+
+                    <!-- Top Selling Products -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+
+                            <div class="table-responsive">
+                                <table class="table table-centered nowrap table-hover mb-0 dtr-inline collapsed">
+                                    <thead>
+                                        <tr class="border-bottom">
+                                            <th class="text-muted border-0 py-2 order-0 font-weight-normal">Property
+                                            </th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal d-none d-md-block">
+                                               <span class="">Details</span></th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal ">
+                                                <span class="d-none d-md-block">Address</span></th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="border-0 pt-3 text-nowrap">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
+                                            </td>
+                                            <td class="border-0 pt-3 text-primary">
+                                                $6,518.18
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0 text-nowrap">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
+                                            </td>
+                                            <td class="border-0 pt-3 text-primary">
+                                                $6,518.18
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0 text-nowrap">
+                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                4 Bedroom Flat
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
+                                            </td>
+                                            <td class="border-0 pt-3 text-primary">
+                                                $6,518.18
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div> <!-- end table-responsive-->
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+
+                </div> <!-- end col-->
+
+                
+            </div>
+        </main>
+    </div>
+
+
+</body>
+
+{% endblock content %}

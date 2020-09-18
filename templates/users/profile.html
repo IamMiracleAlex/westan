@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock extrastyle %}
+
+{% block title %} Profile {% endblock title %}
+
+
+
+{% block content %}
+
+
+<body class="container-fluid">
+    <div class="header">
+        <!-- Navbar -->
+    {% include 'partials/dashboard_navbar.html' %}
+    </div>
+
+    <div class="row">
+        <!-- Sidebar -->
+         {% include 'partials/dashboard_sidebar.html' %}
+        <!-- Sidebar ends -->
+
+
+        <!-- Main content -->
+        <main role="main" class="col-md h-100 overflow-aut p-4">
+            <div class="py-5 d-block d-md-none"></div>
+
+            <!-- Heading and Filters -->
+            <div class="row mb-4 d-flex align-items-end">
+                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">My Profile</h3>
+                <div class="col-auto d-none d-md-flex align-items-center">
+                    <a href="../listings.html" class="col-auto btn bg-orange text-white px-4 ml-3">Edit Profile</a>
+                </div>
+
+            </div>
+
+            <!-- Cards -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm mb-4 widget-flat">
+                        <div class="card-body">
+                            <img src="{% static 'img/blog/author.png' %}" class="rounded img-responsive w-100" alt="">
+                            <a href="/dashboard/invoice.html"  class="btn btn-sm bg-orange text-white d-md-block border-0 w-100 mt-3 py-2">
+                                Property Documents
+                            </a>
+                            <a href="/dashboard/invoice.html" class="btn btn-sm orange border-orange bg-white bg-md-light d-md-block border-0 w-100 mt-3 py-2">
+                                Payment Receipts
+                            </a>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div>
+
+               
+                <!-- Transactions -->
+                <div class="col-md-8">
+                    <div class="card border-0 p-3 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold mb-3">Personal Details</h5>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">First name</span>
+                                        <p class="h5 md-h6">Aduwa-Erelu</p>
+                                    </span>
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">Last name</span>
+                                        <p class="h5 md-h6">Johnson</p>
+                                    </span>
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">Phone number</span>
+                                        <p class="h5 md-h6">+234-8059876432</p>
+                                    </span>
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">Nationality (optional)</span>
+                                        <p class="h5 md-h6">Nigerian</p>
+                                    </span>
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">Country</span>
+                                        <p class="h5 md-h6">Nigeria</p>
+                                    </span>
+                                </div>
+                                <div class="col">
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">Email address</span>
+                                        <p class="h5 md-h6">aduwa.johnieway@gmail.com</p>
+                                    </span>
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">Street address</span>
+                                        <p class="h5 md-h6">44, Obazuwa Road, Off sakponba Slope,
+                                            Lagos-Benin Road, Ugbowo, Benin City.</p>
+                                    </span>
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">State of Residence</span>
+                                        <p class="h5 md-h6">Lagos State</p>
+                                    </span>
+                                    <span class="mb-4">
+                                        <span class="font-12 grey">Next of Kin</span>
+                                        <p class="h5 md-h6">Rosemary Johnson</p>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+            </div>
+
+            
+            
+        </main>
+    </div>
+
+</body>
+
+{% endblock content %} 

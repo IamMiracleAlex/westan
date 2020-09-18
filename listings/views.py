@@ -165,3 +165,15 @@ def sort(request, by=None):
     }
 
     return render(request, 'listings/all_listings.html', context)
+
+
+
+
+def dashboard_marketer_properties(request):
+    return render(request, 'listings/dashboard_marketer_properties.html')
+
+def dashboard_client_properties(request):
+    return render(request, 'listings/dashboard_client_properties.html')
+
+def dashboard_client_single_properties(request, id, slug=None):
+    return render(request, 'listings/dashboard_client_single_properties.html')
