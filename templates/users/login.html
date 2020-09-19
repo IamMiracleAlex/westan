@@ -25,6 +25,7 @@
         mind.</p>
 </div>
 
+{% include 'partials/alerts.html' %}
 
 <form class="auth login-form border mx-auto bg-white" action="{% url 'users:login'%}" method="post">
         {% csrf_token %}
@@ -39,7 +40,7 @@
     </div>
     <br> <br>
     <div class="form-group">
-        <input type="email" name="email" class="form-control px-3" id="validationCustom02" placeholder="Email address" required>
+        <input type="email" name="email" value='{{ email }}' class="form-control px-3" id="validationCustom02" placeholder="Email address" required>
         <div class="invalid-feedback">
             Please enter a valid email address.
         </div>

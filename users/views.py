@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator  
-
 from django.http import HttpResponse, JsonResponse
+from django.urls import reverse
 
 from users.models import User, Subscribe
 from utils.handlers import send_activation_email
@@ -15,8 +15,8 @@ from utils.handlers import send_activation_email
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
+        email = request.POST.get('email', None)
+        password = request.POST.get('password', None)
 
 
         user = auth.authenticate(email=email, password=password)
@@ -28,22 +28,20 @@ def login(request):
 
             if user_type == 'client' and user.is_client:
                 messages.success(request, 'You are now logged in, as a client')
-                # return redirect('dashboard') # client dashboard
-                return HttpResponse('You are now logged in, as a client')
+                return redirect(reverse('users:client_dashboard')) # client dashboard
 
             elif user_type == 'marketer' and user.is_marketer:
                 messages.success(request, 'You are now logged in, as a marketer')
-                # return redirect('dashboard') # marketer dashboard
-                return HttpResponse('You are now logged in, as a marketer')
+                return redirect(reverse('users:marketer_dashboard')) # marketer dashboard
+
             else:
                 auth.logout(request) #log user out
                 messages.success(request, 'You are neither a client or a marketer')
-                # return redirect('index') # home
-                return HttpResponse('You are neither a client or a marketer')
+                return redirect('index') # home
+
         else:
             messages.error(request, 'Invalid credentials')
-            # return redirect('login')
-            return HttpResponse('Invalid credentials')
+            return render(request, 'users/login.html', {'email': email})
 
     return render(request, 'users/login.html')
 
@@ -80,7 +78,6 @@ def signup(request, refer_code=None):
                                             last_name=last_name,
                                             email=email, 
                                             phone=phone,
-                                            # is_active=False,
                                             referer=referer,
                                             is_client=True,
                                             password=password)

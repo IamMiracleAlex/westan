@@ -1,4 +1,4 @@
 // alerts
 setTimeout(function() {
-    $('#message').fadeOut('slow');
+    jQuery('#message').fadeOut('slow');
  }, 7000);
