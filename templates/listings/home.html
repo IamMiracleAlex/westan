@@ -60,6 +60,9 @@
 <!-- Hero -->
 <section class="masthead container">
 	<div class="col-md-12">
+
+			{% include 'partials/alerts.html' %}
+
 		<h1 class="col-md mt-5 mt-md-0 mb-5f text-uppercase">
 			<strong>
 				The smartest decision you can make is to invest in Real estate.
@@ -482,10 +485,10 @@
 
 {% block javascript %}
 
-{% comment %} <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> {% endcomment %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
  <script>
-	$(document).on('submit', '#form', function(e){
+	$(document).on('submit', '#subscribe_form', function(e){
     var form = $(this);
  
         $.ajax({
@@ -495,32 +498,34 @@
             dataType: 'json',
 			cache: false,
 			success: function(data) {
-				alert(data.success)
+				if (data.success) {
+					swal({
+                        title: "Newsletter Subscription!",
+                        text: data.success,
+                        icon: "success",
+                        button: "Done!",
+                    }); 
+				} else {
+					swal({
+                        title: "Ooops",
+                        text: data.error,
+                        icon: "error",
+                        button: "Done!",
+                    }); 
+				}
+
+			document.getElementById("subscribe_form").reset();
+	
 			},
             error: function() {
                 alert('error');
             }
     });
     	return false;
-		//e.preventDefault();
 
 
     });
     </script> 
-
-	{% comment %} <script>
-	
-	(function($){
-        $("body").on("submit", "#form", function(e){
-            e.preventDefault();
-            var form = $(e.target);
-            $.post( form.attr("action"), form.serialize(), function(res){
-                console.log(res);
-            });
-        });
-	)(jQuery);
-
-	</script> {% endcomment %}
 
 <script>
 	$('#recipeCarousel').carousel({
@@ -550,18 +555,4 @@
 
 {% endblock javascript %}
 
-{% comment %} if (data.success) {
                     //swal("Good job!", "You clicked the button!", "success");
-                    swal({
-                        title: "Newsletter Subscription!",
-                        text: data.success,
-                        icon: "success",
-                        button: "Done!",
-                    }); 
-
-					alert(data.success)
-                    document.getElementById("subscribe_form").reset();
-
-					onsubmit="return validateData();
-                } {% endcomment %}
-

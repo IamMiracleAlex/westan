@@ -24,6 +24,7 @@
     </div>
 
 
+{% include 'partials/alerts.html' %}
 
       <form class="auth signup-form needs-validation rounded mb-5 pb-5 bg-white text-center" action="{% url 'users:signup'%}" method="post" novalidate>
           <p class="text-center h4 mb-3 mb-md-5"><strong>Sign Up</strong> </p>
@@ -46,13 +47,13 @@
         <br> <br>           
         <div class="form-row">
           <div class="col-md-6 mb-3">
-            <input type="text" name='first_name' class="form-control px-3" id="validationCustom01" placeholder="First name" required>
+            <input type="text" name='first_name' value='{{first_name}}' class="form-control px-3" id="validationCustom01" placeholder="First name" required>
             <div class="invalid-feedback">
                 Please enter your first name.
             </div>
           </div>
           <div class="col-md-6 mb-3">
-            <input type="text" name='last_name' class="form-control px-3" id="validationCustom02" placeholder="Last name" required>
+            <input type="text" name='last_name' value='{{last_name}}' class="form-control px-3" id="validationCustom02" placeholder="Last name" required>
             <div class="invalid-feedback">
                 Please enter your last name.
             </div>
@@ -60,13 +61,13 @@
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-3">
-              <input type="text" name='phone' class="form-control px-3" id="validationCustom01" placeholder="Phone number" required>
+              <input type="text" name='phone' value='{{phone}}' class="form-control px-3" id="validationCustom01" placeholder="Phone number" required>
               <div class="invalid-feedback">
                   Please enter your phone number.
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <input type="email" name='email' class="form-control px-3" id="validationCustom02" placeholder="Email address" required>
+              <input type="email" name='email' value='{{email}}' class="form-control px-3" id="validationCustom02" placeholder="Email address" required>
               <div class="invalid-feedback">
                   Please enter a valid email address.
               </div>

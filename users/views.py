@@ -52,17 +52,19 @@ def signup(request, refer_code=None):
         request.session['refer_code'] = refer_code.lower()
 
     if request.method == 'POST':
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        password = request.POST['password']
+        first_name = request.POST.get('first_name', None)
+        last_name = request.POST.get('last_name', None)
+        email = request.POST.get('email', None)
+        phone = request.POST.get('phone', None)
+        password = request.POST.get('password', None)
         referer = None
 
         if User.objects.filter(email=email).exists():
             messages.error(request, 'This email is in use')
-            # return redirect('signup')
-            return HttpResponse('This email is in use')
+            return render(request, 'users/signup.html', {'email': email,
+                                            'first_name': first_name,
+                                            'last_name': last_name,
+                                            'phone': phone })
 
         if request.session.get('refer_code', None):
             try:
@@ -88,19 +90,16 @@ def signup(request, refer_code=None):
                                             last_name=last_name,
                                             email=email, 
                                             phone=phone,
-                                            # is_active=False,
                                             referer=referer,
                                             is_marketer=True,
                                             password=password)
         else:
-            messages.success(request, 'Must be a client or marketer')
-            # return redirect('signup')
-            return HttpResponse('Must be a client or marketer')
+            messages.error(request, 'Must be a client or marketer')
+            return render(request, 'users/signup.html')
 
         send_activation_email(request, user)
-        messages.success(request, 'Registeration successful! Kindly login')
-        # return redirect('login')
-        return HttpResponse('Registration was successful, Verify your email')
+        messages.success(request, 'Registeration successful! Kindly verify your email and login')
+        return redirect(reverse('users:login'))
 
     return render(request, 'users/signup.html')
 
@@ -109,11 +108,9 @@ def logout(request):
     auth.logout(request)
     messages.info(request, "You're now logged out")
     return redirect('listings:index')
-    # return HttpResponse('You are now logged out')
 
 
-
-# @login_required
+@login_required
 def client_dashboard(request):
     # user_contacts = Contact.objects.order_by(
     #     '-contact_date').filter(user_id=request.user.id)
@@ -123,6 +120,7 @@ def client_dashboard(request):
     return render(request, 'users/client.html', context)
 
 
+@login_required
 def marketer_dashboard(request):
     return render(request, 'users/marketer.html',)
 
@@ -131,8 +129,10 @@ def marketer_dashboard(request):
 @login_required
 def resend_activation_email(request):
     '''To resend activation email to a user'''
+    
     send_activation_email(request, request.user)
-    return HttpResponse('Verification email sent')
+    messages.info(request, f'Verification email sent to {request.user.email}')
+    return redirect('listings:index')
 
 
 def activate_email(request, uid, token):
@@ -181,19 +181,17 @@ def subscribe(request):
 
     if email:
         if Subscribe.objects.filter(email=email).exists():
-            data['success'] = 'You are already subscribed!'
+            data['error'] = 'You are already subscribed!'
 
         else:
             Subscribe.objects.create(email=email, active=True)
             data['success'] = 'Your subscription was successful!'
     else:
-        data['success'] = 'Please add an email address!'
+        data['error'] = 'Please add an email address!'
 
     return JsonResponse(data)
 
-    # send msg reply
-    # return redirect('index')
-
+   
 
 def test(request):
     pass
