@@ -55,7 +55,7 @@
 
     <div class="container">
       <div class="row mx-auto col-md-9">
-        <div class="col border rounded text-center p-4 p-md-5 mr-0 mr-md-3 mb-4">
+        <div class="col border rounded text-center p-4 p-md-5 mr-0 mr-md-3 ">
           <p class="h4 pb-3">Our Bank Accounts </p>
           <div class="card mb-3">
             <div class="card-header">Zenith Bank Nig Plc</div>
@@ -87,29 +87,27 @@
         </div>
         <div class="col border rounded ml-0 ml-md-3  p-4 p-md-5">
           <p class="h4 pb-3 text-center font-weight-bold">Checkout Form</p>
-          <form class="needs-validation mb-0" novalidate>
+          <form action="{% url 'transactions:checkout'  trans_id %}" method='POST' class="needs-validation mb-0" novalidate>
+            {% csrf_token %}
+              {% comment %} <input type="hidden" class="form-control" value='{{trans_id}}' name='trans_id'> {% endcomment %}
               <div class="mb-3">
-                <label for="validationTooltip01">Buyer's name</label>
-                <input type="text" class="form-control" id="validationTooltip01" required>
-              </div>
-              <div class="mb-3">
-                <label for="validationTooltip02">Last name</label>
-                <textarea class="form-control w-100" name="" id="validationTooltip02" rows="4" required></textarea>
+                <label for="validationTooltip02">Email address</label>
+                <input type='email' class="form-control" value='{{user.email}}' name="email" id="validationTooltip02" disabled>
               </div>
               <div class="mb-3">
                 <label for="validationTooltip03">Phone number</label>
-                <input type="number" class="form-control" id="validationTooltip03" required>
+                <input type="number" class="form-control" value='{{user.phone}}' name='name' id="validationTooltip03" disabled>
               </div>
               <div class="mb-3">
                 <label for="validationTooltip04">Payment method</label>
-                <select class="custom-select" id="validationTooltip04" required>
+                <select name='pyament_type' class="custom-select" id="validationTooltip04" required>
                   <option selected disabled value="">Choose...</option>
-                  <option>Bank Transfer</option>
-                  <option>Bank Deposit</option>
+                  <option value="0">Bank Transfer</option>
+                  <option value="1">Bank Deposit</option>
                 </select>
               </div>
-              <button class="main-button btn btn-primary w-100 mb-3 border-0" type="submit">Enter Transaction Details</button>
-              <button class="second-button btn btn-primary w-100 mb-0" type="submit">Confirm Payment Later</button>
+              <button class="main-button btn btn-primary w-100 mb-3 border-0" type="submit">Confirm Payment</button>
+              <a href="{% url 'users:dashboard' %}" class="second-button btn btn-primary w-100 mb-0" type="submit">Confirm Payment Later</a>
           </form>
         </div>
       </div>

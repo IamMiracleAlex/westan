@@ -174,7 +174,7 @@
 
         <p class="h5 text-muted">{{ listing.get_address }}.</p>
         <div class="pt-2 d-inline d-flex option-buttons">
-          <a href="{% url 'transactions:checkout' %}" class="btn-sm bg-orange text-white rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
+          <a href="{% url 'transactions:confirm_purchase' listing.id %}" class="btn-sm bg-orange text-white rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
           <button id='save'  class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2"> {% if wish %} Saved <span> &#129505;</span> {% else %} Save <span> &#9825;</span> {% endif %} </button>
           <button class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 share-btn">
             <img src="{% static 'img/share-2.svg' %}" alt="" srcset="">
@@ -454,11 +454,9 @@ shareBtn.addEventListener('click', () => {
       
         success: function (data) {
           if (data.final_status) {
-            $("#save").text('');
-            $("#save").append("Saved <span> &#129505;</span>");
+            $("#save").text('').append("Saved <span> &#129505;</span>");
           }else{
-            $("#save").text('');
-          $("#save").append("Save <span> &#9825;</span>")
+            $("#save").text('').append("Save <span> &#9825;</span>")
           }
           if (data.auth) {
              alert(data.auth)
@@ -470,10 +468,3 @@ shareBtn.addEventListener('click', () => {
       
       </script>
 {% endblock javascript %}
-
-{% comment %} 
-Save <span> &#x1f499;</span>
-
-Saved <span> &#x1f49a;</span>
- {% endcomment %}
- 

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static humanize %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
@@ -69,24 +69,24 @@
     <div class="container">
       <div class="col-md-9 mx-auto">
         <div class="card shadow-sm mb-3 overflow-hidden">
-            <img src="{% static 'img/blog/post-big.png' %}" class="card-img rounded-0 h-100" alt="...">
+            <img src="{{ listing.image.url }}" class="card-img rounded-0 h-100" alt="Listing Image">
                 <div class="card-img-overlay px-3 px-md-5 d-flex flex-col-reverse">
                     <div class="property-detail rounded bg-secondary w-100 mt-auto border">
-                        <h5 class="price rounded text-white float-right bg-secondary px-3 py-2 mt-4 mr-4 d-none d-md-block">$78,096</h5>
+                        <h5 class="price rounded text-white float-right bg-secondary px-3 py-2 mt-4 mr-4 d-none d-md-block"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
                         <div class="card-body ml-3">
-                            <h4 class="card-title p-0 mb-0"><strong>El Classico Mansion</strong></h4>
+                            <h4 class="card-title p-0 mb-0"><strong>{{ listing.title }}</strong></h4>
                             <p class="card-text text-secondary d-none d-md-block">
                                 <img src="{% static 'img/location.svg' %}" alt="">
-                                Palm Royal Estate, Off Ibeju-Lekki, Ikeja, Lagos State.
+                                    {{ listing.get_address }} 
                             </p>
                         </div>
                         
                         <div class="card-footer d-none d-md-block">
                             <div class="mb-0 ">
-                              <span class="ml-3">10 Rooms</span>
-                              <span class="ml-3">5 Baths</span>
-                              <span class="ml-3">7 Bathrooms</span>
-                              <span class="ml-3">678m<sup>2</sup></span>
+                              <span class='ml-3'>{{ listing.bedrooms }} Rooms</span>
+                              <span class='ml-3'>{{ listing.bathrooms }} Baths</span>
+                              <span class='ml-3'>{{ listing.garage }} Garage</span>
+                              <span class='ml-3'>{{ listing.area }}m<sup>2</sup></span>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
           </div>
       </div>
       <div class="text-center">
-        <a href="" type="submit" class="btn btn-dash px-5 border-0 mt-4">Go to Dashboard</a>
+        <a href="{% url 'users:dashboard' %}" type="submit" class="btn btn-dash px-5 border-0 mt-4">Go to Dashboard</a>
       </div>
       
     </div>

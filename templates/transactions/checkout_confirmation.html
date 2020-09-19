@@ -57,16 +57,18 @@
     </div>
     
     <div class="container">
-      <form class="auth col-12 col-md-8 mx-md-auto border p-3 p-md-5 needs-validation rounded mb-5 pb-5 bg-white text-left" novalidate>
+      <form enctype="multipart/form-data" action="{% url 'transactions:checkout_confirmation' trans_id %}" method='POST' class="auth col-12 col-md-8 mx-md-auto border p-3 p-md-5 needs-validation rounded mb-5 pb-5 bg-white text-left" novalidate>
+       {% csrf_token %}
           <p class="text-center h4 mb-3 mb-md-5 pt-3 pt-md-0"><strong>Transaction Details</strong> </p>
           <div class="form-row">
-            <div class="col-md-6  form-col px-3">
+            <div class="col-md-6 form-col px-3">
               <div class="mb-3">
                 <label for="bankPayedTo">Bank Payed to</label>
-                <select class="custom-select" id="bankPayedTo" required>
+                <select name='bank' class="custom-select" id="bankPayedTo" required>
                   <option selected disabled value="">Choose...</option>
-                  <option>Zenith</option>
-                  <option>First Bank</option>
+                  <option value='0' >Zenith Bank</option>
+                  <option value='1'>Fidelity Bank</option>
+                  <option value='2'>Access Bank</option>
                 </select>
                 <div class="invalid-tooltip">
                   Please select a bank.
@@ -79,7 +81,7 @@
                   <div class="js--image-preview"></div>
                   <div class="upload-options">
                     <label>Upload
-                      <input type="file" class="image-upload" accept="image/*" />
+                      <input type="file" class="image-upload" name='file' >
                     </label>
                   </div>
                 </div>
@@ -91,21 +93,21 @@
             <div class="col-md-6 form-col px-3">
               <div class="mb-3">
                 <label for="payersName">Payer's name</label>
-                <input type="text" class="form-control" id="payersName" placeholder="Payer's name" required>
+                <input type="text" class="form-control" name='teller_name' id="payersName" required>
                 <div class="invalid-tooltip">
                   Please enter Payer's name.
                 </div>
               </div>
               <div class="mb-3">
                 <label for="amountPaid">Amount Paid</label>
-                <input type="number" class="form-control" id="amountPaid" required>
+                <input type="number" name='amount_paid' class="form-control" id="amountPaid" required>
                 <div class="invalid-tooltip">
                   Please enter the amount paid.
                 </div>
               </div>
               <div class="mb-3">
                 <label for="tellerNo">Transaction/Teller Number</label>
-                <input type="text" class="form-control" id="tellerNo" required>
+                <input type="text" name='bank_reference' class="form-control" id="tellerNo" required>
                 <div class="invalid-tooltip">
                   Please enter the teller number.
                 </div>

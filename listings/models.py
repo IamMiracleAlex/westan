@@ -76,10 +76,9 @@ class Listing(models.Model):
 class WishList(models.Model):
     user = models.ForeignKey(User, models.DO_NOTHING)  
     listing = models.ForeignKey(Listing, models.DO_NOTHING)  
-    status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.user} - {self.status}'
+        return f'{self.user} - {self.listing}'
     

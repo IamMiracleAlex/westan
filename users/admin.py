@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from utils.mixins import ExportCsvMixin
-from .models import User, Subscribe
+from users.models import User, Subscribe
 
 
 @admin.register(User)

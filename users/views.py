@@ -111,6 +111,18 @@ def logout(request):
 
 
 @login_required
+def dashboard(request):
+    if request.user.is_client:
+        return redirect(reverse('users:client_dashboard'))
+
+    elif request.user.is_marketer:    
+        return redirect(reverse('users:marketer_dashboard'))
+        
+    else:
+        return redirect(reverse('listings:index'))    
+
+
+@login_required
 def client_dashboard(request):
     # user_contacts = Contact.objects.order_by(
     #     '-contact_date').filter(user_id=request.user.id)
