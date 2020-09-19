@@ -27,7 +27,7 @@ class ListingAdmin(admin.ModelAdmin):
 
 @admin.register(WishList)
 class WishList(admin.ModelAdmin):
-    list_display = ('user','listing','status', 'created_at', 'updated_at')
-    list_filter = ('status', 'created_at')
+    list_display = ('user','listing', 'created_at', 'updated_at')
+    list_filter = ('created_at',)
     search_fields = ('user__email', 'user__first_name')
     date_hierarchy = 'created_at'

@@ -33,7 +33,7 @@ def listings(request):
 
 
 def single_listing(request, id, slug):
-    wish = None
+    wish = False
     form = ListingMapForm()
 
     listing = get_object_or_404(Listing, id=id)
@@ -43,6 +43,7 @@ def single_listing(request, id, slug):
     if request.user.is_authenticated:
         try:
             wish = WishList.objects.get(user=request.user, listing=listing)
+            wish = True 
         except Exception as e:
             pass
 
@@ -60,15 +61,14 @@ def add_wishlist(request):
         listing_id = request.GET.get('listing_id', None)
         listing = Listing.objects.get(pk=listing_id)
 
-        try:
-            wished = WishList.objects.get(
-                listing=listing, user=request.user)
-            wished.status = not wished.status
-            wished.save()  
-            final_status = wished.status 
-        except:
+        wish = WishList.objects.filter(listing=listing, user=request.user)
 
-            wish = WishList.objects.create(user=request.user, listing=listing, status=True)
+        if wish.exists():
+            wish.delete()
+            final_status = False
+
+        else:
+            WishList.objects.create(user=request.user, listing=listing)
             final_status = True
 
     else:
