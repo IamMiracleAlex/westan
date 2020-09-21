@@ -9,7 +9,7 @@ class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
 
     actions = ["export_as_csv"] 
     date_hierarchy = 'date_joined'
-    ExportCsvMixin.export_as_csv.short_description = 'Export selected users to csv'
+    ExportCsvMixin.export_as_csv.short_description = 'Export selected items to csv'
 
     list_display = ('first_name','last_name','email','phone','refered_by','refer_code', 
                 'no_of_referrals', 'email_verified', 'is_client', 'is_marketer',
