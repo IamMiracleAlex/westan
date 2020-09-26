@@ -6,9 +6,11 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator  
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
+from django.core.files.storage import FileSystemStorage
 
 from users.models import User, Subscribe
 from utils.handlers import send_activation_email
+from users.forms import ProfileForm
 
 
 
@@ -179,11 +181,34 @@ def activate_email(request, uid, token):
 
 
 
-
-
-
 def profile(request):
     return render(request, 'users/profile.html')
+
+
+def edit_profile(request, user_id):
+
+    if request.method == 'POST':
+        user = get_object_or_404(User, id=user_id)
+
+        image = request.FILES.get('image', None)
+        user.first_name = request.POST.get('first_name', None)
+        user.last_name = request.POST.get('last_name', None)
+        user.phone = request.POST.get('phone', None)
+        user.address = request.POST.get('address', None)
+        user.next_of_kin = request.POST.get('next_of_kin', None)
+        user.send_notifications = True if request.POST.get('send_notifications', None) else False
+
+        fs = FileSystemStorage()
+        fs.save(image.name, image)
+        user.image = image
+
+        user.save()
+
+        messages.success(request, 'Profile has been updated successfully!')
+        return redirect(reverse('users:profile'))
+
+
+    return render(request,'users/edit_profile.html')
 
 
 

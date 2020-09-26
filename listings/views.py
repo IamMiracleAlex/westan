@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import JsonResponse
+from django.urls import reverse
 
 from listings.models import Listing, WishList
 from listings.forms import ListingMapForm
@@ -167,7 +168,15 @@ def sort(request, by=None):
     return render(request, 'listings/all_listings.html', context)
 
 
+def dashboard_properties(request):
+    if request.user.is_client:
+        return redirect(reverse('listings:dashboard_client_properties'))
 
+    elif request.user.is_marketer:
+        return redirect(reverse('listings:dashboard_marketer_properties'))
+
+    else:
+        return redirect(reverse('listings:listings'))
 
 def dashboard_marketer_properties(request):
     return render(request, 'listings/dashboard_marketer_properties.html')

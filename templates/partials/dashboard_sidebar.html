@@ -6,19 +6,19 @@
     <div class="sidebar-sticky text-danger pt-5">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% endif %} d-flex align-items-center" href=" {% if 'dashboard/client' in request.path %} {% url 'users:client_dashboard' %} {% else %} {% url 'users:marketer_dashboard' %} {% endif %}">
+                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% elif 'dashboard/marketer' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'users:dashboard' %}">
                     <i class="fa fa-th-large mr-2" aria-hidden="true"></i>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if 'dashboard/profile' in request.path %} active {% endif %} d-flex align-items-center" href="/dashboard/profile.html">
+                <a class="nav-link {% if 'dashboard/profile' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'users:profile' %}">
                     <i class="fa fa-user mr-2" aria-hidden="true"></i>
                     My Profile
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if 'dashboard/properties' in request.path %} active {% endif %} d-flex align-items-center" href="/dashboard/client-properties.html">
+                <a class="nav-link {% if 'dashboard/properties' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'listings:dashboard_properties' %}">
                     <i class="fa fa-building mr-2" aria-hidden="true"></i>
                     Properties
                 </a>
@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="#">
+                <a class="nav-link d-flex align-items-center" href="{% url 'users:logout' %}">
                     <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>
                     Logout
                 </a>
@@ -45,8 +45,8 @@
     </div>
 
     <div class="author my-5 py-5 text-cente pl-3 d-none d-md-block">
-        <img src="{% static 'img/blog/author.png' %}" width="100" alt=""
+        <img src="{{ user.image.url }}" width="100" alt=""
             class="img-responsive rounded-circle border mt-5">
-        <p class="i d-block pt-2">Guddy Miracle</p>
+        <p class="i d-block pt-2">{{ user.full_name }}</p>
     </div>
 </nav>

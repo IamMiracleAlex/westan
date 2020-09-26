@@ -24,12 +24,12 @@ class User(AbstractUser):
         null=True,
         related_name='referrals'
     )
-    # image = models.ImageField(upload_to='users', null=True, blank=True)
     next_of_kin = models.CharField(max_length=50, null=True, blank=True)
-    state = models.CharField(max_length=50, null=True, blank=True)
     send_notifications = models.BooleanField(default=False)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    image = models.ImageField(upload_to='users', null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
