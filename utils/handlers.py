@@ -22,6 +22,31 @@ def send_activation_email(request, user):
 	subject = 'Activate Your Account'
 	send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 
+
+def send_failed_test_email(profile):
+    context = {'first_name': profile.first_name }
+    subject = 'Career Acceleration Program Status'
+    message = render_to_string('transactions/emails/success.txt', context)
+    email = profile.email_address
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+
+
+def send_passed_test_email(profile):
+    context = {'first_name': profile.first_name,  }
+    subject = 'Welcome to Edubridge Career Acceleration Program'
+    message = render_to_string('transactions/emails/failure.txt', context)
+    email = profile.email_address
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+
+
+
+
+
+
+
+
+
+
 # bar.py
 
 # def foo(data):

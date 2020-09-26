@@ -12,7 +12,8 @@ urlpatterns = [
     path('add-wishlist/', views.add_wishlist, name='add_wishlist'),
     path('sort/<str:by>', views.sort, name='sort'),
     path('dashboard/properties/', views.dashboard_properties, name='dashboard_properties'),
-    path('dashboard/marketer/properties/', views.dashboard_marketer_properties, name='dashboard_marketer_properties'),
-    path('dashboard/client/properties/', views.dashboard_client_properties, name='dashboard_client_properties'),
-    path('dashboard/client/property/<int:id>/<slug:slug>/', views.dashboard_client_single_properties, name='dashboard_client_single_properties'),
+    path('dashboard/properties/marketer/', views.dashboard_marketer_properties, name='dashboard_marketer_properties'),
+    path('dashboard/properties/client/', views.dashboard_client_properties, name='dashboard_client_properties'),
+    path('dashboard/property/client/<int:id>/<slug:slug>/', views.dashboard_client_single_properties, name='dashboard_client_single_properties'),
+    path('dashboard/wishlist/', views.dashboard_wishlist, name='dashboard_wishlist'),
 ]

@@ -10,7 +10,6 @@ from django.core.files.storage import FileSystemStorage
 
 from users.models import User, Subscribe
 from utils.handlers import send_activation_email
-from users.forms import ProfileForm
 
 
 
@@ -126,17 +125,17 @@ def dashboard(request):
 
 @login_required
 def client_dashboard(request):
-    # user_contacts = Contact.objects.order_by(
-    #     '-contact_date').filter(user_id=request.user.id)
-    context = {
-        # 'contacts': user_contacts
-    }
-    return render(request, 'users/client.html', context)
+    if request.user.is_client:
+        return render(request, 'users/client.html')
 
+    return redirect(reverse('listings:index'))    
 
 @login_required
 def marketer_dashboard(request):
-    return render(request, 'users/marketer.html',)
+    if request.user.is_marketer:
+        return render(request, 'users/marketer.html',)
+        
+    return redirect(reverse('listings:index'))    
 
 
 

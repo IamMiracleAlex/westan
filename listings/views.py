@@ -186,3 +186,7 @@ def dashboard_client_properties(request):
 
 def dashboard_client_single_properties(request, id, slug=None):
     return render(request, 'listings/dashboard_client_single_properties.html')
+
+
+def dashboard_wishlist(request):
+    return render(request, 'listings/dashboard_wishlist.html') 

@@ -14,30 +14,26 @@
         <ul class="navbar-nav mr-auto text-center">
            
             <li class="nav-item">
-                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% endif %} " href="{% url 'users:client_dashboard' %}">
+                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% elif 'dashboard/marketer' in request.path %} active {% endif %} " href="{% url 'users:dashboard' %}">
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item {% if 'dashboard/profile' in request.path %} active {% endif %} ">
+                <a class="nav-link" href="{% url 'users:profile' %}">
                     My Profile
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard/client-properties.html">
+                <a class="nav-link {% if 'dashboard/properties' in request.path %} active {% endif %}"  href="{% url 'listings:dashboard_properties' %}">
                     Properties
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+            <li class="nav-item {% if 'dashboard/wishlist' in request.path %} active {% endif %}">
+                <a class="nav-link" href="{% url 'listings:dashboard_wishlist' %}">
                     Wishlist
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    Settings
-                </a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'users:logout' %}">
                     Logout
