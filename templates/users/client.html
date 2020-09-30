@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static humanize %}
+
+{% load custom_tags %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
@@ -40,25 +42,8 @@
             <div class="py-5 d-block d-md-none"></div>
 
             <!-- Heading and Filters -->
-            <div class="row mb-4 d-flex align-items-end">
-                <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Hi {{user.first_name}}</h3>
-                <div class="col-auto d-none d-md-flex align-items-center">
-                    <form method="POST" action="{% url 'listings:search' %}">
-                    {% csrf_token %}
-                    <label class="sr-only" for="search">Search</label>
-                    <div class="input-group overflow-hidden rounded border">
-                        <input type="text" name='q' class="form-control border-0" id="search" placeholder="Search">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text bg-white border-0">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                    <a href="{% url 'listings:listings' %}" class="col-auto btn bg-orange text-white px-4 ml-3">Go to Listings</a>
-                </div>
 
-            </div>
+            {% include 'partials/dashboard_search.html' %}
 
             <!-- Cards -->
             <div class="row">
@@ -74,17 +59,17 @@
                         <!-- card footer-->
                         <div class="card-footer border-top bg-white d-flex justify-content-around">
                             <span class="text-center d-block">
-                                <p class="h5 font-weight-bold pb-0 mb-0">12.5M</p>
+                                <p class="h5 font-weight-bold pb-0 mb-0">{{incomplete_trans.listing.price|shrink}}</p>
                                 <p class="grey">Total Cost</p>
                             </span>
                             <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
                             <span class="text-center d-block">
-                                <p class="h5 font-weight-bold pb-0 mb-0">320K</p>
+                                <p class="h5 font-weight-bold pb-0 mb-0">{{incomplete_trans.amount_paid|shrink}}</p>
                                 <p class="grey">Amount Paid</p>
                             </span>
                             <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
                             <span class="text-center d-block">
-                                <p class="h5 font-weight-bold pb-0 mb-0">90K</p>
+                                <p class="h5 font-weight-bold pb-0 mb-0">{{pending_payment|shrink}}</p>
                                 <p class="grey">Amount Due</p>
                             </span>
                         </div>
@@ -101,7 +86,7 @@
                                 </div>
                                 <div class="pie-img position-absolute text-center w-100 mb-5">
                                     <i class="fa fa-credit-card p-4 rounded-circle orange bg-light-red" aria-hidden="true"></i>
-                                    <p class="h2 font-weight-bold pb-0 mb-0">68.5%</p>
+                                    <p class="h2 font-weight-bold pb-0 mb-0">{{payment_progress}}%</p>
                                     <p class="grey">Payment Progress</p>
                                 </div>
                                 
@@ -111,7 +96,8 @@
                         <div class="card-footer mt-1 border-top bg-white d-flex justify-content-around">
                             <span class="text-center d-block">
                                 <p class="grey pb-0 mb-0">Pending Payment</p>
-                                <p class="h5 font-weight-bold">N90,000</p>
+                                {% comment %} <p class="h5 font-weight-bold">N90,000</p> {% endcomment %}
+                                <p class="h5 font-weight-bold"><span>&#8358;</span>{{pending_payment|intcomma}}</p>
                                 
                             </span>
                             <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
@@ -138,40 +124,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {% for trans in transactions %}
                                         <tr>
                                             <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}"
+                                                <img src="{{trans.listing.image.url}}"
                                                     class="rounded-circle img-responsive mr-2" height="30" width="30"
                                                     alt="">
-                                                Plazora Villa Rea
+                                                {{trans.listing.title}}
                                             </td>
-                                            <td class="border-0 pt-3 red">
-                                                Pending
+                                            <td class="border-0 pt-3 {% if trans.get_status_display == 'Allocated' or trans.get_status_display == 'Paid' %} green {% elif  trans.get_status_display == 'Processing' %} blue {% else %} red {% endif %} ">
+                                                {{trans.get_status_display}}
                                             </td>
                                         </tr>
+                                        {% empty %}
+
                                         <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}"
-                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
-                                                    alt="">
-                                                Plazora Villa Rea
-                                            </td>
-                                            <td class="border-0 pt-3 green">
-                                                Processing
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}"
-                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
-                                                    alt="">
-                                                Plazora Villa Rea
-                                            </td>
-                                            <td class="border-0 pt-3 blue">
-                                                Allocated
-                                            </td>
+                                            <br>
+                                            <td>  No transactions </td>
                                         </tr>
 
+                                        {% endfor %}
+                                        
 
                                     </tbody>
                                 </table>
@@ -199,47 +172,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {% for p in allocated_properties %}
                                         <tr>
                                             <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                <img src="{{ p.listing.image.url }}" class="rounded img-responsive mr-2"
                                                     height="30" width="30" alt="">
-                                                4 Bedroom Flat
+                                                {{ p.listing.title }}
                                             </td>
                                             <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                                {{p.listing.bedrooms}} Rooms, {{p.listing.bathrooms}} Baths, {{p.listing.garage}} Garage, {{p.listing.area}}m<sup>2</sup>
                                             </td>
                                             <td class="border-0 pt-3 text-muted">
-                                                <span class=" d-none d-md-inline">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, </span>Lagos
+                                                <span class=" d-none d-md-inline">{{ p.listing.get_address }} </span>
                                             </td>
+                                                                          
                                         </tr>
+                                        
+                                        {% empty %}
+
                                         <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class=" d-none d-md-inline">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, </span>Lagos
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class=" d-none d-md-inline">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, </span>Lagos
-                                            </td>
+                                            <br>
+                                            <td>  You've not been allocated any properties yet </td>
                                         </tr>
 
-
+                                        {% endfor %}                               
                                     </tbody>
                                 </table>
                             </div> <!-- end table-responsive-->
@@ -264,7 +220,7 @@
         // Webite: https://www.chartjs.org
         // CDN: https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js
 
-        const percent = 84;
+        const percent = {{ payment_progress }};
         const color = '#01713c';
         const canvas = 'chartCanvas';
         const container = 'chartContainer';

@@ -10,6 +10,7 @@ from django.core.files.storage import FileSystemStorage
 
 from users.models import User, Subscribe
 from utils.handlers import send_activation_email
+from transactions.models import Transaction
 
 
 
@@ -126,7 +127,27 @@ def dashboard(request):
 @login_required
 def client_dashboard(request):
     if request.user.is_client:
-        return render(request, 'users/client.html')
+        transactions = Transaction.objects.filter(user=request.user)
+        allocated_properties = transactions.filter(status=Transaction.ALLOCATED)
+        incomplete_trans = transactions.exclude(status=Transaction.ALLOCATED).exclude(status=Transaction.PAID).last()
+
+        pending_payment = incomplete_trans.listing.price - incomplete_trans.amount_paid
+        payment_progress = (incomplete_trans.amount_paid / incomplete_trans.listing.price) * 100
+        amount_due = 1 #same with pending_payment
+        amount_paid = 'compute in template' # incomplete_trans.amount
+        total_cost = 'template' # incomplete_trans.listing.price
+
+
+
+        context = {
+            'allocated_properties': allocated_properties,
+            'transactions': transactions,
+            'incomplete_trans': incomplete_trans,
+            'pending_payment': pending_payment,
+            'payment_progress': payment_progress,
+        }
+       
+        return render(request, 'users/client.html', context)
 
     return redirect(reverse('listings:index'))    
 

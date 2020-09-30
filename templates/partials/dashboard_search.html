@@ -1,0 +1,19 @@
+<div class="row mb-4 d-flex align-items-end">
+        <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Hi {{user.first_name}}</h3>
+        <div class="col-auto d-none d-md-flex align-items-center">
+            <form method="POST" action="{% url 'listings:search' %}">
+            {% csrf_token %}
+            <label class="sr-only" for="search">Search</label>
+            <div class="input-group overflow-hidden rounded border">
+                <input type="text" name='q' class="form-control border-0" id="search" placeholder="Search">
+                <div class="input-group-prepend">
+                    <div class="input-group-text bg-white border-0">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </form>
+            <a href="{% url 'listings:listings' %}" class="col-auto btn bg-orange text-white px-4 ml-3">Go to Listings</a>
+        </div>
+
+    </div>
