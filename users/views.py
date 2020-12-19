@@ -139,16 +139,11 @@ def client_dashboard(request):
         sum_paid = incomplete_transactions.filter(listing=last_listing).aggregate(Sum('amount_paid'))['amount_paid__sum']
         
         # listing price
-        listing_price = last_incomplete_tran.listing.price
-        print(sum_paid)
-
-        
-
+        listing_price = last_incomplete_tran.listing.price        
         
         pending_payment = listing_price - sum_paid
         payment_progress = round(((sum_paid / listing_price) * 100), 2)
         
-
         context = {
             'allocated_properties': allocated_properties,
             'transactions': transactions,
@@ -157,7 +152,6 @@ def client_dashboard(request):
             'payment_progress': payment_progress,
             'sum_paid': sum_paid
         }
-       
         return render(request, 'users/client.html', context)
 
     return redirect(reverse('listings:index'))    

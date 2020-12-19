@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from decimal import Decimal
+from django.db.models import Sum
 
 from listings.models import Listing
 from transactions.models import Transaction
@@ -91,14 +92,20 @@ def payment_success(request, listing_id):
     return render(request, 'transactions/payment_success.html', {'listing': listing})
 
 
-def dashboard_checkout_confirmation(request):
-    return render(request, 'transactions/dashboard_checkout_confirmation.html')
+def invoice(request, listing_id):
 
-def dashboard_payment_success(request):
-    return render(request, 'transactions/dashboard_payment_success.html')
-
-def invoice(request):
-    return render(request, 'transactions/invoice.html')
+    trans = Transaction.objects.filter(listing_id=listing_id, user=request.user, status__in=[Transaction.SUBMITTED, Transaction.PROCESSING, Transaction.CONFIRMED])
+    last_trans = trans.last()
+    listing = last_trans.listing
+    sum_paid = trans.aggregate(Sum('amount_paid'))['amount_paid__sum']
+    balance = listing.price - sum_paid
+    context = {
+        "listing": listing,
+        "sum_paid": sum_paid,
+        "last_trans": last_trans,
+        "balance": balance,
+    }
+    return render(request, 'transactions/invoice.html', context)
 
 
 def test(request):
