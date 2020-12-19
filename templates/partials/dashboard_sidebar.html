@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="{% url 'listings:dashboard_wishlist' %}">
+                <a class="nav-link {% if 'dashboard/wishlist' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'listings:dashboard_wishlist' %}">
                     <i class="fa fa-shopping-bag mr-2" aria-hidden="true"></i>
                     Wishlist
                 </a>

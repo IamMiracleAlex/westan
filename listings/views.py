@@ -83,7 +83,6 @@ def add_wishlist(request):
     return JsonResponse(data)
 
 
-
 def search(request):
     results = []
 
@@ -181,18 +180,19 @@ def dashboard_properties(request):
     else:
         return redirect(reverse('listings:listings'))
 
+
 def dashboard_marketer_properties(request):
     return render(request, 'listings/dashboard_marketer_properties.html')
 
+
 def dashboard_client_properties(request):
-    trans = Transaction.objects.filter(user=request.user)
-    context = {'trans': trans }
-
+    trans = Transaction.objects.filter(user=request.user, status__in=[Transaction.ALLOCATED, Transaction.COMPLETED])
+    context = {
+        'trans': trans 
+        }
     return render(request, 'listings/dashboard_client_properties.html', context)
-
-def dashboard_client_single_properties(request, id, slug=None):
-    return render(request, 'listings/dashboard_client_single_properties.html')
 
 
 def dashboard_wishlist(request):
-    return render(request, 'listings/dashboard_wishlist.html') 
+    wishes = WishList.objects.filter(user=request.user)
+    return render(request, 'listings/dashboard_wishlist.html', {'wishes': wishes}) 

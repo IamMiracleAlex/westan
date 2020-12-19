@@ -60,7 +60,7 @@ class Listing(models.Model):
         return f'{self.street}, {self.city}, {self.state}'    
 
     def get_absolute_url(self):
-        return reverse("listings:single_lisitng", args=[self.pk, self.slug])
+        return reverse("listings:single_listing", args=[self.pk, self.slug])
 
     def save(self, *args, **kwargs):
         if not self.pk:

@@ -60,62 +60,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="border-0 text-nowrap">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
-                                            </td>
-                                            <td class="border-0 pt-3">
-                                                <a href="/dashboard/client-single-property.html" class="btn btn-sm bg-orange text-white px-3">
-                                                    View <span class="d-none d-md-inline">Details</span> 
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0 text-nowrap">
-                                                <img src="/dashboard/client-single-property.html" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
-                                            </td>
-                                            <td class="border-0 pt-3">
-                                                <a href="../listings.html" class="btn btn-sm bg-orange text-white px-3">
-                                                    View <span class="d-none d-md-inline">Details</span> 
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0 text-nowrap">
-                                                <img src="/dashboard/client-single-property.html" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
-                                            </td>
-                                            <td class="border-0 pt-3">
-                                                <a href="../listings.html" class="btn btn-sm bg-orange text-white px-3">
-                                                    View <span class="d-none d-md-inline">Details</span> 
-                                                </a>
-                                            </td>
-                                        </tr>
 
-
+                                    {% for tran in trans %}
+                                        {% with tran.listing as listing %}
+                                        <tr>
+                                            <td class="border-0 text-nowrap">
+                                                <img src="{{ listing.image.url }}" class="rounded img-responsive mr-2"
+                                                    height="30" width="30" alt="">
+                                                {{ listing.title }}
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
+                                                <span class="">{{listing.bedrooms}} Rooms, {{listing.bathrooms}} Baths, {{listing.garage}} Garage, {{listing.area}}m<sup>2</sup></span> 
+                                            </td>
+                                            <td class="border-0 pt-3 text-muted">
+                                                <span class="d-none d-md-block">{{ listing.get_address }}</span> 
+                                            </td>
+                                            <td class="border-0 pt-3">
+                                                <a href="{% url 'listings:single_listing' listing.id listing.slug %}" class="btn btn-sm bg-orange text-white px-3">
+                                                    View <span class="d-none d-md-inline">Details</span> 
+                                                </a>
+                                            </td>
+                                        </tr>
+                                            {% endwith %}
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div> <!-- end table-responsive-->

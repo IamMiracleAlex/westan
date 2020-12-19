@@ -36,16 +36,8 @@
             <div class="row mb-3 mb-md-4 d-flex align-items-end">
                 <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Wish List</h3>
                 <div class="col-auto d-non d-md-flex align-items-center">
-                    <label class="sr-only" for="inlineFormInputGroup">Search</label>
-                    <div class="input-group overflow-hidden rounded border">
-                        <input type="text" class="form-control border-0" id="inlineFormInputGroup" placeholder="Search">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text bg-white border-0">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="../listings.html" class="col-auto d-none d-md-block btn bg-orange text-white px-4 ml-3">Go to Listings</a>
+                    
+                    <a href="{% url 'listings:listings' %}" class="col-auto d-none d-md-block btn bg-orange text-white px-4 ml-3">Go to Listings</a>
                 </div>
 
             </div>
@@ -73,60 +65,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {% for wish in wishes %}
+                                        {% with wish.listing as listing %}
                                         <tr>
                                             <td class="border-0 text-nowrap">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                <img src="{{ listing.image.url }}" class="rounded img-responsive mr-2"
                                                     height="30" width="30" alt="">
-                                                4 Bedroom Flat
+                                                {{ listing.title }}
                                             </td>
                                             <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
+                                                <span class="">{{listing.bedrooms}} Rooms, {{listing.bathrooms}} Baths, {{listing.garage}} Garage, {{listing.area}}m<sup>2</sup></span> 
                                             </td>
                                             <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
+                                                <span class="d-none d-md-block">{{ listing.get_address }}</span> 
                                             </td>
                                             <td class="border-0 pt-3">
-                                                <a href="/dashboard/client-single-property.html" class="btn btn-sm bg-orange text-white px-3">
+                                                <a href="{% url 'listings:single_listing' listing.id listing.slug %}" class="btn btn-sm bg-orange text-white px-3">
                                                     View <span class="d-none d-md-inline">Details</span> 
                                                 </a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="border-0 text-nowrap">
-                                                <img src="/dashboard/client-single-property.html" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
-                                            </td>
-                                            <td class="border-0 pt-3">
-                                                <a href="../listings.html" class="btn btn-sm bg-orange text-white px-3">
-                                                    View <span class="d-none d-md-inline">Details</span> 
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0 text-nowrap">
-                                                <img src="/dashboard/client-single-property.html" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
-                                            </td>
-                                            <td class="border-0 pt-3">
-                                                <a href="../listings.html" class="btn btn-sm bg-orange text-white px-3">
-                                                    View <span class="d-none d-md-inline">Details</span> 
-                                                </a>
-                                            </td>
-                                        </tr>
+                                            {% endwith %}
+                                        {% endfor %}
+                                        
 
 
                                     </tbody>
