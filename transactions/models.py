@@ -17,11 +17,12 @@ class Transaction(models.Model):
         (FIDELITY, 'Fidelity Bank'),
         (ACCESS, 'Access Bank'), 
     )
-    SUBMITTED, PROCESSING, PAID, ALLOCATED = 0, 1, 2, 4
+    SUBMITTED, PROCESSING, CONFIRMED, COMPLETED, ALLOCATED = 0, 1, 2, 4, 5
     STATUS_CHOICES = (
         (SUBMITTED, 'Submitted'),
         (PROCESSING, 'Processing'),
-        (PAID, 'Paid'),
+        (CONFIRMED, 'Confirmed'),
+        (COMPLETED, 'Complete'),
         (ALLOCATED, 'Allocated'),
     )
     file = models.FileField(upload_to='transactions', verbose_name='Teller Image/File', null=True, blank=True)

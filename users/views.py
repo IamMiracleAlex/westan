@@ -7,12 +7,11 @@ from django.contrib.auth.tokens import default_token_generator
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
+from django.db.models import Sum
 
 from users.models import User, Subscribe
 from utils.handlers import send_activation_email
 from transactions.models import Transaction
-
-
 
 
 def login(request):
@@ -54,11 +53,11 @@ def signup(request, refer_code=None):
         request.session['refer_code'] = refer_code.lower()
 
     if request.method == 'POST':
-        first_name = request.POST.get('first_name', None)
-        last_name = request.POST.get('last_name', None)
-        email = request.POST.get('email', None)
-        phone = request.POST.get('phone', None)
-        password = request.POST.get('password', None)
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
         referer = None
 
         if User.objects.filter(email=email).exists():
@@ -68,13 +67,13 @@ def signup(request, refer_code=None):
                                             'last_name': last_name,
                                             'phone': phone })
 
-        if request.session.get('refer_code', None):
+        if request.session.get('refer_code'):
             try:
                 referer = User.objects.get(refer_code=request.session['refer_code'])
             except:
                 pass
 
-        user_type = request.POST.get('user_type', None)
+        user_type = request.POST.get('user_type')
 
         if user_type == 'client': 
 
@@ -127,24 +126,36 @@ def dashboard(request):
 @login_required
 def client_dashboard(request):
     if request.user.is_client:
-        transactions = Transaction.objects.filter(user=request.user)
-        allocated_properties = transactions.filter(status=Transaction.ALLOCATED)
-        incomplete_trans = transactions.exclude(status=Transaction.ALLOCATED).exclude(status=Transaction.PAID).last()
+        transactions = Transaction.objects.filter(user=request.user) #get user specific trans
+        allocated_properties = transactions.filter(status=Transaction.ALLOCATED) # allocated ppties
 
-        pending_payment = incomplete_trans.listing.price - incomplete_trans.amount_paid
-        payment_progress = (incomplete_trans.amount_paid / incomplete_trans.listing.price) * 100
-        amount_due = 1 #same with pending_payment
-        amount_paid = 'compute in template' # incomplete_trans.amount
-        total_cost = 'template' # incomplete_trans.listing.price
+        # incomplete transactions
+        incomplete_transactions = transactions.exclude(status__in=[Transaction.ALLOCATED, Transaction.COMPLETED])
+        # get last incomplete trans, and the it's listing
+        last_incomplete_tran = incomplete_transactions.last() 
+        last_listing = last_incomplete_tran.listing
 
+        # sum of all the amounts paid
+        sum_paid = incomplete_transactions.filter(listing=last_listing).aggregate(Sum('amount_paid'))['amount_paid__sum']
+        
+        # listing price
+        listing_price = last_incomplete_tran.listing.price
+        print(sum_paid)
 
+        
+
+        
+        pending_payment = listing_price - sum_paid
+        payment_progress = round(((sum_paid / listing_price) * 100), 2)
+        
 
         context = {
             'allocated_properties': allocated_properties,
             'transactions': transactions,
-            'incomplete_trans': incomplete_trans,
+            'incomplete_trans': last_incomplete_tran,
             'pending_payment': pending_payment,
             'payment_progress': payment_progress,
+            'sum_paid': sum_paid
         }
        
         return render(request, 'users/client.html', context)
@@ -210,17 +221,18 @@ def edit_profile(request, user_id):
     if request.method == 'POST':
         user = get_object_or_404(User, id=user_id)
 
-        image = request.FILES.get('image', None)
-        user.first_name = request.POST.get('first_name', None)
-        user.last_name = request.POST.get('last_name', None)
-        user.phone = request.POST.get('phone', None)
-        user.address = request.POST.get('address', None)
-        user.next_of_kin = request.POST.get('next_of_kin', None)
-        user.send_notifications = True if request.POST.get('send_notifications', None) else False
+        image = request.FILES.get('image')
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.phone = request.POST.get('phone')
+        user.address = request.POST.get('address')
+        user.next_of_kin = request.POST.get('next_of_kin')
+        user.send_notifications = True if request.POST.get('send_notifications') else False
 
-        fs = FileSystemStorage()
-        fs.save(image.name, image)
-        user.image = image
+        if image:
+            fs = FileSystemStorage()
+            fs.save(image.name, image)
+            user.image = image
 
         user.save()
 
@@ -234,7 +246,7 @@ def edit_profile(request, user_id):
 
 def subscribe(request):
     data = {}
-    email = request.POST['email'] if 'email' in request.POST else None
+    email = request.POST.get('email')
 
     if email:
         if Subscribe.objects.filter(email=email).exists():

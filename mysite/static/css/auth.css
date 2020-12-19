@@ -1,18 +1,11 @@
 body {
   background-image: url(../img/bgg.svg);
-  /* background-position: center; */
   background-position: center;
   background-size: cover;
   background-color: #ffffff;
   height: fit-content;
-  /* padding: 0 2rem; */
   margin-top: 0;
-  /* height: fit-content; */
 }
-
-/* .h1 { color: #003333;}
-.h3 { color: #5A6F6F;}
-p { color: #73738D !important;} */
 
 navbar {
   padding-left: 120px !important;

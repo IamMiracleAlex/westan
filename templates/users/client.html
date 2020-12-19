@@ -64,7 +64,7 @@
                             </span>
                             <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
                             <span class="text-center d-block">
-                                <p class="h5 font-weight-bold pb-0 mb-0">{{incomplete_trans.amount_paid|shrink}}</p>
+                                <p class="h5 font-weight-bold pb-0 mb-0">{{sum_paid|shrink}}</p>
                                 <p class="grey">Amount Paid</p>
                             </span>
                             <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
@@ -101,7 +101,7 @@
                             </span>
                             <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
                             <span class="text-center d-block pt-1">
-                                <a href="{% url 'transactions:checkout' incomplete_trans.id %}" class="col-auto btn bg-orange text-white px-4 ml-3">Pay Now</a>
+                                <a href="{% url 'transactions:checkout' incomplete_trans.id %}" class="col-auto btn bg-orange text-white px-4 ml-3 {% if sum_paid|add:"1" >= incomplete_trans.listing.price %} disabled {% endif %} ">Pay Now</a>
                             </span>
                             
                         </div>
@@ -131,7 +131,7 @@
                                                     alt="">
                                                 {{trans.listing.title}}
                                             </td>
-                                            <td class="border-0 pt-3 {% if trans.get_status_display == 'Allocated' or trans.get_status_display == 'Paid' %} green {% elif  trans.get_status_display == 'Processing' %} blue {% else %} red {% endif %} ">
+                                            <td class="border-0 pt-3 {% if trans.get_status_display in 'Allocated, Complete' %} green {% elif  trans.get_status_display in 'Processing, Confirmed' %} blue {% else %} red {% endif %} ">
                                                 {{trans.get_status_display}}
                                             </td>
                                         </tr>

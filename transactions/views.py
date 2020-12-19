@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
+from django.contrib import messages
+from decimal import Decimal
 
 from listings.models import Listing
 from transactions.models import Transaction
@@ -14,7 +16,7 @@ def confirm_purchase(request, listing_id):
     listing = get_object_or_404(Listing, id=listing_id) 
 
     if request.method == "POST":
-        amount_to_pay = request.POST.get('amount_to_pay', None)
+        amount_to_pay = request.POST.get('amount_to_pay')
         trans = Transaction.objects.create(listing=listing,
                                         user=request.user,
                                         amount_to_pay=amount_to_pay, 
@@ -45,24 +47,39 @@ def checkout(request, trans_id):
 def checkout_confirmation(request, trans_id):
 
     if request.method == 'POST':
-        bank = request.POST.get('bank', None)
-        teller_name = request.POST.get('teller_name', None)
-        amount_paid = request.POST.get('amount_paid', None)
-        file = request.FILES.get('file', None)
-        bank_reference = request.POST.get('amount_paid', None)
+        bank = request.POST.get('bank')
+        teller_name = request.POST.get('teller_name')
+        amount_paid = request.POST.get('amount_paid')
+        file = request.FILES.get('file')
+        bank_reference = request.POST.get('amount_paid')
 
         if file:
             fs = FileSystemStorage()
             fs.save(file.name, file)
 
         trans = Transaction.objects.get(id=trans_id)
-        trans.bank = bank
-        trans.teller_name = teller_name
-        trans.bank_reference = bank_reference
-        trans.status = Transaction.PROCESSING
-        trans.file = file
-        trans.amount_paid = amount_paid
-        trans.save()
+
+        # incase of a subsequent or additional payment
+        if trans.bank or trans.teller_name or trans.amount_paid:
+            new_trans = Transaction.objects.create(
+                                        listing = trans.listing,
+                                        user = request.user,
+                                        amount_to_pay = trans.amount_to_pay, 
+                                        status = Transaction.PROCESSING,
+                                        bank = bank,
+                                        teller_name = teller_name,
+                                        amount_paid = amount_paid,
+                                        file=file
+                                        )
+        else:  
+            # first payment made                              
+            trans.bank = bank
+            trans.teller_name = teller_name
+            trans.bank_reference = bank_reference
+            trans.status = Transaction.PROCESSING
+            trans.file = file
+            trans.amount_paid += Decimal(amount_paid)
+            trans.save()
         return redirect(reverse('transactions:payment_success', args=[trans.listing.id]))
 
     return render(request, 'transactions/checkout_confirmation.html', {'trans_id': trans_id})
