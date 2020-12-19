@@ -51,8 +51,9 @@ def checkout_confirmation(request, trans_id):
         file = request.FILES.get('file', None)
         bank_reference = request.POST.get('amount_paid', None)
 
-        fs = FileSystemStorage()
-        fs.save(file.name, file)
+        if file:
+            fs = FileSystemStorage()
+            fs.save(file.name, file)
 
         trans = Transaction.objects.get(id=trans_id)
         trans.bank = bank

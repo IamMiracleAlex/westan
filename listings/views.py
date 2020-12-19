@@ -74,7 +74,9 @@ def add_wishlist(request):
             final_status = True
 
     else:
-        auth = "Please login to add this listing to your wish list"
+        auth = """
+        Please login to add this listing to your wish list: <br/> <br/> <a href='/login/'> Click to Login </a>  
+        """
 
     data = {'final_status': final_status, 'auth': auth}
 
@@ -109,10 +111,10 @@ def search(request):
         queryset = queryset.filter(bathrooms__lte=bathrooms)
 
     if maxprice:
-        queryset = queryset.filter(maxprice__lte=maxprice)    
+        queryset = queryset.filter(price__lte=maxprice)    
 
     if minprice:
-        queryset = queryset.filter(minprice__gte=minprice)    
+        queryset = queryset.filter(price__gte=minprice)    
 
     if reference:
         queryset = Listing.objects.filter(reference=reference)

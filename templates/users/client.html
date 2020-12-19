@@ -96,13 +96,12 @@
                         <div class="card-footer mt-1 border-top bg-white d-flex justify-content-around">
                             <span class="text-center d-block">
                                 <p class="grey pb-0 mb-0">Pending Payment</p>
-                                {% comment %} <p class="h5 font-weight-bold">N90,000</p> {% endcomment %}
                                 <p class="h5 font-weight-bold"><span>&#8358;</span>{{pending_payment|intcomma}}</p>
                                 
                             </span>
                             <div class="bg-grey rounded mt-1" style="width: 1px; height: 36px;"></div>
                             <span class="text-center d-block pt-1">
-                                <a href="/dashboard/client-pay.html" class="col-auto btn bg-orange text-white px-4 ml-3">Pay Now</a>
+                                <a href="{% url 'transactions:checkout' incomplete_trans.id %}" class="col-auto btn bg-orange text-white px-4 ml-3">Pay Now</a>
                             </span>
                             
                         </div>

@@ -206,7 +206,7 @@
             <span class="mr-2">Sort By</span>
             <div class="btn-group">
               <button type="button" class="btn btn-muted border border-secondary btn-sm dropdown-toggle mr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Popularity
+              {% if 'sort/latest' in request.path %} Latest {% elif 'sort/popular' in request.path %} Popular {% else %}  Popularity {% endif %}
               </button>
               <div class="dropdown-menu dropdown-menu-right">
               <a href="{% url 'listings:sort' 'latest' %}"><button class="dropdown-item" type="button">Latest</button></a>
@@ -215,7 +215,7 @@
             </div>
             <div class="btn-group">
               <button type="button" class="btn btn-muted border border-secondary btn-sm dropdown-toggle mr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Price
+                {% if 'sort/maxprice' in request.path %} Max Price {% elif 'sort/minprice' in request.path %} Min Price {% else %}  Price {% endif %}
               </button>
               <div class="dropdown-menu dropdown-menu-right">
               <a href="{% url 'listings:sort' 'maxprice' %}"><button class="dropdown-item" type="button">Max Price</button></a>

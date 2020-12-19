@@ -438,6 +438,7 @@ shareBtn.addEventListener('click', () => {
 {% block javascript %}
 
   <script src="{% static 'js/lightbox.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script>
 
@@ -459,7 +460,12 @@ shareBtn.addEventListener('click', () => {
             $("#save").text('').append("Save <span> &#9825;</span>")
           }
           if (data.auth) {
-             alert(data.auth)
+            
+            Swal.fire({
+              title:  "Notice!",
+              html: data.auth,  
+              confirmButtonText: "Ok",
+            });    
           }
         }
       });
