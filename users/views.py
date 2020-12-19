@@ -12,6 +12,7 @@ from django.db.models import Sum
 from users.models import User, Subscribe
 from utils.handlers import send_activation_email
 from transactions.models import Transaction
+from listings.models import Listing
 
 
 def login(request):
@@ -160,10 +161,18 @@ def client_dashboard(request):
 
     return redirect(reverse('listings:index'))    
 
+
 @login_required
 def marketer_dashboard(request):
     if request.user.is_marketer:
-        return render(request, 'users/marketer.html',)
+        referrals = request.user.referrals.all()
+        trending_listings = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-views')[:10]
+
+        context = {
+            "referrals": referrals,
+            "trending_listings": trending_listings,
+        }
+        return render(request, 'users/marketer.html', context)
         
     return redirect(reverse('listings:index'))    
 

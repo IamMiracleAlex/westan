@@ -165,23 +165,14 @@ def sort(request, by=None):
     context = {
         'listings': listings
     }
-
     return render(request, 'listings/all_listings.html', context)
 
 
-def dashboard_properties(request):
-    if request.user.is_client:
-        return redirect(reverse('listings:dashboard_client_properties'))
-
-    elif request.user.is_marketer:
-        return redirect(reverse('listings:dashboard_marketer_properties'))
-
-    else:
-        return redirect(reverse('listings:listings'))
-
-
 def dashboard_marketer_properties(request):
-    return render(request, 'listings/dashboard_marketer_properties.html')
+    referred_users_ids = [user.id for user in request.user.referrals.all()]
+    trans = Transaction.objects.filter(user_id__in=referred_users_ids)
+
+    return render(request, 'listings/dashboard_marketer_properties.html', {"trans": trans})
 
 
 def dashboard_client_properties(request):

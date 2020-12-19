@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if 'dashboard/properties' in request.path %} active {% endif %}"  href="{% url 'listings:dashboard_properties' %}">
+                <a class="nav-link {% if 'dashboard/properties' in request.path %} active {% endif %}"  href="{% if "client" in request.path %} {% url 'listings:dashboard_client_properties' %} {% else %} {% url 'listings:dashboard_marketer_properties' %}  {% endif %} ">
                     Properties
                 </a>
             </li>

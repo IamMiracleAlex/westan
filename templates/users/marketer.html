@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static humanize %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
@@ -155,7 +152,7 @@
                     <!-- Trending -->
                     <div class="card border-0 shadow-sm mb-4">
                         <div class="card-body">
-                            <h5 class="font-weight-bold mt-2">Top Selling Products</h5>
+                            <h5 class="font-weight-bold mt-2">Top Trending Properties</h5>
 
                             <div class="table-responsive">
                                 <table class="table table-centered nowrap table-hover mb-0 dtr-inline collapsed">
@@ -169,48 +166,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
+                                        {% for listing in trending_listings %}
                                         <tr>
                                             <td class="border-0 pt-3">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                <img src="{{ listing.image.url }}" class="rounded img-responsive mr-2"
                                                     height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                                <span class="text-muted d-none d-md-inline"> - Ikeja, Lagos</span>
+                                                <a href=" {% url 'listings:single_listing' listing.id listing.slug %}">{{listing.title}} </a>
                                             </td>
                                             <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
+                                                {{listing.bedrooms}} Rooms, {{listing.bathrooms}} Baths, {{listing.garage}} Garage, {{listing.area}}m<sup>2</sup>
                                             </td>
                                             <td class="border-0 pt-3 text-primary">
-                                                $6,518.18
+                                                <span>&#8358;</span>{{listing.price|intcomma}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                                <span class="text-muted d-none d-md-inline"> - Ikeja, Lagos</span>
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
-                                            </td>
-                                            <td class="border-0 pt-3 text-primary">
-                                                $6,518.18
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                                <span class="text-muted d-none d-md-inline"> - Ikeja, Lagos</span>
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup>
-                                            </td>
-                                            <td class="border-0 pt-3 text-primary">
-                                                $6,518.18
-                                            </td>
-                                        </tr>
+                                        {% endfor %}
 
 
                                     </tbody>
@@ -232,44 +203,29 @@
                                     <thead>
                                         <tr class="border-top border-bottom">
                                             <th class="text-muted border-0 py-2 font-weight-normal">Referral</th>
-                                            <th class="text-muted border-0 py-2 font-weight-normal">Town/City</th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal">Phone</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {% for referral in referrals %}
                                         <tr>
                                             <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}"
+                                            {% if referral.image %}
+                                                <img src="{{ referral.image.url }}"
                                                     class="rounded-circle img-responsive mr-2" height="30" width="30"
                                                     alt="">
-                                                Jelima Chibuzor
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                Abakaliki
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}"
+                                            {% else %}        
+                                                <img src="https://ui-avatars.com/api/?name={{referral.full_name}}"
                                                     class="rounded-circle img-responsive mr-2" height="30" width="30"
                                                     alt="">
-                                                Jelima Chibuzor
+                                            {% endif %}        
+                                                {{ referral.full_name }}
                                             </td>
                                             <td class="border-0 pt-3 text-muted">
-                                                Abakaliki
+                                                {{ referral.phone }}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="border-0">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}"
-                                                    class="rounded-circle img-responsive mr-2" height="30" width="30"
-                                                    alt="">
-                                                Jelima Chibuzor
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                Abakaliki
-                                            </td>
-                                        </tr>
-
+                                    {% endfor %}    
 
                                     </tbody>
                                 </table>
@@ -294,7 +250,8 @@
 				label: 'Sales',
 				backgroundColor: '#1943EF',
 				data: [ 12, 19, 3, 5, 2, 3, 9 ]
-			}, {
+			}, 
+            {% comment %} {
 				label: 'Commission',
 				backgroundColor: '#31bfbf',
 				data: [ 17, 21, 9, 3, 4, 7, 12 ]
@@ -302,13 +259,14 @@
 				label: 'Sales Value',
 				backgroundColor: '#ff3a29',
 				data: [ 7, 9, 13, 11, 9, 13, 7 ]
-			}]
+			} {% endcomment %}
+            ]
 
 		};
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: barChartData,
-            options: {
+            {% comment %} options: {
 					tooltips: {
 						mode: 'index',
 						intersect: false
@@ -325,7 +283,7 @@
                         legend: {
                         display: false,
                     },
-				}
+				} {% endcomment %}
         });
     </script>
 </body>

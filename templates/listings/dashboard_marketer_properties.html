@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static humanize %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
@@ -69,58 +69,37 @@
                                                <span class="">Details</span></th>
                                             <th class="text-muted border-0 py-2 font-weight-normal ">
                                                 <span class="d-none d-md-block">Address</span></th>
+                                            <th class="text-muted border-0 py-2 font-weight-normal ">
+                                                <span class="d-none d-md-block">Status</span></th>
                                             <th class="text-muted border-0 py-2 font-weight-normal">Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="border-0 pt-3 text-nowrap">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-primary">
-                                                $6,518.18
-                                            </td>
-                                        </tr>
+
+                                        {% for tran in trans %}
+                                        {% with tran.listing as listing %}
                                         <tr>
                                             <td class="border-0 text-nowrap">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
+                                                <img src="{{ listing.image.url }}" class="rounded img-responsive mr-2"
                                                     height="30" width="30" alt="">
-                                                4 Bedroom Flat
+                                                {{ listing.title }}
                                             </td>
                                             <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
+                                                <span class="">{{listing.bedrooms}} Rooms, {{listing.bathrooms}} Baths, {{listing.garage}} Garage, {{listing.area}}m<sup>2</sup></span> 
                                             </td>
                                             <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
+                                                <span class="d-none d-md-block">{{ listing.get_address }}</span> 
+                                            </td>
+                                            <!-- use boostrap if color does not work -->
+                                            <td class="border-0 pt-3 {% if trans.get_status_display in 'Allocated, Complete' %} green {% elif  trans.get_status_display in 'Processing, Confirmed' %} blue {% else %} red {% endif %}">
+                                                {{trans.get_status_display}}
                                             </td>
                                             <td class="border-0 pt-3 text-primary">
-                                                $6,518.18
+                                                <span>&#8358;</span>{{listing.price|intcomma}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="border-0 text-nowrap">
-                                                <img src="{% static 'img/dash-thumb.jpg' %}" class="rounded img-responsive mr-2"
-                                                    height="30" width="30" alt="">
-                                                4 Bedroom Flat
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted d-none d-md-block">
-                                                <span class="">6 Rooms, 4 Beds, 3 Baths, 245m<sup>2</sup></span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-muted">
-                                                <span class="d-none d-md-block">No 4, Ojodu Street, Off Ilasamaja, Ikorodu, Lagos</span> 
-                                            </td>
-                                            <td class="border-0 pt-3 text-primary">
-                                                $6,518.18
-                                            </td>
-                                        </tr>
+                                            {% endwith %}
+                                        {% endfor %}
 
 
                                     </tbody>
