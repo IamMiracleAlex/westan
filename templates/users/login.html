@@ -41,6 +41,8 @@
     <br> <br>
     <div class="form-group">
         <input type="email" name="email" value='{{ email }}' class="form-control px-3" id="validationCustom02" placeholder="Email address" required>
+        <input type="hidden" value='{{ request.GET.next }}' name="next" />
+
         <div class="invalid-feedback">
             Please enter a valid email address.
         </div>

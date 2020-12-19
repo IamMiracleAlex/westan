@@ -60,17 +60,16 @@ def add_wishlist(request):
 
     if request.user.is_authenticated:
 
-        listing_id = request.GET.get('listing_id', None)
-        listing = Listing.objects.get(pk=listing_id)
+        listing_id = request.GET.get('listing_id')
 
-        wish = WishList.objects.filter(listing=listing, user=request.user)
+        wish = WishList.objects.filter(listing_id=listing_id, user=request.user)
 
         if wish.exists():
             wish.delete()
             final_status = False
 
         else:
-            WishList.objects.create(user=request.user, listing=listing)
+            WishList.objects.create(user=request.user, listing_id=listing_id)
             final_status = True
 
     else:

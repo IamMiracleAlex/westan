@@ -16,23 +16,27 @@ from transactions.models import Transaction
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST.get('email', None)
-        password = request.POST.get('password', None)
-
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        next = request.POST.get('next')
 
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
             auth.login(request, user)
 
-            user_type = request.POST.get('user_type', None)
+            user_type = request.POST.get('user_type')
 
             if user_type == 'client' and user.is_client:
                 messages.success(request, 'You are now logged in, as a client')
+                if next:
+                    return redirect(next)
                 return redirect(reverse('users:client_dashboard')) # client dashboard
 
             elif user_type == 'marketer' and user.is_marketer:
                 messages.success(request, 'You are now logged in, as a marketer')
+                if next:
+                    return redirect(next)
                 return redirect(reverse('users:marketer_dashboard')) # marketer dashboard
 
             else:

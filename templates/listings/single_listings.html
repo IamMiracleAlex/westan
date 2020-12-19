@@ -462,8 +462,8 @@ shareBtn.addEventListener('click', () => {
           if (data.auth) {
             
             Swal.fire({
-              title:  "Notice!",
-              html: data.auth,  
+              title: "Notice!",
+              html: "Please login to add this listing to your wish list: <br/> <br/> <a href='/login/?next={{request.build_absolute_uri }}'> Click to Login </a>",  
               confirmButtonText: "Ok",
             });    
           }
