@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from django_google_maps import fields as map_fields
 
 from utils.tools import generate_unique_id
+from utils.handlers import image_resizer
 from users.models import User
 
 
@@ -66,6 +67,10 @@ class Listing(models.Model):
         if not self.pk:
             self.slug = slugify(self.title)
             self.reference = generate_unique_id(Listing, 'reference', len=10)
+
+        for image in [self.image, self.image_1, self.image_2, self.image_3, self.image_4]:
+            if image:
+                image_resizer(image)
 
         super().save(*args, **kwargs)
 

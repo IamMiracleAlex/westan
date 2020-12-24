@@ -37,8 +37,9 @@
                 <div class="col-auto d-none d-md-flex align-items-center">
                     <a href="{% url 'users:edit_profile' user.id %}" class="col-auto btn bg-orange text-white px-4 ml-3">Edit Profile</a>
                 </div>
-
             </div>
+
+            {% include 'partials/alerts.html' %}
 
             <!-- Cards -->
             <div class="row">

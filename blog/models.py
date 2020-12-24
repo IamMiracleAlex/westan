@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from taggit.managers import TaggableManager
 
 from users.models import User
-
+from utils.handlers import image_resizer
 
 
 class Post(models.Model):
@@ -39,19 +39,10 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.slug = slugify(self.title)
+
+        if self.image:    
+            image_resizer(self.image)
+            
         super().save(*args, **kwargs)
 
-class Comment(models.Model):
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     body = models.TextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#     active = models.BooleanField(default=False)
-
-#     class Meta:
-#         ordering = ('created_at',)
-
-#     def __str__(self):
-#         return f'Comment by {self.name} on {self.post}'  
-    pass                                                                         
+                                                                    

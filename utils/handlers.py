@@ -1,7 +1,8 @@
 import csv
 import io
+import sys
 
-from django.core.files.storage import default_storage as storage
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.http import HttpResponse
 from django.contrib.auth.tokens import default_token_generator  
 from django.contrib.sites.shortcuts import get_current_site
@@ -12,8 +13,6 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 from PIL import Image
-
-from users.models import User
 
 
 def send_activation_email(request, user):
@@ -48,20 +47,26 @@ class ExportCsvMixin:
 
 
 def image_resizer(image_field):
+    # open the uploaded image
+    img = Image.open(image_field)
 
-    img_read = storage.open(image_field.name, 'r')
-    img = Image.open(img_read)
-
-    if img.height > 300 or img.width > 300:
-        output_size = (300, 300)
+    if img.height > 200 or img.width > 200:
+        output_size = (200, 200)
         img.thumbnail(output_size)
-        in_mem_file = io.BytesIO()
-        img.convert('RGB').save(in_mem_file, format='JPEG')
-        img_write = storage.open(image_field.name, 'w+')
-        img_write.write(in_mem_file.getvalue())
-        img_write.close()
+        img = img.convert('RGB')
 
-    img_read.close()   
+        output = io.BytesIO()
+        img.save(output, format='JPEG')
+        output.seek(0)
+
+        # change the imagefield value to be the newley modifed image value
+        image_field = InMemoryUploadedFile(
+                                file=output, 
+                                field_name='ImageField',
+                                name=f'{image_field.name.split(".")[0]}.jpg',
+                                content_type='image/jpeg',
+                                size=sys.getsizeof(output),
+                                charset=None)
 
 
 def send_transaction_status_email(profile):
@@ -70,11 +75,6 @@ def send_transaction_status_email(profile):
     message = render_to_string('transactions/emails/success.txt', context)
     email = profile.email_address
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
-
-
-
-
-
 
 
 
