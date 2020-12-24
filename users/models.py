@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from utils.tools import generate_unique_id
-from .managers import CustomUserManager
+from users.managers import CustomUserManager
+from utils.handlers import image_resizer
 
 
 class User(AbstractUser):
@@ -45,6 +46,8 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.refer_code = generate_unique_id(User, 'refer_code')
+        image_resizer(self.image)    
+        
         super(User, self).save(*args, **kwargs)
 
 

@@ -1,5 +1,8 @@
 <div class="row mb-4 d-flex align-items-end">
         <h3 class="col font-weight-bold text-center text-md-left mb-4 mb-md-0">Hi {{user.first_name}}</h3>
+        
+         {% include 'partials/alers.html' %}
+
         <div class="col-auto d-none d-md-flex align-items-center">
             <form method="POST" action="{% url 'listings:search' %}">
             {% csrf_token %}

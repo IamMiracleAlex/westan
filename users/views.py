@@ -167,10 +167,16 @@ def marketer_dashboard(request):
     if request.user.is_marketer:
         referrals = request.user.referrals.all()
         trending_listings = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-views')[:10]
+        referred_users_ids = [user.id for user in referrals]
+        trans = Transaction.objects.filter(user_id__in=referred_users_ids).distinct("listing") # works only with postgres
+        trans = Transaction.objects.filter(user_id__in=referred_users_ids)
+        
 
         context = {
             "referrals": referrals,
             "trending_listings": trending_listings,
+            "num_properties": trans.count(),
+
         }
         return render(request, 'users/marketer.html', context)
         

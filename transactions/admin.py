@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from utils.mixins import ExportCsvMixin
+from utils.handlers import ExportCsvMixin
 from transactions.models import Transaction
 
 
