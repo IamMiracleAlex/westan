@@ -1,0 +1,20 @@
+{% load humanize %}
+
+Your payment has been Confirmed
+
+Please find the details of the payment below:
+
+Account Owner:  {{ trans.user.full_name }}.
+
+Teller Name:   {{ trans.teller_name }}.
+
+Listing:  {{ trans.listing }}. 
+
+Amount Paid: NGN {{ trans.amount_paid|intcomma }}.
+
+Transaction Reference: {{ trans.reference }}.
+
+Status:  {{ trans.get_status_display }}.  
+
+Payment Type:   {{ trans.payment_type }}.
+

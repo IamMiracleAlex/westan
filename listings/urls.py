@@ -14,4 +14,8 @@ urlpatterns = [
     path('dashboard/properties/marketer/', views.dashboard_marketer_properties, name='dashboard_marketer_properties'),
     path('dashboard/properties/client/', views.dashboard_client_properties, name='dashboard_client_properties'),
     path('dashboard/wishlist/', views.dashboard_wishlist, name='dashboard_wishlist'),
+    path('contact/', views.contact, name='contact'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('faqs/', views.faqs, name='faqs'),
+
 ]

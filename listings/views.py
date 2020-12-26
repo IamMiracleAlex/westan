@@ -6,6 +6,7 @@ from django.urls import reverse
 from listings.models import Listing, WishList
 from transactions.models import Transaction
 from listings.forms import ListingMapForm
+from utils.handlers import send_contact_us_mail
 
 
 def index(request):  #home page
@@ -186,3 +187,20 @@ def dashboard_client_properties(request):
 def dashboard_wishlist(request):
     wishes = WishList.objects.filter(user=request.user)
     return render(request, 'listings/dashboard_wishlist.html', {'wishes': wishes}) 
+
+
+def contact(request):
+    if request.method == "POST":
+        send_contact_us_mail(request.POST)
+
+        data = {'success': 'Hang on! We will get back to you!'}
+        return JsonResponse(data)    
+    return render(request, 'listings/contact.html')
+
+
+def privacy(request):
+    return render(request, 'listings/privacy.html') 
+
+
+def faqs(request):
+    return render(request, 'listings/faqs.html')    

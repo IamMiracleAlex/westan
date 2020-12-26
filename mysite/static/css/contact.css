@@ -1,0 +1,74 @@
+
+html {
+  scroll-behavior: smooth;
+}
+.section-1 {
+  padding-top:10%;
+}
+.headliner {
+  color:#31bfbf;
+  font-weight:900;
+  font-size:60px;
+  text-align:center;
+}
+.headliner-summary{
+  margin-top:1%;
+  text-align:center;
+  font-weight:500;
+  font-size:18px;
+}
+.hero-btn{
+  background-color:#fc8210; 
+  border:0px;
+}
+.hero-btn:hover{
+    background-color:white;
+    color:#fc8210;
+    border:3px solid #fc8210;
+}
+ /* ============ Hero Page Ends Here ================== */
+  
+  
+.form-control{
+  border:0px;
+  border-bottom:1px solid #31bfbf;
+  margin-top:-15px;
+}
+.form-control:hover{
+  border-bottom:3px solid #31bfbf;
+  box-shadow:none;
+}
+.form-control:focus{
+  box-shadow:none;
+}
+.submit-btn {
+  margin-top:10%;
+  position:relative;
+  left:35%;
+  letter-spacing: 0.1em;
+  font-size: 18px;
+  font-weight: 500;
+  color: #31bfbf;
+  padding: 3px 15px 3px 15px;
+  border-radius: 0px;
+  border: 0px;
+  background-color: #31bfbf;
+}
+label{
+  font-size:18px;
+}
+    
+.scnd_form {
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: #31bfbf
+}
+.comp {
+    color: red;
+}
+  
+
+  
+section {
+  overflow-x: hidden;
+}    

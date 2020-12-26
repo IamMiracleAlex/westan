@@ -486,7 +486,7 @@
 
 {% block javascript %}
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% comment %} <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
  <script>
 	$(document).on('submit', '#subscribe_form', function(e){
@@ -526,7 +526,7 @@
 
 
     });
-    </script> 
+    </script>  {% endcomment %}
 
 <script>
 	$('#recipeCarousel').carousel({

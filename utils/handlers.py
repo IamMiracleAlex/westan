@@ -11,6 +11,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils import timezone
 
 from PIL import Image
 
@@ -69,12 +70,36 @@ def image_resizer(image_field):
                                 charset=None)
 
 
-def send_transaction_status_email(profile):
-    context = {'first_name': profile.first_name }
-    subject = 'Career Acceleration Program Status'
-    message = render_to_string('transactions/emails/success.txt', context)
-    email = profile.email_address
+def send_transaction_status_email(trans):
+    context = {'trans': trans }
+    subject = f'Transaction is {trans.get_status_display()}'
+    message = render_to_string('transactions/emails/confirm_payment.txt', context)
+    email = trans.user.email
     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+
+
+def send_contact_us_mail(data):
+    
+    fullname = data.get('fullname')
+    phone = data.get('phone')
+    email = data.get('email')
+    message = data.get('message')
+
+    now = timezone.now()
+    time = now.strftime("%d %B, %Y, %H:%M:%S")
+
+    subject = f"New message from {fullname}"
+
+    context = {
+        'fullname': fullname,
+        'phone': phone,
+        'email': email,
+        'message': message,
+        'time': time
+    }
+    message = render_to_string('listings/emails/contact.txt', context)
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, ['abiolaolusalajay@gmail.com'])
+
 
 
 

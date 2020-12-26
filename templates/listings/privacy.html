@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Privacy Policy {% endblock title %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="css/" >
+<style>
+.main-body {
+    width: 65%;
+}
+.signup {
+    background-color: #fc8210;
+    border: 0;
+}
+.login {
+    background-color: #31bfbf;
+    border: 0;
+}
+.signup:hover {
+    background-color: white;
+    border: 1px solid #fc8210;
+    color: #fc8210;
+}
+.login:hover {
+    background-color: white;
+    border: 1px solid #31bfbf;
+    color: #31bfbf;   
+}
+form button {
+    font-size: 1rem !important;
+    background-color: #fc8210 !important;
+}
+
+@media screen and (max-width: 1200px) {
+    .main-body {
+        widows: 80%;
+    }
+}
+</style>
+{% endblock extrastyle %}
+
+{% block content %}
+
+<div class="container">
+        
+    {% include 'partials/navbar.html' %}
+
+</div>
+
+    <section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                <br> <br> <br> <br>
+                    <h1 class="bg_color pt-3 pb-3"> Privacy Policy</h1>
+                    <br>
+                    <p class="main-body mx-auto" >We've created this privacy policy to demonstrate our commitment to the privacy of the users of our websites. Please read the following to learn more about our privacy policy, and how we treat personally identifiable information collected from our visitors and users.</p>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <br> <br>
+
+    <div class="container main-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div >
+                    <h3 class="text-center"> What this Privacy Policy Covers </h3>
+                    <br>
+                    <p class="text-justify"> This policy applies to information we collect when you use our website or otherwise interact with us as described below. We may change this privacy policy from time to time. If we make changes, we will notify you or provide additional notice (such as by adding a statement to the homepages of our website or by sending you an email notification)
+                    </p>
+                    <p class="text-justify"> This privacy policy does not apply to the practices of companies that Tifi.tv does not own or control, or of persons that Tifi.tv does not employ or manage, including any third-party content contributors bound by contract and any third-party websites to which Tifi.tv websites link.
+                    </p>
+
+
+                    <br> <br>
+                    <h3  class="text-center"> Collection and Use of Personal Information </h3>
+                    <br>
+                    <p class="text-justify"> You can visit the websites of Tifi.tv without revealing any personal information. However, Tifi.tv needs certain personal information if you wish to purchase our products, receive Tifi.tv newsletter, or use certain Tifi.tv services.
+                        </p>
+                        <p class="text-justify">
+                        Where required, this information is your personal contact information. Tifi.tv will use this information to reply to your inquiries, to provide you with requested products and services, to set up your member's account, and to contact you regarding new products and services.
+                        </p>
+                        <p class="text-justify">
+                            By accessing the services of Tifi.tv and voluntarily providing us with the requested personal information, you consent to the collection and use of the information in accordance with this privacy policy.
+                        </p>
+
+
+                    <br> <br>
+                    <h3  class="text-center"> Collection and Use of Non-Personal Information </h3>
+                    <br>
+                    <p class="text-justify"> Tifi.tv automatically receives and records non-personal information on our server logs from your browser including your IP address, cookie information and the page you requested. Tifi.tv may use this information to customize the advertising and content you see and to fulfill your requests for certain products and services. However, Tifi.tv does not connect this non-personal data to any personal information collected from you.
+                        </p>
+                     
+                       
+                        <br> <br>
+                    <h3  class="text-center"> Information Sharing and Disclosure </h3>
+                    <br>
+                    <p class="text-justify"> Tifi.tv may disclose your personal information to third parties who work on behalf of Tifi.tv to provide products and services requested by you. We will share personal information for these purposes only with third parties whose privacy policies are consistent with ours or who agree to abide by our policies with respect to personal information
+                        </p>
+
+                        <p class="text-justify">
+                        Tifi.tv may otherwise disclose your personal information when:
+                        <ul class="pl-5" >
+                            <li>  We have your express consent to share the information for a specified purpose;
+                            </li>
+                            <li>We need to respond to subpoenas, court orders or such other legal process;
+                            </li>
+                            <li> We need to protect the personal safety of the users of our websites or defend the rights or property of Tifi.tv;
+                            </li>
+                            <li>We find that your actions on our websites violate the Tifi.tv Terms of Use document or any of our usage guidelines for specific products or services.
+                            </li>
+                        </ul>
+                        </p>
+
+                             <br> <br>
+                        <h3  class="text-center"> Consent </h3>
+                        <br>
+                        <p class="text-justify"> If you do not consent to the collection, use or disclosure of your personal information as outlined in this policy, please do not provide any personal information to Tifi.tv. If you have provided personal information to Tifi.tv and no longer consent to its use or disclosure as outlined herein, please notify Tifi.tv at support@tifi.tv.
+                        </p>
+
+                        <br> <br>
+                        <h3  class="text-center"> Security </h3>
+                        <br>
+                        <p class="text-justify">
+                        Your Tifi.tv information is protected for your privacy and security. In all areas of our websites, as identified on the site, Tifi.tv uses industry-standard SSL-encryption to protect data transmissions.
+                        </p>
+                        <p class="text-justify">
+                        We also safeguard your personal information from unauthorized access, through access control procedures, network firewalls and physical security measures. Further, Tifi.tv retains your personal information only as long as necessary to fulfil the purposes identified above or as required by law.
+                        </p>
+
+
+                        <br> <br>
+                        <h3  class="text-center"> Questions or Suggestions </h3>
+                        <br>
+                        <p class="text-justify">
+                        If you have questions or suggestions about this privacy policy, or your own personal information, please e-mail us at support@tifi.tv.
+                        </p>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    </section>
+
+
+{% include 'partials/footer.html' %}
+
+{% endblock content %}

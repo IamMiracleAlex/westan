@@ -118,7 +118,8 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyBwo2GyU_dC_Tl3nFtFXCRm-aBs0sPLqho'
+# GOOGLE_MAPS_API_KEY = 'AIzaSyBwo2GyU_dC_Tl3nFtFXCRm-aBs0sPLqho'
+GOOGLE_MAPS_API_KEY = 'AIzaSyD2EkSqcIaL3Euwk17RLOcDMbvw7kB0l48'
 
 # try:
 #     from .production import *

@@ -6,16 +6,16 @@
 		<div class="col-6 col-md">
 			<h5 class="text-uppercase">quick links</h5>
 			<ul class="list-unstyled text-small">
-				<li><a class="text-muted" href="#">Listings</a></li>
+				<li><a class="text-muted" href="{% url 'listings:listings' %}">Listings</a></li>
 				<li><a class="text-muted" href="#">Featured</a></li>
-				<li><a class="text-muted" href="#">Contact</a></li>
-				<li><a class="text-muted" href="#">Sign Up</a></li>
+				<li><a class="text-muted" href="{% url 'listings:contact' %}">Contact</a></li>
+				<li><a class="text-muted" href="{% url 'users:signup' %}">Sign Up</a></li>
 			</ul>
 		</div>
 		<div class="col-6 col-md">
 			<h5 class="text-uppercase">legal</h5>
 			<ul class="list-unstyled text-small">
-				<li><a class="text-muted" href="#">Privacy</a></li>
+				<li><a class="text-muted" href="{% url 'listings:privacy' %}">Privacy</a></li>
 				<li><a class="text-muted" href="#">Terms & Conditions</a></li>
 				<!-- <li><a class="text-muted" href="#">FAQs</a></li> -->
 				<li><a class="text-muted" href="#">Money Back Policies</a></li>
@@ -24,8 +24,8 @@
 		<div class="col-6 col-md">
 			<h5 class="text-uppercase">others</h5>
 			<ul class="list-unstyled text-small">
-				<li><a class="text-muted" href="#">FAQs</a></li>
-				<li><a class="text-muted" href="#">Blog</a></li>
+				<li><a class="text-muted" href="{% url 'listings:faqs' %}">FAQs</a></li>
+				<li><a class="text-muted" href="{% url 'blog:blog_index' %}">Blog</a></li>
 				<li><a class="text-muted" href="#">Testimonials</a></li>
 				<li><a class="text-muted" href="#">About Us</a></li>
 			</ul>

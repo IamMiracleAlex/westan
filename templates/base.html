@@ -35,7 +35,47 @@
    <script src="{% static 'js/popper.min.js' %}"></script>
    <script src="{% static 'js/bootstrap.min.js' %}"></script>
    <script src="{% static 'js/utils.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+ <script>
+	$(document).on('submit', '#subscribe_form', function(e){
+    var form = $(this);
+ 
+        $.ajax({
+            url: form.attr("action"),
+            data: form.serialize(),
+            type: form.attr("method"),
+            dataType: 'json',
+			cache: false,
+			success: function(data) {
+				if (data.success) {
+					swal({
+                        title: "Newsletter Subscription!",
+                        text: data.success,
+                        icon: "success",
+                        button: "Done!",
+                    }); 
+				} else {
+					swal({
+                        title: "Ooops",
+                        text: data.error,
+                        icon: "error",
+                        button: "Done!",
+                    }); 
+				}
+
+			document.getElementById("subscribe_form").reset();
+	
+			},
+            error: function() {
+                alert('error');
+            }
+    });
+    	return false;
+
+
+    });
+    </script> 
    {% block javascript %}
 
    {% endblock javascript %}
