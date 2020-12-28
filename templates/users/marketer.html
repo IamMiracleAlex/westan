@@ -77,7 +77,7 @@
                                     aria-hidden="true"></i>
                             </div>
                             <div class="">
-                                <h4 class="mb-0">$44,765.00</h4>
+                                <h4 class="mb-0"> <span>&#8358;</span>{{ total_sales|intcomma }}</h4>
                                 <p class="text-nowrap text-muted mb-0">Total Sales Value</p>
                             </div>
 
@@ -92,7 +92,7 @@
                                 <i class="fa fa-credit-card p-3 rounded-circle orange bg-light-red" aria-hidden="true"></i>
                             </div>
                             <div class="">
-                                <h4 class="mb-0">$4,365.00</h4>
+                                <h4 class="mb-0"><span>&#8358;</span>{{ commission_earned|intcomma }}</h4>
                                 <p class="text-nowrap text-muted mb-0">Commission Earned</p>
                             </div>
 
@@ -137,14 +137,6 @@
                                     <span>
                                         <span class="px-2 rounded-circle bg-blue"></span>
                                         &nbsp;Sales
-                                    </span>
-                                    <span class="px-2">
-                                        <span class="px-2 rounded-circle bg-green"></span>
-                                        &nbsp;Commission
-                                    </span>
-                                    <span>
-                                        <span class="px-2 rounded-circle bg-red"></span>
-                                        &nbsp;Sales Value
                                     </span>
                                 </span>
 
@@ -248,45 +240,17 @@
     <script>
         var ctx = document.getElementById("myChart");
         var barChartData = {
-			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 			datasets: [{
 				label: 'Sales',
 				backgroundColor: '#1943EF',
-				data: [ 0, 4, 1, 1, 2, 3, 2 ]
+				data: {{ sales_data }}
 			}, 
-            {% comment %} {
-				label: 'Commission',
-				backgroundColor: '#31bfbf',
-				data: [ 17, 21, 9, 3, 4, 7, 12 ]
-			}, {
-				label: 'Sales Value',
-				backgroundColor: '#ff3a29',
-				data: [ 7, 9, 13, 11, 9, 13, 7 ]
-			} {% endcomment %}
             ]
-
 		};
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: barChartData,
-            {% comment %} options: {
-					tooltips: {
-						mode: 'index',
-						intersect: false
-					},
-					responsive: true,
-					scales: {
-						xAxes: [{
-							stacked: true,
-						}],
-						yAxes: [{
-							stacked: true
-						}]
-                    },
-                        legend: {
-                        display: false,
-                    },
-				} {% endcomment %}
         });
     </script>
 </body>

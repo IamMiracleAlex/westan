@@ -1,3 +1,6 @@
+from datetime import timedelta
+
+from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
@@ -164,19 +167,36 @@ def client_dashboard(request):
 
 @login_required
 def marketer_dashboard(request):
+    COMMISSION = 0.01  # 10% percent commission earned
     if request.user.is_marketer:
         referrals = request.user.referrals.all()
         trending_listings = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-views')[:10]
         referred_users_ids = [user.id for user in referrals]
-        trans = Transaction.objects.filter(user_id__in=referred_users_ids).distinct("listing") # works only with postgres
+        # trans = Transaction.objects.filter(user_id__in=referred_users_ids).distinct("listing") # works only with postgres
         trans = Transaction.objects.filter(user_id__in=referred_users_ids)
-        
+        total_sales = trans.filter(status__in=[Transaction.ALLOCATED, Transaction.COMPLETED]).aggregate(Sum('amount_paid'))['amount_paid__sum'] or 0.0
+        commission_earned = total_sales * COMMISSION
 
+        sales_data = []
+        now = timezone.now()
+
+        counter = 1
+        while counter < 13:
+            counter += 1
+
+            month = now - timedelta(days=counter*30)
+
+            sales_data.append(trans.filter(created_at__month=month.month).aggregate(Sum('amount_paid'))['amount_paid__sum'] or 0.0)
+
+
+        print(sales_data)
         context = {
             "referrals": referrals,
             "trending_listings": trending_listings,
             "num_properties": trans.count(),
-
+            "total_sales": total_sales,
+            "commission_earned": commission_earned,
+            "sales_data": sales_data,
         }
         return render(request, 'users/marketer.html', context)
         
@@ -211,7 +231,6 @@ def activate_email(request, uid, token):
     if user and default_token_generator.check_token(user, token):
 
         user.email_verified = True
-        is_active = True,
         user.save()
 
         context['message'] = 'Email verification successful'
