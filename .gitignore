@@ -4,7 +4,6 @@ __pycache__/
 .vscode
 env/
 db.sqlite3
-migrations/
 production.py
 scripts.py
 westan.pem
