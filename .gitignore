@@ -8,3 +8,5 @@ migrations/
 production.py
 scripts.py
 westan.pem
+.env
+.env_production
