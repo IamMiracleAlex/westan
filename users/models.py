@@ -46,8 +46,9 @@ class User(AbstractUser):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.refer_code = generate_unique_id(User, 'refer_code')
-            
-        image_resizer(self.image)    
+
+        if self.image: 
+            image_resizer(self.image)    
 
         super(User, self).save(*args, **kwargs)
 
