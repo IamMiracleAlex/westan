@@ -40,8 +40,13 @@
     </div>
 
     <div class="author my-5 py-5 text-cente pl-3 d-none d-md-block">
+    {% if user.image %}
         <img src="{{ user.image.url }}" width="100" alt=""
             class="img-responsive rounded-circle border mt-5">
+    {% else %}
+        <img src="https://ui-avatars.com/api/?name={{user.full_name}}" width="100" alt=""
+            class="img-responsive rounded-circle border mt-5">
+    {% endif %}        
         <p class="i d-block pt-2">{{ user.full_name }}</p>
     </div>
 </nav>

@@ -134,6 +134,7 @@ def dashboard(request):
 @login_required
 def client_dashboard(request):
     if request.user.is_client:
+        context = {}
         transactions = Transaction.objects.filter(user=request.user) #get user specific trans
         allocated_properties = transactions.filter(status=Transaction.ALLOCATED) # allocated ppties
 
@@ -141,25 +142,27 @@ def client_dashboard(request):
         incomplete_transactions = transactions.exclude(status__in=[Transaction.ALLOCATED, Transaction.COMPLETED])
         # get last incomplete trans, and the it's listing
         last_incomplete_tran = incomplete_transactions.last() 
-        last_listing = last_incomplete_tran.listing
 
-        # sum of all the amounts paid
-        sum_paid = incomplete_transactions.filter(listing=last_listing).aggregate(Sum('amount_paid'))['amount_paid__sum']
-        
-        # listing price
-        listing_price = last_incomplete_tran.listing.price        
-        
-        pending_payment = listing_price - sum_paid
-        payment_progress = round(((sum_paid / listing_price) * 100), 2)
-        
-        context = {
-            'allocated_properties': allocated_properties,
-            'transactions': transactions,
-            'incomplete_trans': last_incomplete_tran,
-            'pending_payment': pending_payment,
-            'payment_progress': payment_progress,
-            'sum_paid': sum_paid
-        }
+        if last_incomplete_tran:
+            last_listing = last_incomplete_tran.listing
+
+            # sum of all the amounts paid
+            sum_paid = incomplete_transactions.filter(listing=last_listing).aggregate(Sum('amount_paid'))['amount_paid__sum']
+            
+            # listing price
+            listing_price = last_incomplete_tran.listing.price        
+            
+            pending_payment = listing_price - sum_paid
+            payment_progress = round(((sum_paid / listing_price) * 100), 2)
+
+            context['pending_payment'] = pending_payment
+            context['sum_paid'] = sum_paid
+            context['payment_progress'] = payment_progress
+
+        context['allocated_properties'] = allocated_properties
+        context['transactions'] = transactions
+        context['incomplete_trans'] = last_incomplete_tran
+
         return render(request, 'users/client.html', context)
 
     return redirect(reverse('listings:index'))    

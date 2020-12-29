@@ -47,6 +47,8 @@
 
             <!-- Cards -->
             <div class="row">
+
+            {% if incomplete_trans.listing %}
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm mb-4 widget-flat overflow-hidden">
                         <div class="card-body text-center">
@@ -107,6 +109,8 @@
                         </div>
                     </div> <!-- end card-->
                 </div>
+
+                {% endif %}
                 
                 <!-- Transactions -->
                 <div class="col-md-4">

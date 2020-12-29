@@ -32,8 +32,11 @@ def shrink(value, num_decimals=2):
     :param value: number
     :param num_decimals: Number of decimal digits
     """
-
-    int_value = int(value)
+    try:
+        int_value = int(value)
+    except:
+        return
+            
     formatted_number = '{{:.{}f}}'.format(num_decimals)
     if int_value < 1000:
         return str(int_value)
