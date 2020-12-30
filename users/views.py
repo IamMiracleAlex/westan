@@ -295,6 +295,3 @@ def subscribe(request):
     return JsonResponse(data)
 
    
-
-def test(request):
-    pass

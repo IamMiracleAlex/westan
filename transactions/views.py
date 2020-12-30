@@ -106,7 +106,3 @@ def invoice(request, listing_id):
         "balance": balance,
     }
     return render(request, 'transactions/invoice.html', context)
-
-
-def test(request):
-    return render(request, 'transactions/dashboard_payment_success.html')
