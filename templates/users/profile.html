@@ -46,7 +46,11 @@
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm mb-4 widget-flat">
                         <div class="card-body">
+                        {% if user.image %}
                             <img src="{{ user.image.url }}" class="rounded img-responsive w-100" alt="">
+                        {% else %}
+                            <img src="https://ui-avatars.com/api/?name={{user.full_name}}" class="rounded img-responsive w-100" alt="">
+                        {% endif %}
                         </div> <!-- end card-body-->
                     </div> <!-- end card-->
                 </div>

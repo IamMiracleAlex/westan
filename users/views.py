@@ -46,7 +46,7 @@ def login(request):
             else:
                 auth.logout(request) #log user out
                 messages.success(request, 'You are neither a client or a marketer')
-                return redirect('index') # home
+                return redirect(reverse('listings:index')) # home
 
         else:
             messages.error(request, 'Invalid credentials')
@@ -192,7 +192,6 @@ def marketer_dashboard(request):
             sales_data.append(trans.filter(created_at__month=month.month).aggregate(Sum('amount_paid'))['amount_paid__sum'] or 0.0)
 
 
-        print(sales_data)
         context = {
             "referrals": referrals,
             "trending_listings": trending_listings,
