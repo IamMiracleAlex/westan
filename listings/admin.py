@@ -12,7 +12,7 @@ from listings.forms import ListingAdminForm
 
 @admin.register(Listing)
 class ListingAdmin(admin.ModelAdmin):
-    # form = ListingAdminForm
+    form = ListingAdminForm  
     
     list_display = ('reference','title','price', 'status', 'availability', 'type','views','state', 'featured','created_at', 'updated_at')
     list_filter = ('status', 'availability','featured', 'type')
