@@ -8,28 +8,28 @@
    
    <link rel="stylesheet" type="text/css" href="{% static 'css/faq.css' %}">
    <style>
-.signup {
-    background-color: #fc8210;
-    border: 0;
-}
-.login {
-    background-color: #31bfbf;
-    border: 0;
-}
-form button {
-    font-size: 1rem !important;
-    background-color: #fc8210 !important;
-}
-.signup:hover {
-    background-color: white;
-    border: 1px solid #fc8210;
-    color: #fc8210;
-}
-.login:hover {
-    background-color: white;
-    border: 1px solid #31bfbf;
-    color: #31bfbf;   
-}
+      .signup {
+         background-color: #fc8210;
+         border: 0;
+      }
+      .login {
+         background-color: #31bfbf;
+         border: 0;
+      }
+      form button {
+         font-size: 1rem !important;
+         background-color: #fc8210 !important;
+      }
+      .signup:hover {
+         background-color: white;
+         border: 1px solid #fc8210;
+         color: #fc8210;
+      }
+      .login:hover {
+         background-color: white;
+         border: 1px solid #31bfbf;
+         color: #31bfbf;   
+      }
 </style>
    {% endblock extrastyle %}
         
@@ -64,12 +64,12 @@ form button {
             
                 <button class="btn btn-outline-success b_color font-weight-bolder m-1 space" onclick="window.location='#general'">GENERAL</button>
         
-                <button class="btn btn-outline-success b_color font-weight-bolder m-1 space" onclick="window.location='#classes'">CLASSES</button>
+                {% comment %} <button class="btn btn-outline-success b_color font-weight-bolder m-1 space" onclick="window.location='#classes'">CLASSES</button>
         
                 <button class="btn btn-outline-success b_color font-weight-bolder m-1 space" onclick="window.location='#application'">APPLICATION</button>
             
                 <button class="btn btn-outline-success b_color font-weight-bolder m-1 space" onclick="window.location='#others'">OTHERS</button>
-                   
+                    {% endcomment %}
            </div>
         </div>
     </div>
@@ -95,51 +95,63 @@ form button {
                   <div  class="card-header p-1 collapsed font-weight-bold common b_color space" data-toggle="collapse"
                      href="#collapseOne">
                      <a class="card-title">
-                      What is the EduBridge Career Acceleration Program?
+                      What title documents do you provide?
                      </a>
                   </div>
                   <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
                      <p>
-                      It is an online work experience for those looking to learn work skills, and know how it is to work in an organization. You will have the opportunity to learn key work skills, work in a team, complete multiple work projects and earn a certificate to prove your achievements. 
+                        All our estate locations offer authentic & verifiable titles such as Certificate of Occupancy, Governor’s Consent, Registered Survey, and Deed of Assignment depending on the estate. We always strive to upgrade all our documentation to match the current trend and government policies.
                      </p>
                   </div>
 
                   <div class="card-header p-1 collapsed font-weight-bold common b_color space" data-toggle="collapse"
                      data-parent="#accordion" href="#collapseTwo">
                      <a class="card-title">
-                        Who is it for, who is the target audience?
+                        What are the basic amenities in your estates?
                      </a>
                   </div>
                   <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
                      <ul>
-                        <li>Students in final or penultimate year </li>
-                        <li>Corps members</li>
-                        <li>Graduates expecting NYSC call up</li>
-                        <li>Job seekers</li>
+                     <li>Green community</li> 
+                     <li>Smart Neighborhood</li> 
+                     <li>Cable Wi-Fi connections</li> 
+                     <li>Outdoor gym</li> 
+                     <li>Parks & Gardens</li> 
+                     <li>Occupancy Identification</li> 
+                     <li>Road network</li> 
+                     <li>Security Surveillance</li> 
+                     <li>Solar powered estate</li> 
+                     <li>Drainage system</li>
                      </ul>
                   </div>
 
                   <div class="card-header p-1 collapsed font-weight-bold common b_color space" data-toggle="collapse"
                      data-parent="#accordion" href="#collapseThree">
                      <a class="card-title">
-                     How will it work and what do I need?
+                     Where are your estate locations?
                      </a>
                   </div>
                   <div id="collapseThree" class="card-body collapse" data-parent="#accordion">
-                     <p>For an average intern, you will need to have a laptop, internet access, access to Slack and email services (these are free solutions), power supply. </p>
+                   <p>Our current locations are;</p> 
+                   <ul>
+                     <li>Ode-Omi, Ibeju Lekki</li>
+                     <li>Mowe/Ofada, Ogun state</li>
+                   </ul>
+                   <p>Our proposed estate locations are; Sangotedo, Epe, Ibadan, Abuja, Enugu, Abeokuta, Badagry, etc</p>
                   </div>
 
                   <div class="card-header p-1 collapsed font-weight-bold common b_color space" data-toggle="collapse"
                      data-parent="#accordion" href="#collapse4">
                      <a class="card-title">
-                   How long will the program last for?
+                   How can I make payment?
                      </a>
                   </div>
                   <div id="collapse4" class="card-body collapse" data-parent="#accordion">
-                     <p>6 weeks. Activities will run from Monday to Friday. Classes on Saturday and Sunday. </p>
+                     <p>At Westan homes and smart estates, we offer outright payment and installment payment plans to encourage everyone to secure a property for themselves. </p>
+                     <p>All payments should be made ONLY to the designated official Westan Homes and Smart Estates bank accounts.</p>
                   </div>
 
-                  <div class="card-header p-1 collapsed font-weight-bold common b_color space" data-toggle="collapse"
+                  {% comment %} <div class="card-header p-1 collapsed font-weight-bold common b_color space" data-toggle="collapse"
                      data-parent="#accordion" href="#collapse5">
                      <a class="card-title">
                         Is it a self paced program? Can I leave anytime?
@@ -148,7 +160,7 @@ form button {
                   <div id="collapse5" class="card-body collapse" data-parent="#accordion">
                      <p>It is not self-paced. It will be managed like the EduBridge Graduate Program. There is a timetable for several activities e.g. classes, group meetings, etc. Everyone starts the program at the same time and ends at the same time. Some activities will be held at the times that candidates choose, e.g. when the groups meet etc.
                      </p>
-                  </div>
+                  </div> {% endcomment %}
 
 
                </div>
@@ -162,7 +174,7 @@ form button {
 </section>
 
  
-
+{% comment %} 
 <br> <br> 
 <section id="classes">
 
@@ -422,7 +434,7 @@ form button {
     </div>
 </div>
 </section>
-    
+     {% endcomment %}
 <br> <br> <br>
 {% include 'partials/footer.html' %}
   

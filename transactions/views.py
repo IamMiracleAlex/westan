@@ -62,7 +62,7 @@ def checkout_confirmation(request, trans_id):
 
         # incase of a subsequent or additional payment
         if trans.bank or trans.teller_name or trans.amount_paid:
-            new_trans = Transaction.objects.create(
+            Transaction.objects.create(
                                         listing = trans.listing,
                                         user = request.user,
                                         amount_to_pay = trans.amount_to_pay, 
