@@ -12,7 +12,7 @@ from listings.forms import ListingAdminForm
 
 @admin.register(Listing)
 class ListingAdmin(admin.ModelAdmin):
-    form = ListingAdminForm
+    # form = ListingAdminForm
     
     list_display = ('reference','title','price', 'status', 'availability', 'type','views','state', 'featured','created_at', 'updated_at')
     list_filter = ('status', 'availability','featured', 'type')
@@ -20,10 +20,10 @@ class ListingAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     exclude = ['slug', 'views', 'reference']
 
-    formfield_overrides = {
-        map_fields.AddressField: {
-          'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
-    }
+    # formfield_overrides = {
+    #     map_fields.AddressField: {
+    #       'widget': map_widgets.GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
+    # }
 
 @admin.register(WishList)
 class WishList(admin.ModelAdmin):
