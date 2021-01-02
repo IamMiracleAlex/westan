@@ -6,9 +6,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['westanhomes.ng', 'localhost', '127.0.0.1']
 
 ADMINS = [('miracle', 'collinsalex50@gmail.com')]
 MANAGERS = [('miracle', 'collinsalex50@gmail.com')]
