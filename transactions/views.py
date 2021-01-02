@@ -94,7 +94,7 @@ def payment_success(request, listing_id):
 
 def invoice(request, listing_id):
 
-    trans = Transaction.objects.filter(listing_id=listing_id, user=request.user, status__in=[Transaction.SUBMITTED, Transaction.PROCESSING, Transaction.CONFIRMED])
+    trans = Transaction.objects.filter(listing_id=listing_id, user=request.user, status__in=[Transaction.COMPLETED, Transaction.ALLOCATED])
     last_trans = trans.last()
     listing = last_trans.listing
     sum_paid = trans.aggregate(Sum('amount_paid'))['amount_paid__sum']
