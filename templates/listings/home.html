@@ -87,7 +87,7 @@
 						</select>
 					</div>
 					<div class="col-12 col-md-3">
-						<button type="submit" class="btn btn-block btn-lg text-white w-100 py-3">Search</button>
+						<button type="submit" class="btn btn-block btn-lg w-100 py-3">Search</button>
 					</div>
 				</div>
 			</form>
@@ -485,48 +485,6 @@
 
 
 {% block javascript %}
-
-{% comment %} <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
- <script>
-	$(document).on('submit', '#subscribe_form', function(e){
-    var form = $(this);
- 
-        $.ajax({
-            url: form.attr("action"),
-            data: form.serialize(),
-            type: form.attr("method"),
-            dataType: 'json',
-			cache: false,
-			success: function(data) {
-				if (data.success) {
-					swal({
-                        title: "Newsletter Subscription!",
-                        text: data.success,
-                        icon: "success",
-                        button: "Done!",
-                    }); 
-				} else {
-					swal({
-                        title: "Ooops",
-                        text: data.error,
-                        icon: "error",
-                        button: "Done!",
-                    }); 
-				}
-
-			document.getElementById("subscribe_form").reset();
-	
-			},
-            error: function() {
-                alert('error');
-            }
-    });
-    	return false;
-
-
-    });
-    </script>  {% endcomment %}
 
 <script>
 	$('#recipeCarousel').carousel({

@@ -1,7 +1,9 @@
   * {
     font-family: 'Inter', sans-serif;
   }
-
+.black {
+  color: #000000;
+}
  header {
       background-image: url(../img/bg.png);
       /* background-position: center; */
@@ -15,38 +17,39 @@
   }
 
   .signup {
-    background-color: #fc8210;
+    background-color: #FFF200;
+    color: black;
     border: 0;
   }
 
   .text-orange {
-    color: #fc8210;
+    color: #FFF200;
   }
   .bg-orange {
-    background-color: #fc8210;
+    background-color: #FFF200;
   }
   .video-tab .list-group .active {
-    background-color: #fc8210;
-    color: #fff !important;
+    background-color: #FFF200;
+    color: black !important;
     border: 0;
   }
   
   .signup:hover {
-    color: #fc8210;
+    color: black;
     background-color: #ffffff;
-    border: 1px solid #fc8210;
+    border: 1px solid black;
     box-sizing: border-box;
   }
   
   .login {
-    background-color: #31bfbf;
+    background-color: #000000;
     border: 0;
   }
   
   .login:hover {
-    color: #31bfbf;
+    color: #000000;
     background-color: #ffffff;
-    border: 1px solid #31bfbf;
+    border: 1px solid #000000;
     box-sizing: border-box;
   }
 
@@ -60,7 +63,7 @@
   form button { 
     font-size: 1rem !important;
     border-radius: 0% !important;
-    background-color: #fc8210 !important;
+    background-color: #FFF200 !important;
   border: 0;
     }
   *:focus {

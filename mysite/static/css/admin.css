@@ -1,7 +1,7 @@
 #header {
     height: 50px;
-    background: #FC8210;
-    color: #fff;
+    background: #a79e02;
+    color: black !important;
  }
  
  a:focus, a:hover {
@@ -13,7 +13,7 @@
  }
  
  div.breadcrumbs {
-    background: #31BFBF;
+    background: black;
  }
  
  div.breadcrumbs a {
@@ -21,10 +21,11 @@
  }
  
  .module h2, .module caption, .inline-group h2 {
-    background: #FC8210;
+    background: #e6db14;
+    color: black !important;
  }
  
  .button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: #31BFBF;
+    background: black;
     color: white;
  }

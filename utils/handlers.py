@@ -24,8 +24,8 @@ def send_activation_email(request, user):
 		'token': default_token_generator.make_token(user),
 	}
 	email = user.email
-	message = render_to_string('users/emails/activation_email.html', context)
-	subject = 'Activate Your Account'
+	message = render_to_string('users/emails/activation_email.txt', context)
+	subject = 'Verify Your Email'
 	send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
 
 

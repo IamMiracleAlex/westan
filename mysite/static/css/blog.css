@@ -4,6 +4,16 @@
     line-height: 1;
   }
 
+form button.btn  {
+  color: black;
+  background-color: #FFF200;
+}
+
+form button.btn:hover {
+  background-color: white;
+  border: 1px solid black !important;
+}
+
   .sliding-posts h4,
   .sliding-posts p {
     max-width: 600px;
@@ -143,7 +153,8 @@
   }
 
   .top-color {
-    background-color: #fc8210 !important;
+    background-color: #FFF200 !important;
+    /* color: black; */
     border: 0;
   }
   

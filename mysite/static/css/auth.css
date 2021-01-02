@@ -42,26 +42,20 @@ input[type="number"] {
 }
 
 .signup {
-  background-color: #fc8210;
+  background-color: #FFF200;
+  color: black;
   border: 0;
-}
-
-.signup:hover {
-  color: #fc8210;
-  background-color: #ffffff;
-  border: 1px solid #fc8210;
-  box-sizing: border-box;
 }
 
 .login {
-  background-color: #31bfbf;
+  background-color: black;
   border: 0;
 }
 
-.login:hover {
-  color: #31bfbf;
+.login:hover, .signup:hover {
+  color: black;
   background-color: #ffffff;
-  border: 1px solid #31bfbf;
+  border: 1px solid black;
   box-sizing: border-box;
 }
 

@@ -6,7 +6,7 @@ html {
   padding-top:10%;
 }
 .headliner {
-  color:#31bfbf;
+  color:black;
   font-weight:900;
   font-size:60px;
   text-align:center;
@@ -18,24 +18,25 @@ html {
   font-size:18px;
 }
 .hero-btn{
-  background-color:#fc8210; 
+  background-color:#FFF200; 
+  color: black;
   border:0px;
 }
 .hero-btn:hover{
     background-color:white;
-    color:#fc8210;
-    border:3px solid #fc8210;
+    color: black;
+    border:3px solid black;
 }
  /* ============ Hero Page Ends Here ================== */
   
   
 .form-control{
   border:0px;
-  border-bottom:1px solid #31bfbf;
+  border-bottom:1px solid black;
   margin-top:-15px;
 }
 .form-control:hover{
-  border-bottom:3px solid #31bfbf;
+  border-bottom:3px solid black;
   box-shadow:none;
 }
 .form-control:focus{
@@ -48,11 +49,9 @@ html {
   letter-spacing: 0.1em;
   font-size: 18px;
   font-weight: 500;
-  color: #31bfbf;
   padding: 3px 15px 3px 15px;
   border-radius: 0px;
   border: 0px;
-  background-color: #31bfbf;
 }
 label{
   font-size:18px;
@@ -61,7 +60,7 @@ label{
 .scnd_form {
   outline: 0;
   border-width: 0 0 1px;
-  border-color: #31bfbf
+  border-color: black;
 }
 .comp {
     color: red;

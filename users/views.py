@@ -175,8 +175,8 @@ def marketer_dashboard(request):
         referrals = request.user.referrals.all()
         trending_listings = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-views')[:10]
         referred_users_ids = [user.id for user in referrals]
-        # trans = Transaction.objects.filter(user_id__in=referred_users_ids).distinct("listing") # works only with postgres
-        trans = Transaction.objects.filter(user_id__in=referred_users_ids)
+        trans = Transaction.objects.filter(user_id__in=referred_users_ids).distinct("listing") # works only with postgres
+        # trans = Transaction.objects.filter(user_id__in=referred_users_ids)
         total_sales = trans.filter(status__in=[Transaction.ALLOCATED, Transaction.COMPLETED]).aggregate(Sum('amount_paid'))['amount_paid__sum'] or 0.0
         commission_earned = total_sales * COMMISSION
 
@@ -283,7 +283,7 @@ def subscribe(request):
     email = request.POST.get('email')
 
     if email:
-        if Subscribe.objects.filter(email=email).exists():
+        if Subscribe.objects.filter(email__iexact=email).exists():
             data['error'] = 'You are already subscribed!'
 
         else:

@@ -1,0 +1,18 @@
+Hi {{name}},
+
+
+Congratulations! You just accomplished the first step towards achieving your financial goals. 
+Our desire at Westan is to raise a generation of property owners.
+
+Please click on the link below to verify your email address. 
+	
+https://{{ domain }}{% url 'users:activate_email' uid=uid token=token %}
+
+
+Please copy and paste the link on your browser if the link is not clickable.
+
+
+
+Warm regards,
+
+Westan Team

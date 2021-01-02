@@ -13,7 +13,6 @@
       max-width: 600px;
     }
     .bg-shade {background-color: #EBF5F7 !important;}
-    .back-btn {color: #FC8210 !important;}
     .main-img {
       max-height: 450px;
       object-fit: cover;
@@ -169,12 +168,12 @@
       <div class="mb-5">
         <div class="d-flex justify-content-between">
           <p class="h2"><strong>{{ listing.title }}</strong> </p>
-          <p class="h2 d-none d-md-block font-weight-bold text-orange"><span>&#8358;</span> {{listing.price|intcomma}}</p>
+          <p class="h2 d-none d-md-block font-weight-bold black"><span>&#8358;</span> {{listing.price|intcomma}}</p>
         </div>
 
         <p class="h5 text-muted">{{ listing.get_address }}.</p>
         <div class="pt-2 d-inline d-flex option-buttons">
-          <a href="{% url 'transactions:confirm_purchase' listing.id %}" class="btn-sm bg-orange text-white rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
+          <a href="{% url 'transactions:confirm_purchase' listing.id %}" class="btn-sm bg-orange black rounded px-3 py-2 text-decoration-none">BUY NOW</a hr>
           <button id='save'  class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 px-3 py-2"> {% if wish %} Saved <span> &#129505;</span> {% else %} Save <span> &#9825;</span> {% endif %} </button>
           <button class="bg-shade btn btn-sm text-dark rounded font-weight-bold ml-3 share-btn">
             <img src="{% static 'img/share-2.svg' %}" alt="" srcset="">
@@ -183,7 +182,7 @@
          <img class='mr-2' src="{%static 'img/eye.svg' %}" alt=""> {{ listing.views }} view{{ listing.views|pluralize }}
           </button>
 
-          <a href="{% url 'listings:listings' %}"  class="d-none d-md-block back-btn btn-sm border-0 ml-2 px-3 py-2">
+          <a href="{% url 'listings:listings' %}"  class="d-none d-md-block black btn-sm border-0 ml-2 px-3 py-2">
             Back to Listings
           </a>
         </div>

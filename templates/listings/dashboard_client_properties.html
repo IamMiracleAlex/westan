@@ -47,7 +47,7 @@
                         <div class="card-body">
 
                             <div class="table-responsive">
-                                <table class="table table-centered nowrap table-hover mb-0 dtr-inline collapsed">
+                                <table class="table table-centered nowrap mb-0 dtr-inline collapsed">
                                     <thead>
                                         <tr class="border-bottom">
                                             <th class="text-muted border-0 py-2 order-0 font-weight-normal">Property
@@ -74,6 +74,11 @@
                                             </td>
                                             <td class="border-0 pt-3 text-muted">
                                                 <span class="d-none d-md-block">{{ listing.get_address }}</span> 
+                                            </td>
+                                            <td class="border-0 pt-3">
+                                                <a href="{% url 'transactions:invoice' listing.id %}" class="btn btn-sm bg-orange text-white px-3">
+                                                    Invoice 
+                                                </a>
                                             </td>
                                             <td class="border-0 pt-3">
                                                 <a href="{% url 'listings:single_listing' listing.id listing.slug %}" class="btn btn-sm bg-orange text-white px-3">

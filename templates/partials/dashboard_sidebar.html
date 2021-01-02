@@ -5,12 +5,22 @@
 
     <div class="sidebar-sticky text-danger pt-5">
         <ul class="nav flex-column">
+        {% if user.is_client %}
             <li class="nav-item">
-                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% elif 'dashboard/marketer' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'users:dashboard' %}">
+                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% elif 'dashboard/marketer' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'users:client_dashboard' %}">
                     <i class="fa fa-th-large mr-2" aria-hidden="true"></i>
-                    Dashboard <span class="sr-only">(current)</span>
+                    Client Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
+            {% endif %}
+            {% if user.is_marketer %}
+            <li class="nav-item">
+                <a class="nav-link {% if 'dashboard/client' in request.path %} active {% elif 'dashboard/marketer' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'users:marketer_dashboard' %}">
+                    <i class="fa fa-th-large mr-2" aria-hidden="true"></i>
+                    Marketer Dashboard <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link {% if 'dashboard/profile' in request.path %} active {% endif %} d-flex align-items-center" href="{% url 'users:profile' %}">
                     <i class="fa fa-user mr-2" aria-hidden="true"></i>
