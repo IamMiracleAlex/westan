@@ -170,7 +170,7 @@ def client_dashboard(request):
 
 @login_required
 def marketer_dashboard(request):
-    COMMISSION = 0.01  # 10% percent commission earned
+    COMMISSION = 0.07  # 10% percent commission earned
     if request.user.is_marketer:
         referrals = request.user.referrals.all()
         trending_listings = Listing.objects.filter(status=Listing.PUBLISHED).order_by('-views')[:10]

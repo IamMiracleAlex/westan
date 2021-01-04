@@ -7,7 +7,7 @@ from decimal import Decimal
 from django.db.models import Sum
 
 from listings.models import Listing
-from transactions.models import Transaction
+from transactions.models import Transaction #, DiscountCode
 
 
 
@@ -18,6 +18,16 @@ def confirm_purchase(request, listing_id):
 
     if request.method == "POST":
         amount_to_pay = request.POST.get('amount_to_pay')
+        # discount_code = request.POST.get('discount_code')
+
+        # discount = DiscountCode.objects.filter(code=discount_code)
+        # if discount.exists():
+        #     amount_to_pay -= discount.amounnt
+            
+            
+
+
+           
         trans = Transaction.objects.create(listing=listing,
                                         user=request.user,
                                         amount_to_pay=amount_to_pay, 

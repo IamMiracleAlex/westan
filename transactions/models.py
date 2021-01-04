@@ -44,6 +44,7 @@ class Transaction(models.Model):
 		max_digits=12,
 	)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    # discount_code = models.ForeignKey(DiscountCode, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
     
@@ -54,14 +55,9 @@ class Transaction(models.Model):
         super().save(*args, **kwargs)
 
 
-    def confirm(self):
-        # change status and email user
-        pass
 
-    def reject(self):
-        # change status and email user
-        pass
-
-    def notify_admins(self):
-        # notify admins of a payment
-        pass
+# class DiscountCode(models.Model):
+#     code = models.CharField(max_length=6, unique=True)
+#     amount = models.PositiveIntegerField()
+#     start_date = models.DateField()
+#     end_date = models.DateField()
