@@ -170,6 +170,10 @@
 						<div class="col-md-4">
 							<div class="card shadow-sm">
 								<a href="{{ listing.get_absolute_url }}"><img class="card-img-top" src="{{ listing.image.url }}" alt="Card image cap"></a>
+								<div class="card-img-overlay d-flex justify-content-between">
+								<p></p>
+								<h5 class="price rounded text-white"><span>&#8358;</span>{{listing.price|intcomma}}</h5>
+								</div>
 								<div class="card-body">
 									<h4 class="card-title"><strong>{{ listing.title }}</strong></h4>
 									<p class="card-text">{{ listing.get_address }}.</p>
@@ -453,7 +457,7 @@
 		</div> -->
 
 		<div class="card shadow border embed-responsive embed-responsive-16by9">
-			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
+			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/_nti7WtpKxU" allowfullscreen></iframe>
 		</div>
 	</div>
 	<!-- How it works end -->

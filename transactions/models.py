@@ -17,11 +17,11 @@ class Transaction(models.Model):
         (FIDELITY, 'Fidelity Bank'),
         (ACCESS, 'Access Bank'), 
     )
-    SUBMITTED, PROCESSING, CONFIRMED, COMPLETED, ALLOCATED = 0, 1, 2, 4, 5
+    SUBMITTED, PROCESSING, RECEIVED, COMPLETED, ALLOCATED = 0, 1, 2, 4, 5
     STATUS_CHOICES = (
         (SUBMITTED, 'Submitted'),
         (PROCESSING, 'Processing'),
-        (CONFIRMED, 'Confirmed'),
+        (RECEIVED, 'Received'),
         (COMPLETED, 'Complete'),
         (ALLOCATED, 'Allocated'),
     )

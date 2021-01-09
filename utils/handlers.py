@@ -51,8 +51,8 @@ def image_resizer(image_field):
     # open the uploaded image
     img = Image.open(image_field)
 
-    if img.height > 200 or img.width > 200:
-        output_size = (200, 200)
+    if img.height > 400 or img.width > 400:
+        output_size = (400, 400)
         img.thumbnail(output_size)
         img = img.convert('RGB')
 

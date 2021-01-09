@@ -52,7 +52,7 @@ class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
     def confirm_payment(self, request, id):
 
         trans = self.get_object(request, id)
-        trans.status = Transaction.CONFIRMED
+        trans.status = Transaction.RECEIVED
         trans.save()
         trans.refresh_from_db()
 

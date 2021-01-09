@@ -91,7 +91,7 @@
                                                 <span class="d-none d-md-block">{{ listing.get_address }}</span> 
                                             </td>
                                             <!-- use boostrap if color does not work -->
-                                            <td class="border-0 pt-3 {% if trans.get_status_display in 'Allocated, Complete' %} green {% elif  trans.get_status_display in 'Processing, Confirmed' %} blue {% else %} red {% endif %}">
+                                            <td class="border-0 pt-3 {% if trans.get_status_display in 'Allocated, Complete' %} green {% elif  trans.get_status_display in 'Processing, Received' %} blue {% else %} red {% endif %}">
                                                 {{trans.get_status_display}}
                                             </td>
                                             <td class="border-0 pt-3 text-primary">

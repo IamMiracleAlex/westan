@@ -177,7 +177,7 @@ def dashboard_marketer_properties(request):
 
 
 def dashboard_client_properties(request):
-    trans = Transaction.objects.filter(user=request.user, status__in=[Transaction.ALLOCATED, Transaction.COMPLETED])
+    trans = Transaction.objects.filter(user=request.user, status__in=[Transaction.ALLOCATED, Transaction.COMPLETED, Transaction.RECEIVED])
     context = {
         'trans': trans 
         }

@@ -135,7 +135,7 @@
                                                     alt="">
                                                 {{trans.listing.title}}
                                             </td>
-                                            <td class="border-0 pt-3 {% if trans.get_status_display in 'Allocated, Complete' %} green {% elif  trans.get_status_display in 'Processing, Confirmed' %} blue {% else %} red {% endif %} ">
+                                            <td class="border-0 pt-3 {% if trans.get_status_display in 'Allocated, Complete' %} green {% elif  trans.get_status_display in 'Processing, Received' %} blue {% else %} red {% endif %} ">
                                                 {{trans.get_status_display}}
                                             </td>
                                         </tr>
