@@ -10,8 +10,8 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['abwestanhomes.com', 'localhost', '127.0.0.1']
 
-ADMINS = [('miracle', 'collinsalex50@gmail.com')]
-MANAGERS = [('miracle', 'collinsalex50@gmail.com')]
+ADMINS = [('miracle', 'collinsalex50@gmail.com'), ('Abiola', 'abiolaolusolajay@gmail.com')]
+MANAGERS = [('miracle', 'collinsalex50@gmail.com'), ('Abiola', 'abiolaolusolajay@gmail.com')]
 
 
 INSTALLED_APPS = [
